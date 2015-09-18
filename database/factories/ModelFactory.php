@@ -42,7 +42,7 @@ $factory->define(App\Entities\Materia::class, function(Faker\Generator $faker){
 
 $factory->define(App\Entities\User::class, function(Faker\Generator $faker){
     return [
-        'id'        => $faker->numberBetween($min = 1000, $max = 100000),
+        'id'        => $faker->unique()->numberBetween($min = 1000, $max = 100000),
         'nickname'  => $faker->unique()->userName,
         'nombres'   => $faker->firstName,
         'paterno'   => $faker->lastName,
