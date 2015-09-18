@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class NotaDocente extends Model
 {
-    //
+    //aca va el modelo de a nota del docente
 }
