@@ -34,4 +34,32 @@ $factory->define(App\Entities\City::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Entities\Materia::class, function(Faker\Generator $faker){
+    return [
+        'nombreMateria' => $faker->name
+    ];
+});
+
+$factory->define(App\Entities\User::class, function(Faker\Generator $faker){
+    return [
+        'id'        => $faker->numberBetween($min = 1000, $max = 100000),
+        'nickname'  => $faker->unique()->userName,
+        'nombres'   => $faker->firstName,
+        'paterno'   => $faker->lastName,
+        'materno'   => $faker->lastName,
+        'email'     => $faker->unique()->email,
+        'password'  => bcrypt('escuela'),
+        'sexo'      => $faker->randomElement($array = array ('masculino','femenino')),
+        'exp_id'    => $faker->randomElement($array = array ('LP', 'SC', 'CBBA', 'TJ', 'BN')),
+        'role'      => 'cursante',
+        'telefono'  => $faker->numberBetween($min = 100, $max = 1000000),
+        'fnac'      => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'direccion' => $faker->address,
+        'profesion' => $faker->title,
+        'grade_id'  => $faker->numberBetween($min = 1, $max = 5),
+        'hin'       => $faker->time($format = 'H:i:s', $max = 'now'),
+        'hout'       => $faker->time($format = 'H:i:s', $max = 'now')
+    ];
+});
+
 

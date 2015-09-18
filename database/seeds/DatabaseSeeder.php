@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
-
         $this->call(GradeTableSeeder::class);
         $this->call(CityTableSeeder::class);
+        $this->call(MateriaTableSeeder::class);
+        $this->call(UserTableSeeder::class);
 
         Model::reguard();
     }

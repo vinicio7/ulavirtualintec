@@ -15,47 +15,47 @@ class CityTableSeeder extends Seeder
 
         factory(App\Entities\City::class)->create([
             'id'   => 'LP',
-            'city' => 'La Paz'
+            'ciudad' => 'La Paz'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'CBBA',
-            'city' => 'Cochabamba'
+            'ciudad' => 'Cochabamba'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'SC',
-            'city' => 'Santa Cruz'
+            'ciudad' => 'Santa Cruz'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'PDO',
-            'city' => 'Pando'
+            'ciudad' => 'Pando'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'BN',
-            'city' => 'Beni'
+            'ciudad' => 'Beni'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'OR',
-            'city' => 'Oruro'
+            'ciudad' => 'Oruro'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'PT',
-            'city' => 'Potosí'
+            'ciudad' => 'Potosí'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'TJ',
-            'city' => 'Tarija'
+            'ciudad' => 'Tarija'
         ]);
 
         factory(App\Entities\City::class)->create([
             'id'   => 'CHQ',
-            'city' => 'Chuquisaca'
+            'ciudad' => 'Chuquisaca'
         ]);
     }
 }

@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
 
 
             $table->integer('id')->unsigned()->primary();
-            $table->string('nikname')->unique();
+            $table->string('nickname')->unique();
             $table->string('nombres');
             $table->string('paterno')->nullable();
             $table->string('materno')->nullable();
@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->enum('sexo',['masculino','femenino']);
             $table->string('exp_id',10);
-            $table->enum('role', ['director', 'docente', 'facilitador', 'cursante', 'invitado']);
+            $table->enum('role', ['admin', 'director', 'docente', 'facilitador', 'cursante', 'invitado']);
             $table->integer('telefono');
             $table->date('fnac');
             $table->string('direccion');
