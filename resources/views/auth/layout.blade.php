@@ -24,7 +24,7 @@
 
 
         <div class="col-md-6">
-            <h2 class="font-bold""> Sistema de Calificaciones Escuela de Altos Estudios Nacionales</h2>
+            <h2 class="font-bold"> Sistema de Calificaciones Escuela de Altos Estudios Nacionales</h2>
 
             <p align="justify">
 
@@ -57,7 +57,7 @@
     <div class="row">
         <div class="col-md-6" align="justify">
             Sitio web desarrollado por:
-            Fabricio Torrico Barahona, Behimar Alvarado, TF. CGON. Charlie Seoane Sanchez
+            TF. CGON. Charlie Seoane Sanchez, Fabricio Torrico Barahona, Behimar Alvarado
         </div>
         <div class="col-md-4 text-right">
             <small>Copyright © 2015</small>

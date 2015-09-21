@@ -21,3 +21,8 @@ Route::post('/login', [
     'uses' => 'UserController@login',
     'as' => 'user.login'
 ]);
+
+
+Route::get('/main',function(){
+    return view ('layouts.main');
+});

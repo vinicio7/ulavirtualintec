@@ -20,7 +20,7 @@
 
     {!! Form::close() !!}
     <p class="m-t">
-        <small>Circulo de Oficiales Navales "Stella Maris" &copy; 2015</small>
+        <small>Sistema de Califiacaciones E.A.E.N. &copy; 2015</small>
     </p>
 </div>
 
