@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function login()//Request $request)
     {
-        return  view('layouts.main');
+        return view('layouts.main');
         //$cadena = 'usuario: ' . $request->id;
         //$pass = 'password: ' . $request->password;
         //dd($cadena . " " . $pass);
