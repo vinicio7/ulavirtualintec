@@ -464,7 +464,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442935218850</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="comente del main lo k no usaremos...luego pondre eso en mainConTodo.blade y en main.blade lo borrare el codigo k no usamos...">
+      <created>1442935230212</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1442935230212</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
