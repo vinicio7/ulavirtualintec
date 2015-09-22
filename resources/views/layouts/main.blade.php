@@ -26,20 +26,20 @@
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
-            <ul class="nav" id="side-menu">
+            <ul-- class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
                             <img alt="image" class="img-circle" src="img/profile_small.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
+                             </span> <span class="text-muted text-xs block">Director <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
+                            <li><a href="profile.html">Datos Personales</a></li>
+                            <!--li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li class="divider"></li-->
+                            <li><a href="index">Salir</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -47,7 +47,7 @@
                     </div>
                 </li>
                 <li class="active">
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
+                    <!--a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboards</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li class="active"><a href="index.html">Dashboard v.1</a></li>
                         <li ><a href="dashboard_2.html">Dashboard v.2</a></li>
@@ -201,8 +201,7 @@
                 <li class="special_link">
                     <a href="package.html"><i class="fa fa-database"></i> <span class="nav-label">Package</span></a>
                 </li>
-            </ul>
-
+            </ul-->
         </div>
     </nav>
 
@@ -211,17 +210,17 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                    <!--form role="search" class="navbar-form-custom" method="post" action="search_results.html">
                         <div class="form-group">
                             <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
                         </div>
-                    </form>
+                    </form-->
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                        <span class="m-r-sm text-muted welcome-message">SISEAEN</span>
                     </li>
-                    <li class="dropdown">
+                    <!--li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                         </a>
@@ -273,13 +272,13 @@
                                 </div>
                             </li>
                         </ul>
-                    </li>
+                    </li-->
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            <i class="fa fa-bell"></i>  <span class="label label-warning">8</span>
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
-                            <li>
+                            <!--li>
                                 <a href="mailbox.html">
                                     <div>
                                         <i class="fa fa-envelope fa-fw"></i> You have 16 messages
@@ -295,12 +294,12 @@
                                         <span class="pull-right text-muted small">12 minutes ago</span>
                                     </div>
                                 </a>
-                            </li>
+                            </li-->
                             <li class="divider"></li>
                             <li>
                                 <a href="grid_options.html">
                                     <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                        <i class="fa fa-upload fa-fw"></i> Calificaciones
                                         <span class="pull-right text-muted small">4 minutes ago</span>
                                     </div>
                                 </a>
@@ -319,8 +318,8 @@
 
 
                     <li>
-                        <a href="login.html">
-                            <i class="fa fa-sign-out"></i> Log out
+                        <a href="index">
+                            <i class="fa fa-sign-out"></i> SALIR
                         </a>
                     </li>
                 </ul>
@@ -379,7 +378,7 @@
                 showMethod: 'slideDown',
                 timeOut: 4000
             };
-            toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
+            toastr.success('Calificaciones Escuela de Altos Estudios Nacionales', 'BIENVENIDOS A SISEAEN');
 
         }, 1300);
 
