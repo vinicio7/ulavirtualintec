@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -57,11 +58,15 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = new User([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $user->role = 'cursante';
+        $user->save();
+
+        return $user;
     }
 
     /**
@@ -81,7 +86,7 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
-        return route('home');
+        return route('user.main');
     }
 
     /**
@@ -102,10 +107,7 @@ class AuthController extends Controller
      */
     protected function getCredentials(Request $request)
     {
-        return [
-            'nickname' => $request->get('nickname'),
-            'password' => $request->get('password'),
-        ];
+        return $request->only($this->loginUsername(), 'password');
     }
 
     /**
