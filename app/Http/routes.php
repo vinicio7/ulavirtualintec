@@ -11,20 +11,38 @@
 |
 */
 
+/********* para logeo y recupeacion de contrasenas *****/
 
-Route::get('/index', [
-        'uses' => 'UserController@index',
-        'as' => 'user.index'
+Route::get('login', [
+    'uses'  => 'Auth\AuthController@getLogin',
+    'as'    => 'login'
+]);
+Route::post('login', [
+    'uses'  => 'Auth\AuthController@postLogin',
+    'as'    => 'login'
+]);
+Route::get('logout', [
+    'uses'  => 'Auth\AuthController@getLogout',
+    'as'    => 'logout'
 ]);
 
-Route::post('/login', [
-    'uses' => 'UserController@login',
-    'as' => 'user.login'
+// registration routes
+Route::get('registro', [
+    'uses'  => 'Auth\AuthController@getRegister',
+    'as'    => 'register'
+]);
+Route::POST('registro', [
+    'uses'  => 'Auth\AuthController@POSTRegister',
+    'as'    => 'register'
 ]);
 
+/******************* fin ******************/
 
-Route::get('/main', [
-    'uses' => 'UserController@main',
-    'as' => 'user.main'
-]);
+Route::group(['middleware' => 'auth'], function() {
 
+    Route::get('/', [
+        'uses' => 'UserController@main',
+        'as' => 'user.main'
+    ]);
+
+});

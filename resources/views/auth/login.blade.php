@@ -3,10 +3,10 @@
 @section('content')
 
 <div class="ibox-content">
-    {!! Form::open(['route' => 'user.login', 'method' => 'POST', 'role' => 'form']) !!}
+    {!! Form::open(['route' => 'login', 'method' => 'POST', 'role' => 'form']) !!}
 
         <div class="form-group">
-            {!! Form::text('id', old('id'), ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
+            {!! Form::text('nickname', old('nickname'), ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
 
         </div>
         <div class="form-group">
