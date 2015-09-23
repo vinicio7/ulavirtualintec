@@ -46,3 +46,7 @@ Route::group(['middleware' => 'auth'], function() {
     ]);
 
 });
+
+Route::get('uu',function(){
+    return view('layouts.master');
+});

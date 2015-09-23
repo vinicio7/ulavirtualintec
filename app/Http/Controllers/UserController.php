@@ -17,11 +17,11 @@ class UserController extends Controller
 
     public function login()
     {
-        return view('layouts.main');
+        return view('layouts.master');
     }
 
     public function main()
     {
-        return view('layouts.main');
+        return view('layouts.master');
     }
 }
