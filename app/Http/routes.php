@@ -36,6 +36,7 @@ Route::POST('registro', [
     'as'    => 'register'
 ]);
 
+
 /******************* fin ******************/
 
 Route::group(['middleware' => 'auth'], function() {
@@ -50,3 +51,27 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('uu',function(){
     return view('layouts.master');
 });
+
+
+//************************ Rutas Cursante ******************
+
+
+// Ruta calificar docente
+Route::get('calificacionDocente', [
+    'uses'  => 'CursanteController@calificarDocente',
+    'as'    => 'cursante.calificarDocente'
+]);
+
+//Ruta calificar cursante (cursante a los mismos cursantes de su grupo)
+Route::get('calificacionCursante',
+    [
+    'uses' => 'CursanteController@calificarCursante',
+    'as'   => 'cursante.calificarCursante'
+]);
+
+//****************************prueba ******************
+
+Route::get('alumno/{id}', [
+    'uses'  => 'CursanteController@usuario',
+    'as'    => 'usuario'
+]);

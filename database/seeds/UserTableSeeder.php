@@ -11,8 +11,9 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->crearUsuarios(500);
+        $this->crearUsuarios(10);
         $this->crearAdmin();
+        $this->crearCursante();
     }
 
     /**
@@ -41,6 +42,36 @@ class UserTableSeeder extends Seeder
             'password'  => bcrypt('admin'),
             'sexo'      => 'masculino',
             'role'      => 'admin',
+        ]);
+    }
+
+    public function crearCursante()
+    {
+        factory(App\Entities\User::class)->create([
+            'id'        => '4',
+            'nickname'  => 'fabricio',
+            'nombres'   => 'Fabricio',
+            'paterno'   => 'Torrico',
+            'materno'   => 'Barahona',
+            'email'     => 'fabricio@hotmail.com',
+            'password'  => bcrypt('fabricio'),
+            'sexo'      => 'masculino',
+            'role'      => 'cursante',
+        ]);
+    }
+
+    public function crearFacilitador()
+    {
+        factory(App\Entities\User::class)->create([
+            'id'        => '5',
+            'nickname'  => 'behimar',
+            'nombres'   => 'Behimar',
+            'paterno'   => 'Alvarado',
+            'materno'   => '',
+            'email'     => 'b@hotmail.com',
+            'password'  => bcrypt('behimar'),
+            'sexo'      => 'masculino',
+            'role'      => 'facilitador',
         ]);
     }
 }

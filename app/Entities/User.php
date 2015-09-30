@@ -36,4 +36,19 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function completeName()
+    {
+        return $this->paterno . " " . substr($this->materno,0,1) . ". " . $this->nombres;
+    }
+
+    public function getRole()
+    {
+        if($this->role == 'admin')return 'Administrador';
+        if($this->role == 'director')return 'Director';
+        if($this->role == 'docente')return 'Docente';
+        if($this->role == 'facilitador')return 'Facilitador';
+        if($this->role == 'cursante')return 'Cursante';
+        if($this->role == 'invitado')return 'Invitado';
+    }
 }
