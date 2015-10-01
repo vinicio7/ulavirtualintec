@@ -3,15 +3,14 @@
 @section('content')
 
    <div class="row border-bottom white-bg dashboard-header">
-       <form class="center">
 
+       {!! Form::open(['route' => 'cursante.formCalifDoc', 'method' => 'POST'])!!}
            <!!--Seleccionar la materia del docente a calificar-->
-           <select>
-               <option value="mat1">mat1</option>
-               <option value="mat2">mat2</option>
-               <option value="mat3">mat3</option>
-               <option value="mat4">mat4</option>
-           </select>
+
+            <div class="" style="text-align:center; margin-bottom: 15px;">
+                <label>Seleccione la Disciplina a Evaluar: </label>
+                {!! Form::select('materia', $disciplinas, ['class' => 'control-label selectpicker']) !!}
+            </div>
 
            <div class="table table-striped">
                <table class="table text-center">
@@ -26,11 +25,11 @@
                        <td class="active">El docente elabora y presenta a los cursantes el programa de asignatura a inicio de módulo y usa el mismo para orientar el desarrollo de la asignatura.</td>
                        <td class="active">
                            <fieldset>
-                           <input type="radio" name="1califDoc" value="AA" checked>AA
-                           <input type="radio" name="1califDoc" value="A">A
-                           <input type="radio" name="1califDoc" value="B" checked>B
-                           <input type="radio" name="1califDoc" value="C">C
-                           <input type="radio" name="1califDoc" value="D">D
+                           <input type="radio" name="1califDoc" value="1">AA
+                           <input type="radio" name="1califDoc" value="2">A
+                           <input type="radio" name="1califDoc" value="3" checked>B
+                           <input type="radio" name="1califDoc" value="4">C
+                           <input type="radio" name="1califDoc" value="5">D
                            </fieldset>
                        </td>
                    </tr>
@@ -305,8 +304,8 @@
 
                </table>
            </div>
-           <button type="submit" class="btn btn-default col-md-3">ENVIAR CALIFICACIÓN</button>
-       </form>
+           <button type="submit" class="btn btn-default col-md-3" style="text-align:center">ENVIAR CALIFICACIÓN</button>
+       {!! Form::close() !!}
    </div>
 
 

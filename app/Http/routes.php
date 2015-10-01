@@ -69,6 +69,28 @@ Route::get('calificacionCursante',
     'as'   => 'cursante.calificarCursante'
 ]);
 
+//Ruta formulario calificar docente
+Route::post('formCalifDoc',
+    [
+    'uses' => 'CursanteController@formCalifDoc',
+    'as'   => 'cursante.formCalifDoc'
+]);
+
+//Ruta formulario calificar cursante
+Route::post('formCalifCursante',
+    [
+        'uses' => 'CursanteController@formCalifCursante',
+        'as'   => 'cursante.formCalifCursante'
+    ]);
+
+
+//Ruta ver calificaciones cursante
+Route::get('calificaciones',
+    [
+        'uses' => 'CursanteController@verCalificaciones',
+        'as'   => 'cursante.verCalificaciones'
+    ]);
+
 //****************************prueba ******************
 
 Route::get('alumno/{id}', [

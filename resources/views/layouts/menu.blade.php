@@ -29,7 +29,7 @@
 
 @elseif(auth()->user()->role == 'cursante')
     <li>
-        <a href="#"><i class="glyphicon glyphicon-list-alt"></i> <span class="nav-label">Ver Calificaciones</span></a>
+        <a href="{{ route('cursante.verCalificaciones')}}"><i class="glyphicon glyphicon-list-alt"></i> <span class="nav-label">Ver Calificaciones</span></a>
     </li>
     <li>
         <a href="#"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Asistencia</span></a>
