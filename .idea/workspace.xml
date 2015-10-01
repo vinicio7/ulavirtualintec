@@ -572,7 +572,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443740506200</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="cambio de la bd...aumente algunos campos...y no me acuerdo k mas...pro el cursante ya casi esta...">
+      <created>1443740881619</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1443740881619</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
