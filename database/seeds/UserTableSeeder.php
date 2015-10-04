@@ -14,6 +14,8 @@ class UserTableSeeder extends Seeder
         $this->crearUsuarios(10);
         $this->crearAdmin();
         $this->crearCursante();
+        $this->crearFacilitador();
+        $this->crearDirector();
     }
 
     /**
@@ -72,6 +74,21 @@ class UserTableSeeder extends Seeder
             'password'  => bcrypt('behimar'),
             'sexo'      => 'masculino',
             'role'      => 'facilitador',
+        ]);
+    }
+
+    public function crearDirector()
+    {
+        factory(\App\Entities\User::class)->create([
+            'id'        => '6',
+            'nickname'  => 'director',
+            'nombres'   => 'Director',
+            'paterno'   => 'APP',
+            'materno'   => '',
+            'email'     => 'director@gmail.com',
+            'password'  => bcrypt('director'),
+            'sexo'      => 'masculino',
+            'role'      => 'director',
         ]);
     }
 }
