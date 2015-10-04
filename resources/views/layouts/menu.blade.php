@@ -2,7 +2,7 @@
     <li>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Administrar Usuarios</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="form_basic.html">las vergas q tiene q hacer </a></li>
+            <li><a href="form_basic.html">las acciones que realiza el administrador </a></li>
 
         </ul>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">otras tareas</span><span class="fa arrow"></span></a>
