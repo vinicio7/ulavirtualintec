@@ -11,6 +11,19 @@ class KardexTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->crearKardexes(2);
+
+        //Creando kardex
+        factory(App\Entities\Kardex::class)->create([
+            'gestion' => '1/2015',
+            'activo' => 'true',
+            'user_id' => '4',
+            'materia_id' => '1',
+        ]);
+    }
+
+    public function crearKardexes($num)
+    {
+        factory(App\Entities\Kardex::class, $num)->create();
     }
 }

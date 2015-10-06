@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->engine='InnoDB';
 
-
             $table->integer('id')->unsigned()->primary();
             $table->string('nickname')->unique();
             $table->string('nombres');
@@ -24,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->enum('sexo',['masculino','femenino']);
-            $table->string('exp_id',10);
+            $table->string('expedido',10);
             $table->enum('role', ['admin', 'director', 'docente', 'facilitador', 'cursante', 'invitado']);
             $table->integer('telefono');
             $table->date('fnac');
@@ -40,12 +39,6 @@ class CreateUsersTable extends Migration
                 ->references('id')->on('grades')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
-
-            $table->foreign('exp_id')
-                ->references('id')->on('cities')
-                ->onDelete('restrict')
-                ->onUpdate('cascade');
-
         });
     }
 

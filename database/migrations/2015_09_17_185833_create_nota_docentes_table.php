@@ -19,6 +19,8 @@ class CreateNotaDocentesTable extends Migration
 
             $table->integer('id_cursante')->unsigned();
             $table->integer('id_docente')->unsigned();
+            $table->integer('materia_id')->unsigned();
+            $table->integer('ua_id')->unsigned();
             $table->integer('indicador1');
             $table->integer('indicador2');
             $table->integer('indicador3');
@@ -41,6 +43,16 @@ class CreateNotaDocentesTable extends Migration
             $table->integer('indicador20');
 
             $table->timestamps();
+
+            $table->foreign('materia_id')
+                ->references('id')->on('materias')
+                ->onDelete('restrict')
+                ->onUpdate('cascade');
+
+            $table->foreign('ua_id')
+                ->references('id')->on('unidad_academicas')
+                ->onDelete('restrict')
+                ->onUpdate('cascade');
 
         });
     }

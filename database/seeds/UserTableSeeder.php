@@ -24,6 +24,7 @@ class UserTableSeeder extends Seeder
     public function crearUsuarios($num)
     {
         factory(App\Entities\User::class, $num)->create();
+        //factory(App\Entities\Kardex::class, $num)->create();
     }
 
     /**

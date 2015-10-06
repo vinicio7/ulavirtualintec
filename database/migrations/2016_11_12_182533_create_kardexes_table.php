@@ -16,20 +16,56 @@ class CreateKardexesTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->string('gestion');
-            $table->boolean('activo');
-            $table->integer('user_id')->unsigned();
             $table->integer('materia_id')->unsigned();
+            $table->integer('user')->unsigned();
+            $table->string('gestion');
+            $table->integer('grupo');
+            $table->boolean('activo');
             $table->integer('ua_id')->unsigned();
-            $table->integer('notaCursante_id')->unsigned();
-            $table->integer('notaDocente_id')->unsigned();
             $table->timestamps();
-
-
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('restrict')
-                ->onUpdate('cascade');
+            //Llenar notas
+            //todos los 1 son del parametro "DECIDIR"
+            $table->integer('11a');
+            $table->integer('11b');
+            $table->integer('11c');
+            $table->integer('12a');
+            $table->integer('12b');
+            $table->integer('prom1');
+            //todos los 2 son del parametro "SABER"
+            $table->integer('21a');
+            $table->integer('21b');
+            $table->integer('21c');
+            $table->integer('22a');
+            $table->integer('22b');
+            $table->integer('22c');
+            $table->integer('prom2');
+            //todos los 3 son del parametro "HACER"
+            $table->integer('31a');
+            $table->integer('31b');
+            $table->integer('31c');
+            $table->integer('31d');
+            $table->integer('31e');
+            $table->integer('31f');
+            $table->integer('31g');
+            $table->integer('prom3');
+            //todos los 4 son del parametro "SER", evaluan entre cursantes, el facilitador y el Jefe de evaluacion.
+            $table->integer('41aCursante');
+            $table->integer('41bCursante');
+            $table->integer('41cCursante');
+            $table->integer('41dCursante');
+            $table->integer('prom4Cursante');
+            $table->integer('41aFacil');
+            $table->integer('41bFacil');
+            $table->integer('41cFacil');
+            $table->integer('41dFacil');
+            $table->integer('prom4Facil');
+            $table->integer('41aJE');
+            $table->integer('41bJE');
+            $table->integer('41cJE');
+            $table->integer('41dJE');
+            $table->integer('prom4JE');
+            //El promedio de las tres evaluaciones de 4
+            $table->integer('prom4');
 
 
             $table->foreign('materia_id')
@@ -37,13 +73,8 @@ class CreateKardexesTable extends Migration
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
 
-            $table->foreign('notaCursante_id')
-                ->references('id')->on('nota_cursantes')
-                ->onDelete('restrict')
-                ->onUpdate('cascade');
-
-            $table->foreign('notaDocente_id')
-                ->references('id')->on('nota_docentes')
+            $table->foreign('ua_id')
+                ->references('id')->on('unidad_academicas')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
         });
