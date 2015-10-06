@@ -2,10 +2,34 @@
     <li>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Administrar Usuarios</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="form_basic.html">las vergas q tiene q hacer </a></li>
+            <li><a href="form_basic.html">las acciones que realiza el administrador </a></li>
 
         </ul>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">otras tareas</span><span class="fa arrow"></span></a>
+    </li>
+@elseif(auth()->user()->role == 'director')
+    <li>
+        <a href="#"><i class="glyphicon glyphicon-user"></i> <span class="nav-label">Cursantes</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-edit"></i>Modificar Cursante</a></li>
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Docentes</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-edit"></i>Modificar Docente</a></li>
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Asignación</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level">
+            <li><a href="form_basic.html"><i class="fa fa-list-ol"></i>Sorteo de grupos</a></li>
+            <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
+        </ul>
     </li>
 @elseif(auth()->user()->role == 'docente')
     <li>
