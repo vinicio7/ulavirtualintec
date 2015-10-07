@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f11852ff-4a2a-4fa9-8fb1-4e476bebe5df" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/cursante/calificarDocente.blade.php" afterPath="$PROJECT_DIR$/resources/views/cursante/calificarDocente.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/CursanteController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/CursanteController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="siseaen.iws" />
@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CursanteController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CursanteController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CursanteController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.153846">
-              <caret line="43" column="54" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.77598566">
+              <caret line="54" column="34" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -55,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="calificarDocente.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="calificarDocente.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/cursante/calificarDocente.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.390681">
-              <caret line="37" column="74" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.115384616">
+              <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
               <folding>
                 <element signature="e#285#332#0#HTML" expanded="true" />
                 <element signature="e#17568#17593#0#HTML" expanded="true" />
@@ -120,8 +120,8 @@
         <option value="$PROJECT_DIR$/database/seeds/KardexTableSeeder.php" />
         <option value="$PROJECT_DIR$/resources/views/cursante/verCalificaciones.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CursanteController.php" />
         <option value="$PROJECT_DIR$/resources/views/cursante/calificarDocente.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CursanteController.php" />
       </list>
     </option>
   </component>
@@ -652,7 +652,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444255048526</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="cmabios">
+      <created>1444255181466</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1444255181466</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1106,14 +1112,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CursanteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.153846">
-          <caret line="43" column="54" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.0">
@@ -1124,12 +1122,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/cursante/calificarDocente.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.390681">
-          <caret line="37" column="74" selection-start-line="37" selection-start-column="74" selection-end-line="37" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.115384616">
+          <caret line="33" column="75" selection-start-line="33" selection-start-column="75" selection-end-line="33" selection-end-column="75" />
           <folding>
             <element signature="e#285#332#0#HTML" expanded="true" />
             <element signature="e#17568#17593#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CursanteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.77598566">
+          <caret line="54" column="34" selection-start-line="54" selection-start-column="34" selection-end-line="54" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

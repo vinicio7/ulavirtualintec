@@ -41,7 +41,9 @@ class CursanteController extends Controller
 
         //Tomamos la unidad academica de usuario cursnate
         $ua = \DB::table('kardexes')->where('user', Auth::user()->id)->value('ua_id');
-        dd($materia, $idDoc, $ua,$request['1califDoc']);
+        $pru = (int)$request['1califDoc'];
+        dd($materia, $idDoc, $ua,$request['1califDoc'],$request['2califDoc'],$request['3califDoc'], $pru);
+
 
         //Realizamos insercion
         DB::table('nota_docentes')->insert([
@@ -49,8 +51,8 @@ class CursanteController extends Controller
             'id_docente'  => $idDoc,
             'materia_id'  => $materia,
             'ua_id'       => $ua,
-            'indicador1'  => $request['1califDoc'],
-            'indicador2'  => $request['2califDoc'],
+            'indicador1'  => (int)$request['1califDoc'],
+            'indicador2'  => (int)$request['2califDoc'],
            ],
         ]);
     }
