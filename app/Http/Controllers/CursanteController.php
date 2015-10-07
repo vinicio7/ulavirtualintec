@@ -10,20 +10,50 @@ use Illuminate\Support\Facades\Auth;
 
 class CursanteController extends Controller
 {
+    /**
+     * @return \Illuminate\View\View
+     */
     public function calificarDocente()
     {
-        $disciplinas = array('a' => 'mat1', 'b' => 'matb', 'c' => 'matc');
-
-
-//      \DB::('insert into nota_docentes(indicador1)
-  //                values (?)', ([$request['1califDoc']]));
-
+        $disciplinas = \DB::table('kardexes')
+            ->join('materias as m', 'materia_id', '=', 'm.id')
+            ->select('m.nombreMateria')
+            ->where('user', '=', Auth::user()->id)
+            ->where('activo', '=', true)
+            ->get();
+        //dd($disciplinas);
         /*$califDoc = new NotaDocente;
         $califDoc -> indicador1 = $request -> 1califDoc;
         $califDoc -> $this->save();*/
         return view('cursante.calificarDocente', compact('disciplinas'));
     }
 
+    public function formCalifDoc(Request $request)
+    {
+
+        //Tomamos el id de materia
+        $materia = \DB::table('materias')->where('nombreMateria', $request['materia'])->value('id');
+
+
+        //Tomamos el id de usuario docente
+        $idDoc = \DB::table('contrato_docentes')->where('materia_id', $materia)->where('activo', true)->value('user');
+        //dd($materia, $idDoc);
+
+        //Tomamos la unidad academica de usuario cursnate
+        $ua = \DB::table('kardexes')->where('user', Auth::user()->id)->value('ua_id');
+        dd($materia, $idDoc, $ua,$request['1califDoc']);
+
+        //Realizamos insercion
+        DB::table('nota_docentes')->insert([
+           ['id_cursante' => Auth::user()->id,
+            'id_docente'  => $idDoc,
+            'materia_id'  => $materia,
+            'ua_id'       => $ua,
+            'indicador1'  => $request['1califDoc'],
+            'indicador2'  => $request['2califDoc'],
+           ],
+        ]);
+    }
 
     public function calificarCursante()
     {
@@ -31,13 +61,7 @@ class CursanteController extends Controller
         return view('cursante.calificarCursante', compact('cursantes'));
     }
 
-    public function formCalifDoc(Request $request)
-    {
-        //dd($request->all());
-        \DB::insert('insert into nota_docentes(indicador1,)
-                    values (?,?)', [$request['1califDoc']]);
-//        echo ($request['1califDoc']);
-    }
+
 
 
     public function formCalifCursante(Request $request)
@@ -48,18 +72,14 @@ class CursanteController extends Controller
 
     public function verCalificaciones()
     {
-      /*  $disciplinas = \DB::table('materias')
-                        ->select('nombreMateria')
-                        ->get();
-        //dd($disciplinas);
-        //$cursantes = array('a' => 'pedro', 'b' => 'juan', 'c' => 'gabriel');
-        return view('cursante.verCalificaciones', compact('disciplinas'));
-*/
-        $nombre = \DB::table('kardexes')
-            ->select('nombres')
-            ->where('id', '=', Auth::user()->id)
-            ->get();
-        dd($nombre);
+            $notas = \DB::table('kardexes')
+                ->join('materias as m', 'materia_id', '=', 'm.id')
+                ->select('m.nombreMateria','prom1', 'prom2', 'prom3', 'prom4')
+                ->where('user', '=', Auth::user()->id)
+                ->where('activo', '=', true)
+                ->get();
+            //dd($notas);
+            return view('cursante.verCalificaciones', compact('notas'));
     }
 
 

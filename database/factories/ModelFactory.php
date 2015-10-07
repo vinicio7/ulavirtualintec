@@ -71,6 +71,8 @@ $factory->define(App\Entities\Kardex::class, function(Faker\Generator $faker){
             '11a'       => $faker->numberBetween($min = 1, $max =100),
             '11b'       => $faker->numberBetween($min = 1, $max =100),
             '11c'       => $faker->numberBetween($min = 1, $max =100),
+            '12a'       => $faker->numberBetween($min = 1, $max =100),
+            '12b'       => $faker->numberBetween($min = 1, $max =100),
             'prom1'       => $faker->numberBetween($min = 1, $max =100),
 
             //todos los 2 son del parametro "SABER"
@@ -111,9 +113,13 @@ $factory->define(App\Entities\Kardex::class, function(Faker\Generator $faker){
             'prom4JE'           => $faker->numberBetween($min = 1, $max =100),
 
             //El promedio de las tres evaluaciones de 4
-            'prom4'             => $faker->numberBetween($min = 1, $max =100),
+            'prom4'             => $faker->numberBetween($min = 1, $max =100)
         ];
 });
 
 
-
+$factory->define(App\Entities\UnidadAcademica::class, function(Faker\Generator $faker){
+    return [
+        'ua' => $faker->city(),
+    ];
+});

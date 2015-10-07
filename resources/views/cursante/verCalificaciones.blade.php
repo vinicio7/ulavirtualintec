@@ -15,15 +15,19 @@
                     <td class="success" width="12%">Nota Final</td>
                 </tr>
 
-                @foreach($disciplinas as $d)
+                @foreach($notas as $n)
                     <tr>
-                    <td class='active'>{{ $d -> nombreMateria }}</td>
-                    <td class="active">70</td>
-                    <td class="active">90</td>
-                    <td class="warning">80</td>
-                    <td class="active">90</td>
-                    <td class="active">90</td>
-                    <td class="info">87</td>
+                    <td class='active'>{{ $n -> nombreMateria }}</td>
+                    <td class="active">{{ $n -> prom1 }}</td>
+                    <td class="active">{{ $n -> prom2 }}</td>
+                    <td class="warning">
+                        <?php echo(($n -> prom1 + $n -> prom2)/2)?>
+                    </td>
+                    <td class="active">{{ $n -> prom3 }}</td>
+                    <td class="active">{{ $n -> prom4 }}</td>
+                    <td class="info">
+                        <?php echo(($n -> prom1 + $n -> prom2 + $n -> prom3 + $n -> prom4)/4)?>
+                    </td>
                     </tr>
                 @endforeach
             </table>
