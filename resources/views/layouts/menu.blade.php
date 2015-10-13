@@ -11,7 +11,7 @@
     <li>
         <a href="#"><i class="glyphicon glyphicon-user"></i> <span class="nav-label">Cursantes</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="form_basic.html"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
+            <li><a href="{{ route('nuevoCursante')}}"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-edit"></i>Modificar Cursante</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
         </ul>
@@ -25,7 +25,7 @@
         </ul>
     </li>
     <li>
-        <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Asignación</span><span class="fa arrow"></span></a>
+        <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">AsignaciÃ³n</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="form_basic.html"><i class="fa fa-list-ol"></i>Sorteo de grupos</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>

@@ -12,10 +12,10 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         $this->crearUsuarios(10);
-        //$this->crearAdmin();
-       //$this->crearCursante();
-       // $this->crearFacilitador();
-       // $this->crearDirector();
+        $this->crearAdmin();
+        $this->crearCursante();
+        $this->crearFacilitador();
+        $this->crearDirector();
     }
 
     /**

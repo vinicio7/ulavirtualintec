@@ -97,3 +97,10 @@ Route::get('alumno/{id}', [
     'uses'  => 'CursanteController@usuario',
     'as'    => 'usuario'
 ]);
+//rutas del director
+Route::get('nuevoCursante',[
+    'uses' => 'PrincipalController@index',
+    'as'   => 'nuevoCursante']);
+Route::post('nuevoCursante',[
+    'uses' => 'PrincipalController@store',
+    'as'   => 'nuevoCursante']);
