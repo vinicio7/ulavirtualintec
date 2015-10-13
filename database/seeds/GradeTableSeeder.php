@@ -18,6 +18,10 @@ class GradeTableSeeder extends Seeder
     private function iniciar()
     {
         factory(App\Entities\Grade::class)->create([
+            'fuerza' => 'Civil',
+            'grado' => 'Civil.'
+        ]);
+        factory(App\Entities\Grade::class)->create([
             'fuerza' => 'Armada',
             'grado' => 'CN. DAEN.'
         ]);

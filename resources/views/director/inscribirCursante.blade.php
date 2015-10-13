@@ -19,6 +19,31 @@
         @endif
         <form class="form-horizontal" action="nuevoCursante" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
             <fielset>
+
+                <div class="form-group has-feedback">
+                    <label for="ci"class="col-sm-3 control-label">CI</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Carnet de Identidad" name="id" required="required">
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ci"class="col-sm-3 control-label">Expedido</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" placeholder="Expedido en:" name="expedido">
+                            <option value="LP">La Paz</option>
+                            <option value="CBBA">Cochabamba</option>
+                            <option value="SCZ">Santa Cruz</option>
+                            <option value="P">Potosi</option>
+                            <option value="O">Oruro</option>
+                            <option value="S">Chuquisaca</option>
+                            <option value="Ta">Tarija</option>
+                            <option value="PA">Pando</option>
+                            <option value="BE">Beni</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group has-feedback">
                     <label for="Nickname"class="col-sm-3 control-label">Nickname</label>
                     <div class="col-sm-9">
@@ -29,7 +54,7 @@
                 <div class="form-group has-feedback">
                     <label for="Password"class="col-sm-3 control-label">Contraseña</label>
                     <div class="col-sm-9">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="password" required="required">
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -72,7 +97,7 @@
                     <label for="Sexo"class="col-sm-3 control-label">Sexo</label>
                     <div class="col-sm-9">
 
-                        <select class="form-control" placeholder="Sexo">
+                        <select class="form-control" placeholder="Sexo" name="sexo">
                             <option value="masculino">Masculino</option>
                             <option value="femenino">Femenino</option>
                         </select>

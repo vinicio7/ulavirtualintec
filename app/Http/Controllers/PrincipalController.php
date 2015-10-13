@@ -6,6 +6,7 @@ use App\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
@@ -46,8 +47,8 @@ class PrincipalController extends Controller
             'paterno'   => 'required',
             'materno'   => 'required',
             'email'     => 'required|email|unique:users',
-            'password ' => 'required',
-            'sexo'      => 'required',
+            //'password ' => 'required',
+            'sexo'      => 'string',
             'telefono'  => 'numeric',
             'fnac'      => 'date',
             'direccion' => 'string',
@@ -57,8 +58,23 @@ class PrincipalController extends Controller
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
-        $cursante->create($request->all());
-        $cursantes = User::all();
+        $pass = Input::get('password');
+        //$cursante->create($request->all());
+        $cursante->nickname = Input::get('nickname');
+        $cursante->password = bcrypt($pass);
+        $cursante->nombres = Input::get('nombres');
+        $cursante->paterno = Input::get('nombres');
+        $cursante->materno = Input::get('materno');
+        $cursante->email = Input::get('email');
+        $cursante->telefono = Input::get('telefono');
+        $cursante->sexo = Input::get('sexo');
+        $cursante->fnac = Input::get('fnac');
+        $cursante->direccion = Input::get('direccion');
+        $cursante->profesion = Input::get('profesion');
+        $cursante->save();
+
+
+        //$cursantes = User::all();
         return redirect('nuevoCursante')->with('status', true);
 
     }
