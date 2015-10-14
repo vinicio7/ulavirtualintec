@@ -60,6 +60,7 @@ class PrincipalController extends Controller
         }
         $pass = Input::get('password');
         //$cursante->create($request->all());
+        $cursante->id = Input::get('id');
         $cursante->nickname = Input::get('nickname');
         $cursante->password = bcrypt($pass);
         $cursante->nombres = Input::get('nombres');
@@ -72,6 +73,7 @@ class PrincipalController extends Controller
         $cursante->grade_id = Input::get('grade_id');
         $cursante->direccion = Input::get('direccion');
         $cursante->profesion = Input::get('profesion');
+        $cursante->role = 'director';
         $cursante->save();
 
 
