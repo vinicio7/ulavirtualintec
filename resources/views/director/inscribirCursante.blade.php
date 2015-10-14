@@ -124,8 +124,26 @@
                 <div class="form-group has-feedback">
                     <label for="Direccion"class="col-sm-3 control-label">Dirección</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Dirección" name="direccion" required="required">
+                        <input type="date" class="form-control" placeholder="Dirección" name="direccion" required="required">
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="Grado"class="col-sm-3 control-label">Grado</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" placeholder="Si Usted. es miembro de las Fuerzas Armadas" name="grade_id">
+                            <option value="1">CIVIL</option>
+                            <option value="2">CN. DAEN.</option>
+                            <option value="3">CN. DEMN.</option>
+                            <option value="4">CF. DEMN.</option>
+                            <option value="5">CF. DIM.</option>
+                            <option value="6">CC. DEMN.</option>
+                            <option value="7">CC. DIM.</option>
+                            <option value="8">CNL. DEM.</option>
+                            <option value="9">CNL. DIM.</option>
+                            <option value="10">TCNL. DEM.</option>
+                            <option value="11">TCNL. DIM.</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group has-feedback">

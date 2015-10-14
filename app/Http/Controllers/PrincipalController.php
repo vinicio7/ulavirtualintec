@@ -69,6 +69,7 @@ class PrincipalController extends Controller
         $cursante->telefono = Input::get('telefono');
         $cursante->sexo = Input::get('sexo');
         $cursante->fnac = Input::get('fnac');
+        $cursante->grade_id = Input::get('grade_id');
         $cursante->direccion = Input::get('direccion');
         $cursante->profesion = Input::get('profesion');
         $cursante->save();

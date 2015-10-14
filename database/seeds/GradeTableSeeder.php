@@ -19,7 +19,7 @@ class GradeTableSeeder extends Seeder
     {
         factory(App\Entities\Grade::class)->create([
             'fuerza' => 'Civil',
-            'grado' => 'Civil.'
+            'grado' => 'Civil'
         ]);
         factory(App\Entities\Grade::class)->create([
             'fuerza' => 'Armada',
@@ -61,11 +61,11 @@ class GradeTableSeeder extends Seeder
         ]);
         factory(App\Entities\Grade::class)->create([
             'fuerza' => 'Ejército',
-            'grado' => 'TCNL. DEM..'
+            'grado' => 'TCNL. DEM.'
         ]);
         factory(App\Entities\Grade::class)->create([
             'fuerza' => 'Ejército',
-            'grado' => 'TCNL. DIM'
+            'grado' => 'TCNL. DIM.'
         ]);
     }
 }
