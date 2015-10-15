@@ -19,7 +19,7 @@
     <li>
         <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Docentes</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="form_basic.html"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
+            <li><a href="{{ route('nuevoDocente')}}"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-edit"></i>Modificar Docente</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
         </ul>

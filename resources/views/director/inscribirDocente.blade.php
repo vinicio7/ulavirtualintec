@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="row border-bottom white-bg dashboard-header">
-        <h2>Nuevo Cursante</h2>
+        <h2>Nuevo Docente</h2>
         <hr>
         @if($errors->has())
             <div class="alert alert-warning" role="alert">
@@ -12,12 +12,12 @@
         @endif
 
         @if(Session::has('status'))
-        <div class="alert alert-dismissible alert-success" class="col-md-10">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <i class="fa fa-check-square"></i>Usuario Creado!!
-        </div>
+            <div class="alert alert-dismissible alert-success" class="col-md-10">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <i class="fa fa-check-square"></i>Docente Creado!!
+            </div>
         @endif
-        <form class="form-horizontal" action="nuevoCursante" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
+        <form class="form-horizontal" action="nuevoDocente" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
             <fielset>
                 <h3 class="col-md-offset-1">Datos de Usuario</h3>
                 <hr>
@@ -109,13 +109,9 @@
                 <div class="form-group has-feedback">
                     <label for="Telefono"class="col-sm-3 control-label">Fecha de nacimiento</label>
                     <div class="col-sm-9">
-                        <input type="date" class="form-control datepicker" name="fnac" required="required">
+                        <input type="date" class="form-control" placeholder="dd/mm/aa" name="fnac" required="required">
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
-                </div>
-                <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                    <input class="span2" size="16" type="text" value="12-02-2012">
-                    <span class="add-on"><i class="icon-th"></i></span>
                 </div>
                 {{--<div class="control-group">
                     <label for="date-picker-2" class="col-sm-3 control-label">Fecha de Nacimiento</label>

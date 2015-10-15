@@ -22,6 +22,11 @@ class PrincipalController extends Controller
         return view('director.inscribirCursante');
     }
 
+    public function insDocente()
+    {
+        return view('director.inscribirDocente');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,7 +69,7 @@ class PrincipalController extends Controller
         $cursante->nickname = Input::get('nickname');
         $cursante->password = bcrypt($pass);
         $cursante->nombres = Input::get('nombres');
-        $cursante->paterno = Input::get('nombres');
+        $cursante->paterno = Input::get('paterno');
         $cursante->materno = Input::get('materno');
         $cursante->email = Input::get('email');
         $cursante->telefono = Input::get('telefono');
@@ -73,13 +78,52 @@ class PrincipalController extends Controller
         $cursante->grade_id = Input::get('grade_id');
         $cursante->direccion = Input::get('direccion');
         $cursante->profesion = Input::get('profesion');
-        $cursante->role = 'director';
+        $cursante->role = 'cursante';
         $cursante->save();
 
 
         //$cursantes = User::all();
         return redirect('nuevoCursante')->with('status', true);
 
+    }
+
+    public function newDocente(Request $request)
+    {
+        $docente = new User;
+        $v = Validator::make($request->all(),[
+            'nickname'  => 'required',
+            'nombres'   => 'required',
+            'paterno'   => 'required',
+            'materno'   => 'required',
+            'email'     => 'required|email|unique:users',
+            //'password ' => 'required',
+            'sexo'      => 'string',
+            'telefono'  => 'numeric',
+            'fnac'      => 'date',
+            'direccion' => 'string',
+            'profesion' => 'string'
+        ]);
+        if ($v ->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+        $pass = Input::get('password');
+        //$cursante->create($request->all());
+        $docente->id = Input::get('id');
+        $docente->nickname = Input::get('nickname');
+        $docente->password = bcrypt($pass);
+        $docente->nombres = Input::get('nombres');
+        $docente->paterno = Input::get('paterno');
+        $docente->materno = Input::get('materno');
+        $docente->email = Input::get('email');
+        $docente->telefono = Input::get('telefono');
+        $docente->sexo = Input::get('sexo');
+        $docente->fnac = Input::get('fnac');
+        $docente->grade_id = Input::get('grade_id');
+        $docente->direccion = Input::get('direccion');
+        $docente->profesion = Input::get('profesion');
+        $docente->role = 'docente';
+        $docente->save();
     }
 
     /**
