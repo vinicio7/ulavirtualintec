@@ -108,26 +108,14 @@
                 </div>
                 <div class="form-group has-feedback">
                     <label for="Telefono"class="col-sm-3 control-label">Fecha de nacimiento</label>
-                    <div class="col-sm-9">
-                        <input type="date" class="form-control datepicker" name="fnac" required="required">
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <div class='input-group date col-sm-3' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
                     </div>
                 </div>
-                <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                    <input class="span2" size="16" type="text" value="12-02-2012">
-                    <span class="add-on"><i class="icon-th"></i></span>
-                </div>
-                {{--<div class="control-group">
-                    <label for="date-picker-2" class="col-sm-3 control-label">Fecha de Nacimiento</label>
-                    <div class="controls">
-                        <div class="input-group col-sm-9">
-                            <input id="date-picker-2" type="text" class="date-picker form-control" />
-                            <label for="date-picker-2" class="input-group-addon btn"><span class="glyphicon glyphicon-calendar"></span>
 
-                            </label>
-                        </div>
-                    </div>
-                </div>--}}
                 <h4 class="col-md-offset-1">Direccion</h4>
                 <hr>
                 <div class="form-group has-feedback">
