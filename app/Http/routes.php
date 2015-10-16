@@ -62,8 +62,15 @@ Route::get('calificacionDocente', [
     'as'    => 'cursante.calificarDocente'
 ]);
 
+//Ruta seleccionar materia para calificar cursante (cursante a los mismos cursantes de su grupo)
+Route::get('selecMateriaCalificacionCursante',
+    [
+        'uses' => 'CursanteController@selecMateriaCalificarCursante',
+        'as'   => 'cursante.selecMateriaCalificarCursante'
+    ]);
+
 //Ruta calificar cursante (cursante a los mismos cursantes de su grupo)
-Route::get('calificacionCursante',
+Route::post('calificacionCursante',
     [
     'uses' => 'CursanteController@calificarCursante',
     'as'   => 'cursante.calificarCursante'
@@ -75,6 +82,7 @@ Route::post('formCalifDoc',
     'uses' => 'CursanteController@formCalifDoc',
     'as'   => 'cursante.formCalifDoc'
 ]);
+
 
 //Ruta formulario calificar cursante
 Route::post('formCalifCursante',
@@ -89,6 +97,14 @@ Route::get('calificaciones',
     [
         'uses' => 'CursanteController@verCalificaciones',
         'as'   => 'cursante.verCalificaciones'
+    ]);
+
+
+//Ruta calificacion exitosa
+Route::get('CalificacionExitosa',
+    [
+        'uses' => 'CursanteController@verCalificacionExitosa',
+        'as'   => 'cursante.calificacionExitosa'
     ]);
 
 //****************************prueba ******************

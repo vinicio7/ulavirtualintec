@@ -9,9 +9,12 @@
 
         <div class="" style="text-align:center; margin-bottom: 15px;">
             <label>Seleccione el Cursante a Evaluar: </label>
-            {!! Form::select('materia', $cursantes, ['class' => 'control-label selectpicker']) !!}
+            <select class="selectpicker" name="cursante" data-live-search="true">
+                @foreach($nombres as $n)
+                    <option>{{ $n -> nombres . ' ' . $n -> paterno . ' ' . $n -> materno . ' - ' .$n -> id }}</option>
+                @endforeach
+            </select>
         </div>
-
         <div class="table table-striped">
             <table class="table text-center">
                 <tr>
@@ -23,11 +26,11 @@
                     <td class="active" >Procede de acuerdo con las normas institucionales.</td>
                     <td class="active">
                         <fieldset>
-                            <input type="radio" name="1califDoc" value="1">AA
-                            <input type="radio" name="1califDoc" value="2">A
-                            <input type="radio" name="1califDoc" value="3" checked>B
-                            <input type="radio" name="1califDoc" value="4">C
-                            <input type="radio" name="1califDoc" value="5">D
+                            <input type="radio" name="1califCursante" value="100">AA
+                            <input type="radio" name="1califCursante" value="90">A
+                            <input type="radio" name="1califCursante" value="80" checked>B
+                            <input type="radio" name="1califCursante" value="71">C
+                            <input type="radio" name="1califCursante" value="50">D
                         </fieldset>
                     </td>
                 </tr>
@@ -36,11 +39,11 @@
                     <td class="active" >Asume sus decisiones y/o responde por sus acciones.</td>
                     <td class="active">
                         <fieldset>
-                            <input type="radio" name="2califCursante" value="1">AA
-                            <input type="radio" name="2califCursante" value="2">A
-                            <input type="radio" name="2califCursante" value="3" checked>B
-                            <input type="radio" name="2califCursante" value="4">C
-                            <input type="radio" name="2califCursante" value="5">D
+                            <input type="radio" name="2califCursante" value="100">AA
+                            <input type="radio" name="2califCursante" value="90">A
+                            <input type="radio" name="2califCursante" value="80" checked>B
+                            <input type="radio" name="2califCursante" value="71">C
+                            <input type="radio" name="2califCursante" value="50">D
                         </fieldset>
                     </td>
                 </tr>
@@ -49,11 +52,11 @@
                     <td class="active" >Trata a las personas con respeto y dignidad.</td>
                     <td class="active">
                         <fieldset>
-                            <input type="radio" name="3califCursante" value="1">AA
-                            <input type="radio" name="3califCursante" value="2">A
-                            <input type="radio" name="3califCursante" value="3" checked>B
-                            <input type="radio" name="3califCursante" value="4">C
-                            <input type="radio" name="3califCursante" value="5">D
+                            <input type="radio" name="3califCursante" value="100">AA
+                            <input type="radio" name="3califCursante" value="90">A
+                            <input type="radio" name="3califCursante" value="80" checked>B
+                            <input type="radio" name="3califCursante" value="71">C
+                            <input type="radio" name="3califCursante" value="50">D
                         </fieldset>
                     </td>
                 </tr>
@@ -62,17 +65,19 @@
                     <td class="active" >Controla sus emociones con equilibrio y adecuación.</td>
                     <td class="active">
                         <fieldset>
-                            <input type="radio" name="4califCursante" value="1">AA
-                            <input type="radio" name="4califCursante" value="2">A
-                            <input type="radio" name="4califCursante" value="3" checked>B
-                            <input type="radio" name="4califCursante" value="4">C
-                            <input type="radio" name="4califCursante" value="5">D
+                            <input type="radio" name="4califCursante" value="100">AA
+                            <input type="radio" name="4califCursante" value="90">A
+                            <input type="radio" name="4califCursante" value="80" checked>B
+                            <input type="radio" name="4califCursante" value="71">C
+                            <input type="radio" name="4califCursante" value="50">D
                         </fieldset>
                     </td>
                 </tr>
             </table>
         </div>
-        <button type="submit" class="btn btn-default col-md-3" style="text-align:center">ENVIAR CALIFICACIÓN</button>
+        <p align="center">
+            <button type="submit" class=" btn-primary btn-sm glyphicon glyphicon-check" style="text-align:center" name="materia" value=<?php echo($id_materia) ?>> ENVIAR CALIFICACIÓN</button>
+        </p>
         {!! Form::close() !!}
     </div>
 

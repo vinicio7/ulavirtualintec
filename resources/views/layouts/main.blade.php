@@ -34,10 +34,10 @@
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{auth()->user()->completeName()}}</strong>
-                             </span> <span class="text-muted text-xs block"> {{auth()->user()->getRole()}} <b class="caret"></b></span> </span> </a>
+                             </span> <span class="text-muted text-xs block"> {{auth()->user()->getRole()}} <!--b class="caret"></b--></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="profile.html">Datos Personales</a></li>
-                            <!--li><a href="contacts.html">Contacts</a></li>
+                            <!--li><a href="profile.html">Datos Personales</a></li>
+                            <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li-->
 

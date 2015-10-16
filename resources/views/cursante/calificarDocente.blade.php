@@ -19,7 +19,7 @@
             </div>
 
            <div class="table table-striped">
-               <table class="table text-center">
+               <table class="table table-hover">
                    <tr>
                        <td class="success" width="10%">Número</td>
                        <td class="success" width="70%">Indicador</td>
@@ -31,11 +31,11 @@
                        <td class="active">El docente elabora y presenta a los cursantes el programa de asignatura a inicio de módulo y usa el mismo para orientar el desarrollo de la asignatura.</td>
                        <td class="active">
                            <fieldset>
-                           <input type="radio" name="1califDoc" value='100'>AA
-                           <input type="radio" name="1califDoc" value='90'>A
-                           <input type="radio" name="1califDoc" value='80' checked>B
-                           <input type="radio" name="1califDoc" value='71'>C
-                           <input type="radio" name="1califDoc" value='50'>D
+                           <input type="radio" name="1califDoc" value="100">AA
+                           <input type="radio" name="1califDoc" value="90">A
+                           <input type="radio" name="1califDoc" value="80" checked>B
+                           <input type="radio" name="1califDoc" value="71">C
+                           <input type="radio" name="1califDoc" value="50">D
                            </fieldset>
                        </td>
                    </tr>
@@ -45,11 +45,11 @@
                        <td class="active">El programa de asignatura socializado a los cursantes contempla mínimamente: objetivos, contenidos mínimos, tiempo, metodología, evaluación, bibliografía.</td>
                        <td class="active">
                            <fieldset>
-                               <input type="radio" name="2califDoc" value=100>AA
-                               <input type="radio" name="2califDoc" value=90>A
-                               <input type="radio" name="2califDoc" value=80 checked>B
-                               <input type="radio" name="2califDoc" value=71>C
-                               <input type="radio" name="2califDoc" value=50>D
+                               <input type="radio" name="2califDoc" value="100">AA
+                               <input type="radio" name="2califDoc" value="90">A
+                               <input type="radio" name="2califDoc" value="80" checked>B
+                               <input type="radio" name="2califDoc" value="71">C
+                               <input type="radio" name="2califDoc" value="50">D
                            </fieldset>
                        </td>
                    </tr>
