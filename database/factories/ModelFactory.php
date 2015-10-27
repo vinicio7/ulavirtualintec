@@ -44,7 +44,7 @@ $factory->define(App\Entities\User::class, function(Faker\Generator $faker){
         'email'     => $faker->unique()->email,
         'password'  => bcrypt('escuela'),
         'sexo'      => $faker->randomElement($array = array ('masculino','femenino')),
-        'expedido'    => $faker->randomElement($array = array ('LP', 'SC', 'CBBA', 'TJ', 'BN')),
+        'expedido'  => $faker->randomElement($array = array ('LP', 'SC', 'CBBA', 'TJ', 'BN')),
         'role'      => 'cursante',
         'telefono'  => $faker->numberBetween($min = 100, $max = 1000000),
         'fnac'      => $faker->date($format = 'Y-m-d', $max = 'now'),
@@ -121,5 +121,16 @@ $factory->define(App\Entities\Kardex::class, function(Faker\Generator $faker){
 $factory->define(App\Entities\UnidadAcademica::class, function(Faker\Generator $faker){
     return [
         'ua' => $faker->city(),
+    ];
+});
+
+
+$factory->define(App\Entities\ContratoDocente::class, function(Faker\Generator $faker){
+    return [
+        'user'       => $faker -> numberBetween($min = 1000, $max = 10000000),
+        'materia_id' => $faker -> numberBetween($min = 1, $max = 15),
+        'gestion'    => $faker -> randomElement($array = array ('I/2015', 'II/2015')),
+        'activo'     => $faker -> boolean(),
+        'ua_id'      => $faker -> numberBetween($min = 1, $max = 3),
     ];
 });

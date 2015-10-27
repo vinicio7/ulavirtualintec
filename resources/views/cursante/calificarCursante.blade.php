@@ -11,7 +11,20 @@
             <label>Seleccione el Cursante a Evaluar: </label>
             <select class="selectpicker" name="cursante" data-live-search="true">
                 @foreach($nombres as $n)
-                    <option>{{ $n -> nombres . ' ' . $n -> paterno . ' ' . $n -> materno . ' - ' .$n -> id }}</option>
+                    <?php
+                    $existe = 0;
+                    $calificado = \DB::table('nota_intercursantes')
+                            -> select('cursante_calificador', 'cursante_calificado')
+                            -> get();
+
+                    //Buscar si existe el registro
+                    foreach($calificado as $c){
+                        if($c -> cursante_calificador == $usuario_calificador && $c -> cursante_calificado == $n -> id)
+                        {$existe=1;}
+                    }
+                    if($existe == 0) {echo '<option>'. ($n -> nombres . ' ' . $n -> paterno . ' ' . $n -> materno . ' - ' .$n -> id).'</option>';}
+                    ?>
+
                 @endforeach
             </select>
         </div>

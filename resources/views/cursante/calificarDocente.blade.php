@@ -12,13 +12,25 @@
                 <div class="form-group">
                     <select class="selectpicker" name="materia" data-live-search="true">
                         @foreach($disciplinas as $d)
-                        <option>{{ $d -> nombreMateria }}</option>
+                            <?php
+                                $existe = 0;
+                                $calificado = \DB::table('nota_docentes')
+                                                -> select('id_cursante', 'materia_id')
+                                                -> get();
+
+                                //Buscar si existe el registro
+                                foreach($calificado as $c){
+                                    if($c -> id_cursante == $d -> user && $c -> materia_id == $d -> id)
+                                    {$existe=1;}
+                                }
+                            if($existe == 0) {echo '<option>'. ($d -> nombreMateria).'</option>';}
+                            ?>
                         @endforeach
                     </select>
                 </div>
             </div>
 
-           <div class="table table-striped">
+       <div class="table table-striped">
                <table class="table table-hover">
                    <tr>
                        <td class="success" width="10%">Número</td>

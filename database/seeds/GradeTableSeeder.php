@@ -17,6 +17,9 @@ class GradeTableSeeder extends Seeder
 
     private function iniciar()
     {
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //!!EL REGISTRO 1 DEBE SER CIVIL!!!
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         factory(App\Entities\Grade::class)->create([
             'fuerza' => 'Civil',
             'grado' => 'Civil'

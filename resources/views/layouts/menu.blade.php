@@ -33,10 +33,10 @@
     </li>
 @elseif(auth()->user()->role == 'docente')
     <li>
-        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Cargar Calificaciones</span><span class="fa arrow"></span></a>
+        <a href="{{ route('docente.calificar')}}"><i class="fa fa-edit"></i> <span class="nav-label">Cargar Calificaciones</span></a>
     </li>
     <li>
-        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Ver Calificaciones</span><span class="fa arrow"></span></a>
+        <a href="{{ route('docente.verCalificaciones')}}"><i class="fa fa-edit"></i> <span class="nav-label">Ver Calificaciones</span></a>
     </li>
 
 @elseif(auth()->user()->role == 'facilitador')

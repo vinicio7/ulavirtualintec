@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(GradeTableSeeder::class);
         //$this->call(MateriaTableSeeder::class);
-        $this->call(UserTableSeeder::class);
+        //$this->call(UserTableSeeder::class);
         //$this->call(UnidadAcademicaTableSeeder::class);
         //$this->call(KardexTableSeeder::class);
+        //$this->call(ContratoDocTableSeeder::class);
 
         Model::reguard();
     }

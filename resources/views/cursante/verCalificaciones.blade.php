@@ -4,7 +4,7 @@
 
     <div class="row border-bottom white-bg dashboard-header">
         <div class="table table-striped">
-            <table class="table text-center">
+            <table class="table text-center table table-hover">
                 <tr>
                     <td class="success" width="40%">Disciplina</td>
                     <td class="success" width="8%">Saber</td>

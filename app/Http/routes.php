@@ -100,12 +100,63 @@ Route::get('calificaciones',
     ]);
 
 
-//Ruta calificacion exitosa
+//Ruta calificacion cursante exitosa no se usa!!
 Route::get('CalificacionExitosa',
     [
         'uses' => 'CursanteController@verCalificacionExitosa',
         'as'   => 'cursante.calificacionExitosa'
     ]);
+
+//Ruta generar pdf de calificaciones interCursatnes
+Route::post('imprimirCalificacionCursante',[
+    'uses' => 'PdfController@calificacionCursante',
+    'as'   => 'pdf.calificacionCursante']);
+
+//Ruta generar pdf de calificaciones docente
+Route::post('imprimirCalificacionDocente',[
+    'uses' => 'PdfController@calificacionDocente',
+    'as'   => 'pdf.calificacionDocente']);
+
+//************************* rutas docente *************
+
+Route::get('calificarCursantes',[
+    'uses' => 'DocenteController@calificar',
+    'as'   => 'docente.calificar']);
+
+Route::get('verCalificacionesCursantes',[
+    'uses' => 'DocenteController@verCalificaciones',
+    'as'   => 'docente.verCalificaciones']);
+
+
+
+
+//*********************** rutas excel ****************
+//preuba generar excel
+
+
+Route::get('excel',[
+    'uses' => 'ExcelController@generarExcel',
+    'as'   => 'excel.generarExcel']);
+
+Route::get('GuardarExcel',[
+    'uses' => 'ExcelController@import',
+    'as'   => 'excel.generarExcel']);
+
+
+//Ruta para que el docente reciba plantilla de excel para llenar...direcciona al ExcelController
+Route::post('darExcel',[
+    'uses' => 'ExcelController@darExcel',
+    'as'   => 'excel.darExcel']);
+
+
+//Ruta para que el docente guarde notas...direcciona al ExcelController
+Route::post('guardarNotas',[
+    'uses' => 'ExcelController@guardarNotas',
+    'as'   => 'excel.guardarNotas']);
+
+
+
+
 
 //****************************prueba ******************
 
@@ -127,3 +178,9 @@ Route::get('nuevoDocente',[
 Route::post('nuevoDocente',[
     'uses' => 'PrincipalController@newDocente',
     'as'   => 'nuevoDocente']);
+
+
+//PRUEBA DOMPDF
+Route::get('pruebaPDF',[
+    'uses' => 'PdfController@invoice',
+    'as'   => 'pruebaPDF']);

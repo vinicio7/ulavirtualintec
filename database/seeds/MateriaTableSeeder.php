@@ -56,7 +56,7 @@ class MateriaTableSeeder extends Seeder
         ]);
 
         factory(App\Entities\Materia::class)->create([
-            'nombreMateria' => 'Hitoria Crítica de Bolivia'
+            'nombreMateria' => 'Historia Crítica de Bolivia'
         ]);
 
         factory(App\Entities\Materia::class)->create([
