@@ -107,7 +107,7 @@ class PrincipalController extends Controller
         $cursante->save();
         return redirect('modificarCursante')->with('update', true);
     }
-
+    //crea el docente... y actualiza
     public function newDocente(Request $request)
     {
         $docente = new User;
