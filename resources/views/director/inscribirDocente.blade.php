@@ -17,7 +17,7 @@
                 <i class="fa fa-check-square"></i>Docente Creado!!
             </div>
         @endif
-        <form class="form-horizontal" action="nuevoDocente" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
+        <form class="form-horizontal" action="nuevoCursante" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
             <fielset>
                 <h3 class="col-md-offset-1">Datos de Usuario</h3>
                 <hr>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="ci"class="col-sm-3 control-label">Expedido</label>
+                    <label class="col-sm-3 control-label">Expedido</label>
                     <div class="col-sm-4">
                         <select class="form-control" placeholder="Expedido en:" name="expedido">
                             <option value="LP">La Paz</option>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label for="Password"class="col-sm-3 control-label">Contraseña</label>
+                    <label for="password"class="col-sm-3 control-label">Contraseña</label>
                     <div class="col-sm-9">
                         <input type="password" class="form-control" placeholder="Contraseña" name="password" required>
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -75,11 +75,11 @@
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
-                <div class="form-group has-feedback">
+                <div class="form-group">
                     <label for="ApellidoM"class="col-sm-3 control-label">Apellido Materno</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Apellido Materno" name="materno" required="required">
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <input type="text" class="form-control" placeholder="Apellido Materno" name="materno">
+
                     </div>
                 </div>
                 <div class="form-group has-feedback">
@@ -107,36 +107,23 @@
                     </div>
                 </div>
                 <div class="form-group has-feedback">
-                    <label for="Telefono"class="col-sm-3 control-label">Fecha de nacimiento</label>
-                    <div class="col-sm-9">
-                        <input type="date" class="form-control" placeholder="dd/mm/aa" name="fnac" required="required">
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    </div>
+                    <label for="fnac"class="col-sm-3 control-label">Fecha de nacimiento</label>
+                    <input type="date" name="fnac">
                 </div>
-                {{--<div class="control-group">
-                    <label for="date-picker-2" class="col-sm-3 control-label">Fecha de Nacimiento</label>
-                    <div class="controls">
-                        <div class="input-group col-sm-9">
-                            <input id="date-picker-2" type="text" class="date-picker form-control" />
-                            <label for="date-picker-2" class="input-group-addon btn"><span class="glyphicon glyphicon-calendar"></span>
 
-                            </label>
-                        </div>
-                    </div>
-                </div>--}}
                 <h4 class="col-md-offset-1">Direccion</h4>
                 <hr>
                 <div class="form-group has-feedback">
                     <label for="Direccion"class="col-sm-3 control-label">Dirección</label>
                     <div class="col-sm-9">
-                        <input type="date" class="form-control" placeholder="Dirección" name="direccion" required="required">
+                        <input type="text" class="form-control" placeholder="Dirección" name="direccion" required="required">
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <h3 class="col-md-offset-1">Datos Profesionales</h3>
                 <hr>
                 <div class="form-group has-feedback">
-                    <label for="Grado"class="col-sm-3 control-label">Grado</label>
+                    <label class="col-sm-3 control-label">Grado</label>
                     <div class="col-sm-9">
                         <select class="form-control" placeholder="Si Usted. es miembro de las Fuerzas Armadas" name="grade_id">
                             <option value="1">CIVIL</option>

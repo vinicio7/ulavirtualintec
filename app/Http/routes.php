@@ -178,6 +178,30 @@ Route::post('nuevoDocente',[
     'uses' => 'PrincipalController@newDocente',
     'as'   => 'nuevoDocente']);
 
+Route::get('modificarCursante',[
+    'uses' => 'PrincipalController@mostrarCursantes',
+    'as'   => 'modificarCursante']);
+Route::get('editarCursante{id}',[
+    'uses'  =>'PrincipalController@editarCursante',
+    'as'    =>'editCursante'
+]);
+Route::put('actualizarCursante{id}',[
+    'uses'  => 'PrincipalController@actualizarCursante',
+    'as'    => 'upCursante'
+]);
+
+Route::get('modificarDocente',[
+    'uses' => 'PrincipalController@mostrarDocentes',
+    'as'   => 'modificarDocente']);
+Route::get('editarDocente{id}',[
+    'uses'  =>'PrincipalController@editarDocente',
+    'as'    =>'editDocente'
+]);
+Route::put('actualizarDocente{id}',[
+    'uses'  => 'PrincipalController@actualizarDocente',
+    'as'    => 'upDocente'
+]);
+
 
 //PRUEBA DOMPDF
 Route::get('pruebaPDF',[
@@ -186,6 +210,9 @@ Route::get('pruebaPDF',[
 
 
 //****************Rutas director************************
+
+
+
 
 //Ruta para mostrar las materias para calificar al cursante
 Route::get('calificarCursanteSelecMateria',[
