@@ -193,6 +193,7 @@ class CursanteController extends Controller
 
     public function formCalifCursante(Request $request)
     {
+        dd('s');
         //Tomamos el id del cursante que calificamos
         $idCalificado= substr($request['cursante'], strpos($request['cursante'], '- ')+strlen('- '));
 

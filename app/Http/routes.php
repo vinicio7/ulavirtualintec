@@ -85,7 +85,7 @@ Route::post('formCalifDoc',
 
 
 //Ruta formulario calificar cursante
-Route::post('formCalifCursante',
+Route::post('formCalifCursanteC',
     [
         'uses' => 'CursanteController@formCalifCursante',
         'as'   => 'cursante.formCalifCursante'
