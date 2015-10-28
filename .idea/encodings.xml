@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/database/migrations/2015_10_12_222552_create_nota_intercursantes_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificacionExitosaCursante.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificacionExitosaDocente.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/cursante/calificadoCompleto.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificarCursante.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificarDocente.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/pdfCalifCursante.blade.php" charset="UTF-8" />

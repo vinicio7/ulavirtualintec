@@ -97,38 +97,42 @@ class CursanteController extends Controller
                         'indicador20' => (int)$request['20califDoc'],
                     ]
                 );
+
+
+                //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
+                $UnoCalifDoc = $request['1califDoc'];
+                $DosCalifDoc = $request['2califDoc'];
+                $TresCalifDoc = $request['3califDoc'];
+                $CuatroCalifDoc = $request['4califDoc'];
+                $CincoCalifDoc = $request['5califDoc'];
+                $SeisCalifDoc = $request['6califDoc'];
+                $SieteCalifDoc = $request['7califDoc'];
+                $OchoCalifDoc = $request['8califDoc'];
+                $NueveCalifDoc = $request['9califDoc'];
+                $DiezCalifDoc = $request['10califDoc'];
+                $OnceCalifDoc = $request['11califDoc'];
+                $DoceCalifDoc = $request['12califDoc'];
+                $TreceCalifDoc = $request['13califDoc'];
+                $CatorceCalifDoc = $request['14califDoc'];
+                $QuinceCalifDoc = $request['15califDoc'];
+                $DieciseisCalifDoc = $request['16califDoc'];
+                $DiecisieteCalifDoc = $request['17califDoc'];
+                $DieciochoCalifDoc = $request['16califDoc'];
+                $DiecinueveCalifDoc = $request['19califDoc'];
+                $VeinteCalifDoc = $request['20califDoc'];
+                //dd($docCalif);
+
+                //dd($materia, $idDoc, $ua,$request['1califDoc'],$request['2califDoc'],$request['3califDoc'], $pru);
+                return view('cursante.calificacionExitosaDocente', compact('idDoc', 'materia', 'UnoCalifDoc', 'DosCalifDoc'
+                    , 'TresCalifDoc', 'CuatroCalifDoc', 'CincoCalifDoc', 'SeisCalifDoc', 'SieteCalifDoc'
+                    , 'OchoCalifDoc', 'NueveCalifDoc', 'DiezCalifDoc', 'OnceCalifDoc', 'DoceCalifDoc', 'TreceCalifDoc'
+                    , 'CatorceCalifDoc', 'QuinceCalifDoc', 'DieciseisCalifDoc', 'DiecisieteCalifDoc', 'DieciochoCalifDoc'
+                    , 'DiecinueveCalifDoc', 'VeinteCalifDoc'));
+
             }
         }
-
-        //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
-        $UnoCalifDoc = $request['1califDoc'];
-        $DosCalifDoc = $request['2califDoc'];
-        $TresCalifDoc = $request['3califDoc'];
-        $CuatroCalifDoc = $request['4califDoc'];
-        $CincoCalifDoc = $request['5califDoc'];
-        $SeisCalifDoc = $request['6califDoc'];
-        $SieteCalifDoc = $request['7califDoc'];
-        $OchoCalifDoc = $request['8califDoc'];
-        $NueveCalifDoc = $request['9califDoc'];
-        $DiezCalifDoc = $request['10califDoc'];
-        $OnceCalifDoc = $request['11califDoc'];
-        $DoceCalifDoc = $request['12califDoc'];
-        $TreceCalifDoc = $request['13califDoc'];
-        $CatorceCalifDoc = $request['14califDoc'];
-        $QuinceCalifDoc = $request['15califDoc'];
-        $DieciseisCalifDoc = $request['16califDoc'];
-        $DiecisieteCalifDoc = $request['17califDoc'];
-        $DieciochoCalifDoc = $request['16califDoc'];
-        $DiecinueveCalifDoc = $request['19califDoc'];
-        $VeinteCalifDoc = $request['20califDoc'];
-        //dd($docCalif);
-
-        //dd($materia, $idDoc, $ua,$request['1califDoc'],$request['2califDoc'],$request['3califDoc'], $pru);
-        return view('cursante.calificacionExitosaDocente', compact('idDoc', 'materia', 'UnoCalifDoc', 'DosCalifDoc'
-                            , 'TresCalifDoc', 'CuatroCalifDoc', 'CincoCalifDoc', 'SeisCalifDoc', 'SieteCalifDoc'
-                            , 'OchoCalifDoc', 'NueveCalifDoc', 'DiezCalifDoc', 'OnceCalifDoc', 'DoceCalifDoc', 'TreceCalifDoc'
-                            , 'CatorceCalifDoc', 'QuinceCalifDoc', 'DieciseisCalifDoc', 'DiecisieteCalifDoc', 'DieciochoCalifDoc'
-                            , 'DiecinueveCalifDoc', 'VeinteCalifDoc'));
+        $personas='docentes';
+        return view('cursante.calificadoCompleto', compact ('personas'));
     }
 
     public function selecMateriaCalificarCursante()
@@ -193,7 +197,7 @@ class CursanteController extends Controller
 
     public function formCalifCursante(Request $request)
     {
-        dd('s');
+        //dd('s');
         //Tomamos el id del cursante que calificamos
         $idCalificado= substr($request['cursante'], strpos($request['cursante'], '- ')+strlen('- '));
 
@@ -248,20 +252,21 @@ class CursanteController extends Controller
                 ->where('activo', 1)
                 ->where('user', $idCalificado)
                 ->update(['prom4Cursante' => $promedio]);
+
+            //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
+            $cursanteCalificado = $request['cursante'];
+            $materia = \DB:: table('materias')-> where('id', $request['materia'])-> value('nombreMateria');
+            $UnoCalifCursante = $request['1califCursante'];
+            $DosCalifCursante = $request['2califCursante'];
+            $TresCalifCursante = $request['3califCursante'];
+            $CuatroCalifCursante = $request['4califCursante'];
+            //dd($materia, $idDoc, $ua,$request['1califDoc'],$request['2califDoc'],$request['3califDoc'], $pru);
+            return view('cursante.calificacionExitosaCursante', compact('UnoCalifCursante', 'DosCalifCursante',
+                'TresCalifCursante','CuatroCalifCursante',
+                'cursanteCalificado', 'materia'));
         }
-
-
-        //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
-        $cursanteCalificado = $request['cursante'];
-        $materia = \DB:: table('materias')-> where('id', $request['materia'])-> value('nombreMateria');
-        $UnoCalifCursante = $request['1califCursante'];
-        $DosCalifCursante = $request['2califCursante'];
-        $TresCalifCursante = $request['3califCursante'];
-        $CuatroCalifCursante = $request['4califCursante'];
-        //dd($materia, $idDoc, $ua,$request['1califDoc'],$request['2califDoc'],$request['3califDoc'], $pru);
-        return view('cursante.calificacionExitosaCursante', compact('UnoCalifCursante', 'DosCalifCursante',
-                                                                    'TresCalifCursante','CuatroCalifCursante',
-                                                                    'cursanteCalificado', 'materia'));
+        $personas='cursantes';
+        return view('cursante.calificadoCompleto', compact ('personas'));
     }
 
     public function verCalificaciones()
