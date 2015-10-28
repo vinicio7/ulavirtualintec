@@ -6,6 +6,7 @@ use App\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -27,32 +28,17 @@ class PrincipalController extends Controller
         return view('director.inscribirDocente');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //registra un cursante
     public function store(Request $request)
     {
         $cursante = new User;
         $v = Validator::make($request->all(),[
-            'nickname'  => 'required',
+            'nickname'  => 'required|unique:users',
             'nombres'   => 'required',
             'paterno'   => 'required',
-            'materno'   => 'required',
+            'materno'   => 'string',
             'email'     => 'required|email|unique:users',
-            //'password ' => 'required',
+            'password ' => 'required',
             'sexo'      => 'string',
             'telefono'  => 'numeric',
             'fnac'      => 'date',
@@ -63,38 +49,73 @@ class PrincipalController extends Controller
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
-        $pass = Input::get('password');
+        //$pass = Input::get('password');
         //$cursante->create($request->all());
-        $cursante->id = Input::get('id');
-        $cursante->nickname = Input::get('nickname');
-        $cursante->password = bcrypt($pass);
-        $cursante->nombres = Input::get('nombres');
-        $cursante->paterno = Input::get('paterno');
-        $cursante->materno = Input::get('materno');
-        $cursante->email = Input::get('email');
-        $cursante->telefono = Input::get('telefono');
-        $cursante->sexo = Input::get('sexo');
-        $cursante->fnac = Input::get('fnac');
-        $cursante->grade_id = Input::get('grade_id');
-        $cursante->direccion = Input::get('direccion');
-        $cursante->profesion = Input::get('profesion');
+        $cursante->id           = Input::get('id');
+        $cursante->nickname     = Input::get('nickname');
+        $cursante->password     = Input::get('password');
+        $cursante->nombres      = strtoupper(Input::get('nombres'));
+        $cursante->paterno      = strtoupper(Input::get('paterno'));
+        $cursante->materno      = strtoupper(Input::get('materno'));
+        $cursante->email        = Input::get('email');
+        $cursante->telefono     = Input::get('telefono');
+        $cursante->sexo         = Input::get('sexo');
+        $cursante->fnac         = Input::get('fnac');
+        $cursante->grade_id     = Input::get('grade_id');
+        $cursante->direccion    = strtoupper(Input::get('direccion'));
+        $cursante->profesion    = strtoupper(Input::get('profesion'));
         $cursante->role = 'cursante';
         $cursante->save();
-
-
         //$cursantes = User::all();
         return redirect('nuevoCursante')->with('status', true);
 
     }
+    public function mostrarCursantes()//lista a los cursantes
+    {
+        //$cursantes = User::all();
+        $cursantes = DB::table('users')
+            ->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado')
+            ->get();
+        return view('director.modificarCursante', compact('cursantes'));
+        //return $cursantes;
+    }
+    public function editarCursante($id)
+    {
+        $cursante =User::find($id);
+        //return $cursante;
+        return view('director.editarCursante',compact('cursante'));
+    }
 
+    public function actualizarCursante($id,Request $request )
+    {
+        $cursante =User::find($id);
+        //$cursante->fill($request->all());
+        $cursante->id           = Input::get('id');
+        $cursante->nickname     = Input::get('nickname');
+        $cursante->password     = Input::get('password');
+        $cursante->nombres      = strtoupper(Input::get('nombres'));
+        $cursante->paterno      = strtoupper(Input::get('paterno'));
+        $cursante->materno      = strtoupper(Input::get('materno'));
+        $cursante->email        = Input::get('email');
+        $cursante->telefono     = Input::get('telefono');
+        $cursante->sexo         = Input::get('sexo');
+        $cursante->fnac         = Input::get('fnac');
+        $cursante->grade_id     = Input::get('grade_id');
+        $cursante->direccion    = strtoupper(Input::get('direccion'));
+        $cursante->profesion    = strtoupper(Input::get('profesion'));
+        $cursante->save();
+        return redirect('modificarCursante')->with('update', true);
+    }
+    //crea el docente... y actualiza
     public function newDocente(Request $request)
     {
         $docente = new User;
         $v = Validator::make($request->all(),[
-            'nickname'  => 'required',
+            'nickname'  => 'required|unique:users',
             'nombres'   => 'required',
             'paterno'   => 'required',
-            'materno'   => 'required',
+            'materno'   => 'string',
             'email'     => 'required|email|unique:users',
             //'password ' => 'required',
             'sexo'      => 'string',
@@ -107,54 +128,62 @@ class PrincipalController extends Controller
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
-        $pass = Input::get('password');
+       // $pass = Input::get('password');
         //$cursante->create($request->all());
-        $docente->id = Input::get('id');
-        $docente->nickname = Input::get('nickname');
-        $docente->password = bcrypt($pass);
-        $docente->nombres = Input::get('nombres');
-        $docente->paterno = Input::get('paterno');
-        $docente->materno = Input::get('materno');
-        $docente->email = Input::get('email');
-        $docente->telefono = Input::get('telefono');
-        $docente->sexo = Input::get('sexo');
-        $docente->fnac = Input::get('fnac');
-        $docente->grade_id = Input::get('grade_id');
-        $docente->direccion = Input::get('direccion');
-        $docente->profesion = Input::get('profesion');
+        $docente->id            = Input::get('id');
+        $docente->nickname      = Input::get('nickname');
+        $docente->password      = Input::get('password');
+        $docente->nombres       = strtoupper(Input::get('nombres'));
+        $docente->paterno       = strtoupper(Input::get('paterno'));
+        $docente->materno       = strtoupper(Input::get('materno'));
+        $docente->email         = Input::get('email');
+        $docente->telefono      = Input::get('telefono');
+        $docente->sexo          = Input::get('sexo');
+        $docente->fnac          = Input::get('fnac');
+        $docente->grade_id      = Input::get('grade_id');
+        $docente->direccion     = strtoupper(Input::get('direccion'));
+        $docente->profesion     = strtoupper(Input::get('profesion'));
         $docente->role = 'docente';
         $docente->save();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function mostrarDocentes()//lista a los docentes
     {
-        //
+        //$cursantes = User::all();
+        $docentes = DB::table('users')
+            ->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado')
+            ->get();
+        return view('director.modificarDocente', compact('docentes'));
+        //return $docentes;
+    }
+    public function editarDocente($id)
+    {
+        $docente =User::find($id);
+        //return $cursante;
+        return view('director.editarDocente',compact('docente'));
+    }
+    public function actualizarDocente($id,Request $request )
+    {
+        $cursante =User::find($id);
+        //$cursante->fill($request->all());
+        $cursante->id           = Input::get('id');
+        $cursante->nickname     = Input::get('nickname');
+        $cursante->password     = Input::get('password');
+        $cursante->nombres      = strtoupper(Input::get('nombres'));
+        $cursante->paterno      = strtoupper(Input::get('paterno'));
+        $cursante->materno      = strtoupper(Input::get('materno'));
+        $cursante->email        = Input::get('email');
+        $cursante->telefono     = Input::get('telefono');
+        $cursante->sexo         = Input::get('sexo');
+        $cursante->fnac         = Input::get('fnac');
+        $cursante->grade_id     = Input::get('grade_id');
+        $cursante->direccion    = strtoupper(Input::get('direccion'));
+        $cursante->profesion    = strtoupper(Input::get('profesion'));
+        $cursante->save();
+        return redirect('modificarDocente')->with('update', true);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

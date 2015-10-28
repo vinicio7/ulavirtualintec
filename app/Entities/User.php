@@ -53,4 +53,12 @@ class User extends Model implements AuthenticatableContract,
         if($this->role == 'cursante')return 'Cursante';
         if($this->role == 'invitado')return 'Invitado';
     }
+
+    //**para actualizar usuarios**//
+    public function setPassordAttribute($valor)
+    {
+        if(!empty($valor)){
+            $this->atttributes['password']=  bcrypt($valor);
+        }
+    }
 }

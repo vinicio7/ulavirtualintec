@@ -16,8 +16,13 @@
     <file url="file://$PROJECT_DIR$/resources/views/cursante/verCalificaciones.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/director/calificacionExitosa.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/director/calificarCursante.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/director/editarCursante.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/director/editarDocente.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/director/forms/edit.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/director/inscribirCursante.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/director/inscribirDocente.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/director/modificarCursante.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/director/modificarDocente.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/docente/calificacionExitosa.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/docente/calificar.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php" charset="UTF-8" />
