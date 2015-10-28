@@ -23,6 +23,7 @@ class CreateNotaIntercursantesTable extends Migration
             $table->integer('4b');
             $table->integer('4c');
             $table->integer('4d');
+            $table->decimal('prom4', 5, 2);
             $table->timestamps();
 
         });

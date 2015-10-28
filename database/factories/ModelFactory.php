@@ -95,10 +95,10 @@ $factory->define(App\Entities\Kardex::class, function(Faker\Generator $faker){
             'prom3'       => $faker->numberBetween($min = 1, $max =100),
 
             //todos los 4 son del parametro "SER", evaluan entre cursantes, el facilitador y el Jefe de evaluacion.
-            '41aCursante'       => $faker->numberBetween($min = 1, $max =100),
+            /*'41aCursante'       => $faker->numberBetween($min = 1, $max =100),
             '41bCursante'       => $faker->numberBetween($min = 1, $max =100),
             '41cCursante'       => $faker->numberBetween($min = 1, $max =100),
-            '41dCursante'       => $faker->numberBetween($min = 1, $max =100),
+            '41dCursante'       => $faker->numberBetween($min = 1, $max =100),*/
             'prom4Cursante'     => $faker->numberBetween($min = 1, $max =100),
             '41aFacil'          => $faker->numberBetween($min = 1, $max =100),
             '41bFacil'          => $faker->numberBetween($min = 1, $max =100),

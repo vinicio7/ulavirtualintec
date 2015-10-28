@@ -65,12 +65,35 @@ class ExcelController extends Controller
                             '11a' => $notas[5],
                             '11b' => $notas[6],
                             '11c' => $notas[7],
-//                            'nombreMateria' => $book->name,
+                            '12a' => $notas[9],
+                            '12b' => $notas[10],
+                            'prom1' => $notas[11],
+                            '21a' => $notas[13],
+                            '21b' => $notas[14],
+                            '21c' => $notas[15],
+                            '22a' => $notas[17],
+                            '22b' => $notas[18],
+                            '22c' => $notas[19],
+                            'prom2' => $notas[20],
+                            '31a' => $notas[22],
+                            '31b' => $notas[23],
+                            '31c' => $notas[24],
+                            '31d' => $notas[25],
+                            '31e' => $notas[26],
+                            '31f' => $notas[27],
+                            '31g' => $notas[28],
+                            'prom3' => $notas[29],
+                            '41aFacil' => $notas[31],
+                            '41bFacil' => $notas[32],
+                            '41cFacil' => $notas[33],
+                            '41dFacil' => $notas[34],
+                            'prom4Facil' => $notas[35],
                         ]);
             }
         })->noHeading()->toArray();
         //return Materia::all();
-        dd($ver);
+        //dd($ver);
+        return view('docente.calificacionExitosa');
         /*       //$xls_datas = Excel::load($request['file1'], function($reader) { })->skip(6);//->take(8)->noHeading()->toArray();//toArray();
                $a = Excel::load($request['file1'], function($reader) {
 
@@ -136,8 +159,7 @@ class ExcelController extends Controller
     //Genera la plantilla de excel que el docente descargara para llenar y posteriormene subir
     public function darExcel(Request $request)
     {
-
-        Excel::create('CalificacionesEAEN', function($excel) use($request) {
+            Excel::create('CalificacionesEAEN', function($excel) use($request) {
 
             $excel->sheet('Calificar', function($sheet) use($request) {
                 $estudiantes = Kardex::select('user', 'paterno', 'materno', 'nombres')

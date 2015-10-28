@@ -218,9 +218,38 @@ class CursanteController extends Controller
                     '4b' => (int)$request['2califCursante'],
                     '4c' => (int)$request['3califCursante'],
                     '4d' => (int)$request['4califCursante'],
+                    'prom4' => (int)((int)$request['1califCursante']+
+                                     (int)$request['2califCursante']+
+                                     (int)$request['3califCursante']+
+                                     (int)$request['4califCursante'])/4
                 ]
             );
+
+            //Sacar promedio para ingresar a la tabla kardexes
+            $calificaciones = \DB::table('nota_intercursantes')
+                ->select('prom4')
+                ->where('cursante_calificado', $idCalificado)
+                ->where('materia_id', (int)$request['materia'])
+                ->get();
+            $total = \DB::table('nota_intercursantes')
+                ->select('prom4')
+                ->where('cursante_calificado', $idCalificado)
+                ->where('materia_id', (int)$request['materia'])
+                ->count();
+            $suma=0;
+            foreach($calificaciones as $c) {$suma=$suma+$c->prom4;}
+            $promedio=$suma/$total;
+            //dd($promedio);
+            \DB::table('kardexes')
+                ->where('materia_id', (int)$request['materia'])
+                /*->where('gestion', $gestion)
+                ->where('ua_id', $ua)*/
+                ->where('activo', 1)
+                ->where('user', $idCalificado)
+                ->update(['prom4Cursante' => $promedio]);
         }
+
+
         //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
         $cursanteCalificado = $request['cursante'];
         $materia = \DB:: table('materias')-> where('id', $request['materia'])-> value('nombreMateria');

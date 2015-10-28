@@ -18,6 +18,14 @@ class KardexTableSeeder extends Seeder
         $this->crearKardexFabri(4);
         $this->crearKardexFabri(5);
         $this->crearKardexFabri(7);
+        factory(App\Entities\Kardex::class)->create([
+            'materia_id' => 1,
+            'user'       => 4197244,
+            'gestion'    => 'I/2015',
+            'grupo'      => 1,
+            'activo'     => true,
+            'ua_id'      => 1,
+        ]);
     }
 
     public function crearKardexes($num)
@@ -65,11 +73,8 @@ class KardexTableSeeder extends Seeder
             'prom3'     => 70,
 
             //todos los 4 son del parametro "SER", evaluan entre cursantes, el facilitador y el Jefe de evaluacion.
-            '41aCursante'       => 70,
-            '41bCursante'       => 70,
-            '41cCursante'       => 70,
-            '41dCursante'       => 70,
             'prom4Cursante'     => 70,
+
             '41aFacil'          => 80,
             '41bFacil'          => 80,
             '41cFacil'          => 80,
@@ -84,7 +89,6 @@ class KardexTableSeeder extends Seeder
 
             //El promedio de las tres evaluaciones de 4
             'prom4'             => 87,
-
         ]);
     }
 }

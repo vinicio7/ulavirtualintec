@@ -12,18 +12,18 @@
                     <td class="success" width="15%" colspan="2">Saber</td>
                     <td class="success" width="15" colspan="2">Hacer</td>
                     <td class="success" width="15%" colspan="2">Ser</td>
-                    <td class="success" width="10%" rowspan="2">Nota Final</td>
+                    <td class="success" width="10%" rowspan="2">Nota Final (100%)</td>
                 </tr>
 
                 <tr>
                     <td class="success">Nota</td>
-                    <td class="success">Valor</td>
+                    <td class="success">Valor (20%)</td>
                     <td class="success">Nota</td>
-                    <td class="success">Valor</td>
+                    <td class="success">Valor (30%)</td>
                     <td class="success">Nota</td>
-                    <td class="success">Valor</td>
+                    <td class="success">Valor (40%)</td>
                     <td class="success">Nota</td>
-                    <td class="success">Valor</td>
+                    <td class="success">Valor (10%)</td>
                 </tr>
 
                 @foreach($notas as $n)

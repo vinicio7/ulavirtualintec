@@ -31,7 +31,7 @@
             <div class="form-group col-lg-4" style="text-align:center; margin-bottom: 10px;" align="center">
             <p align="center" style="text-align:center; margin-bottom: 50px;">
                     <input type="file" name="file1" accept=".xls, .xlsx, .csv" style="margin-bottom: 15px;" required>
-                    <button type="submit" class=" btn-primary btn-sm glyphicon glyphicon-save"> GUARDAR </button>
+                    <button type="submit" class=" btn-primary btn-sm glyphicon glyphicon-upload"> SUBIR A LA WEB </button>
                 </p>
             </div>
 

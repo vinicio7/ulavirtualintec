@@ -166,4 +166,58 @@ class PrincipalController extends Controller
     {
         //
     }
+
+    public function calificarCursanteSelecMateria()
+    {
+        //dd($disciplinas);
+        return view ('director.calificarCursanteSelecMateria');
+    }
+
+    public function calificarCursante(Request $request)
+    {
+        //Seleccionamos el id de la materia que selecciono
+        $materiaId = \DB::table('materias')->where('nombreMateria',$request['materia'])->value('id');
+
+        //Seleccionamos los cursantes que pasan esa materia
+        $cursantes = \DB::table('kardexes')
+                    ->join('users as u', 'user', '=', 'u.id')
+                    ->select('u.nombres', 'u.paterno', 'u.materno', 'u.id')
+                    ->where('materia_id', $materiaId)
+                    ->where('activo', 1)
+                    //Seleccionamos los que aun no califico
+                    ->where('prom4JE',0)
+                    //->where('ua_id', unidadDelDirector)
+                    ->get();
+        //dd($cursantes);
+        return view ('director.calificarCursante', compact('cursantes', 'materiaId'));
+    }
+
+    public function formCalifCursante(Request $request)
+    {
+        //dd($request['materia']);
+        if($request['cursante'] != null)
+        {
+            //Seleccionamos id del cursante
+            $cursanteId = substr($request['cursante'], strpos($request['cursante'], '- ')+strlen('- '));
+
+            //Insertamos valores
+            \DB::table('kardexes')
+                ->where('materia_id', $request['materia'])
+                ->where('user', $cursanteId)
+                ->where('activo', 1)
+                ->update(
+                    [
+                        '41aJE' => $request['1califCursante'],
+                        '41bJE' => $request['2califCursante'],
+                        '41cJE' => $request['3califCursante'],
+                        '41dJE' => $request['4califCursante'],
+                        'prom4JE' => (($request['1califCursante']+
+                                        $request['2califCursante']+
+                                        $request['3califCursante']+
+                                        $request['4califCursante'])/4)
+                    ]);
+        }
+        return view('director.calificacionExitosa');
+        //dd('exitoso');
+    }
 }

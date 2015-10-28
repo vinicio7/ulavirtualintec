@@ -129,7 +129,6 @@ Route::get('verCalificacionesCursantes',[
 
 
 
-
 //*********************** rutas excel ****************
 //preuba generar excel
 
@@ -184,3 +183,21 @@ Route::post('nuevoDocente',[
 Route::get('pruebaPDF',[
     'uses' => 'PdfController@invoice',
     'as'   => 'pruebaPDF']);
+
+
+//****************Rutas director************************
+
+//Ruta para mostrar las materias para calificar al cursante
+Route::get('calificarCursanteSelecMateria',[
+    'uses' => 'PrincipalController@calificarCursanteSelecMateria',
+    'as'   => 'director.calificarCursanteSelecMateria']);
+
+//Ruta para seleccionar cursante y calificarlo
+Route::post('calificarCursante',[
+    'uses' => 'PrincipalController@calificarCursante',
+    'as'   => 'director.calificarCursante']);
+
+//Ruta para guardar calificacion al cursante
+Route::post('formCalifCursante',[
+    'uses' => 'PrincipalController@formCalifCursante',
+    'as'   => 'director.formCalifCursante']);

@@ -11,15 +11,16 @@
     <li>
         <a href="#"><i class="glyphicon glyphicon-user"></i> <span class="nav-label">Cursantes</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="{{ route('nuevoCursante')}}"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
+            <li><a href="{{ route('nuevoCursante')}}"><i class="glyphicon glyphicon-plus-sign"></i>Inscribir nuevo</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-edit"></i>Modificar Cursante</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
+            <li><a href="{{ route('director.calificarCursanteSelecMateria')}}"><i class="fa fa-edit"></i>Evaluar Cursante</a></li>
         </ul>
     </li>
     <li>
         <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Docentes</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="{{ route('nuevoDocente')}}"><i class="glyphicon glyphicon-plus-sign"></i>Incribir nuevo</a></li>
+            <li><a href="{{ route('nuevoDocente')}}"><i class="glyphicon glyphicon-plus-sign"></i>Inscribir nuevo</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-edit"></i>Modificar Docente</a></li>
             <li><a href="form_basic.html"><i class="glyphicon glyphicon-file"></i>Reportes</a></li>
         </ul>
@@ -53,9 +54,9 @@
     <li>
         <a href="{{ route('cursante.verCalificaciones')}}"><i class="glyphicon glyphicon-list-alt"></i> <span class="nav-label">Ver Calificaciones</span></a>
     </li>
-    <li>
+    <!--li>
         <a href="#"><i class="glyphicon glyphicon-dashboard"></i> <span class="nav-label">Asistencia</span></a>
-    </li>
+    </li-->
     <li>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Evaluar</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
