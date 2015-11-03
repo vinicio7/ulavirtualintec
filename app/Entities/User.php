@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+//use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model implements AuthenticatableContract,
                                     AuthorizableContract,
@@ -22,7 +23,7 @@ class User extends Model implements AuthenticatableContract,
      * @var string
      */
     protected $table = 'users';
-
+    //protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *
@@ -55,10 +56,15 @@ class User extends Model implements AuthenticatableContract,
     }
 
     //**para actualizar usuarios**//
-    public function setPassordAttribute($valor)
+    public function getCursante()
+    {
+        $cursante= User::where('role','cursante');
+        return $cursante;
+    }
+    public function setPasswordAttribute($valor)
     {
         if(!empty($valor)){
-            $this->atttributes['password']=  bcrypt($valor);
+            $this->attributes['password']=  bcrypt($valor);
         }
     }
 }

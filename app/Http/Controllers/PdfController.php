@@ -24,10 +24,10 @@ class PdfController extends Controller
     public function getData()
     {
         $data =  [
-            'quantity' => '1' ,
+            'quantity'      => '1' ,
             'description'   => 'some ramdom text',
-            'price'   => '500',
-            'total'     => '500'
+            'price'         => '500',
+            'total'         => '500'
         ];
         return $data;
     }
@@ -88,4 +88,38 @@ class PdfController extends Controller
         return $pdf->download('calificacionDocente.pdf');
         //return $pdf->stream('prueba.pdf');
     }
+    //************* +++++ del director +++++++ ****************************
+    //del director
+    public function cursantes()
+    {
+
+        $cursantes = \DB::table('users')
+            ->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado')
+            ->where('role','cursante')
+            ->get();
+        $view = \View::make('director.pdfCursantes',compact('cursantes'))->render();
+
+        $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+
+
+        return $pdf->stream('Cursantes.pdf');
+    }
+
+    public function docentes()
+    {
+        $docentes = \DB::table('users')
+            ->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado')
+            ->where('role','docente')
+            ->get();
+        $view = \View::make('director.pdfDocentes',compact('docentes'))->render();
+
+        $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+
+
+        return $pdf->stream('Docentes.pdf');
+    }
+
+    //************* +++++ del director +++++++ ****************************
 }

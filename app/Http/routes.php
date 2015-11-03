@@ -163,6 +163,7 @@ Route::get('alumno/{id}', [
     'uses'  => 'CursanteController@usuario',
     'as'    => 'usuario'
 ]);
+Route::get('sorteo','PrincipalController@sortearGrupos' );
 //rutas del director
 Route::get('nuevoCursante',[
     'uses' => 'PrincipalController@index',
@@ -201,8 +202,26 @@ Route::put('actualizarDocente{id}',[
     'uses'  => 'PrincipalController@actualizarDocente',
     'as'    => 'upDocente'
 ]);
+Route::delete('eliminar{id}',[
+    'uses'   => 'PrincipalController@destroyCu',
+    'as'     => 'eliminar'
+]);
+Route::delete('eliminar{id}',[
+    'uses'   => 'PrincipalController@destroyDo',
+    'as'     => 'eliminar'
+]);
 
-
+/*Route::get('sorteoGrupos',[
+    'uses'  => 'PrincipalController@sortearIndex',
+    'as'    => 'sortearIndex'
+]);*/
+Route::get('sortear', 'PrincipalController@sortearGrupos');
+/*Route::get('sorteoDeGrupos',[
+    'uses'  => 'PrincipalController@sortearGrupos',
+    'as'    => 'sortearIndex'
+]);*/
+Route::get('pdfCursanes', 'PdfController@cursantes');
+Route::get('pdfDocentes', 'PdfController@docentes');
 //PRUEBA DOMPDF
 Route::get('pruebaPDF',[
     'uses' => 'PdfController@invoice',

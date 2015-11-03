@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
@@ -38,7 +39,7 @@ class PrincipalController extends Controller
             'paterno'   => 'required',
             'materno'   => 'string',
             'email'     => 'required|email|unique:users',
-            'password ' => 'required',
+            //'password ' => 'required',
             'sexo'      => 'string',
             'telefono'  => 'numeric',
             'fnac'      => 'date',
@@ -183,17 +184,50 @@ class PrincipalController extends Controller
         return redirect('modificarDocente')->with('update', true);
     }
 
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroyCu($id)
     {
-        //
+        User::destroy($id);
+        Session::flash('message','Usuario Eliminado...');
+        return redirect()->back();
+    }
+    public function destroyDo($id)
+    {
+        User::destroy($id);
+        Session::flash('message','Usuario Eliminado...');
+        return redirect()->back();
+    }
+
+    public function sortearIndex()
+    {
+        return view('director.sorteo');
+    }
+
+    public function sortearGrupos()
+    {
+
+        $alumnos = User::where('role','cursante')->get();
+        //$as =$al->where('role','cursante');
+        //$total = DB::table('users')->where('role','cursante');
+        //for ($i=0 ; $i <= count($alumnos); $i++){
+        //foreach($alumnos as $alumno){
+        $shuffled = $alumnos->shuffle();
+          //  $var[$i]= $alumno;
+            //$i++;
+        //}
+
+        //$sds = array_chunk($shuffled,2,false);
+
+        return view('director.sorteo', compact('shuffled'));
+        //return $alumno;
+        /*for($a = 1 ; $a<=$total; $a++){
+            if($total % $a == 0){
+                $numero[$a]= $a;
+                $a++;
+            }
+
+        }
+        return $numero;*/
+
     }
 
     public function calificarCursanteSelecMateria()
