@@ -238,12 +238,14 @@ class CursanteController extends Controller
                 ->where('cursante_calificado', $idCalificado)
                 ->where('materia_id', (int)$request['materia'])
                 ->get();
+
             $total = \DB::table('nota_intercursantes')
                 ->select('prom4')
                 ->where('cursante_calificado', $idCalificado)
                 ->where('materia_id', (int)$request['materia'])
                 ->count();
             $suma=0;
+
             foreach($calificaciones as $c) {$suma=$suma+$c->prom4;}
             $promedio=$suma/$total;
 

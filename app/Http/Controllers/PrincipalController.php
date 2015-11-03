@@ -260,7 +260,7 @@ class PrincipalController extends Controller
         //dd($request['materia']);
         if($request['cursante'] != null)
         {
-            //Seleccionamos id del cursante
+            //Seleccionamos id del cursante calificado
             $cursanteId = substr($request['cursante'], strpos($request['cursante'], '- ')+strlen('- '));
 
             //Insertamos valores
@@ -279,6 +279,27 @@ class PrincipalController extends Controller
                                         $request['3califCursante']+
                                         $request['4califCursante'])/4)
                     ]);
+
+            //3 Promedios del parametro 4
+            $promedios = \DB::table('kardexes')
+                ->where('materia_id', (int)$request['materia'])
+                ->where('activo', 1)
+                ->where('user', $cursanteId)
+                ->select('prom4Cursante', 'prom4Facil', 'prom4JE')
+                ->get();
+
+            //Pomredio 4, para actulaizarlo
+            $promedioGeneral = ($promedios[0]->{'prom4Cursante'})*0.1+
+                ($promedios[0]->{'prom4JE'})*0.2+
+                ($promedios[0]->{'prom4Facil'})*0.7;
+            //dd($promedios);
+
+            //Insertamos valores
+            \DB::table('kardexes')
+                ->where('materia_id', $request['materia'])
+                ->where('user', $cursanteId)
+                ->where('activo', 1)
+                ->update(['prom4' => $promedioGeneral]);
         }
         return view('director.calificacionExitosa');
         //dd('exitoso');
