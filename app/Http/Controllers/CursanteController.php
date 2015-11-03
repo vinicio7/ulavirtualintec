@@ -180,7 +180,9 @@ class CursanteController extends Controller
             ->where('user', '!=', Auth::user()->id)
             ->where('k.activo', '=', true)
             ->get();
+
         $usuario_calificador = Auth::user()->id;
+
         //dd($usuario_calificador);
         //dd($nombres);
         return view('cursante.calificarCursante', compact('nombres', 'id_materia', 'usuario_calificador'));
@@ -244,14 +246,28 @@ class CursanteController extends Controller
             $suma=0;
             foreach($calificaciones as $c) {$suma=$suma+$c->prom4;}
             $promedio=$suma/$total;
-            //dd($promedio);
+
+            $promedios = \DB::table('kardexes')
+                                ->where('materia_id', (int)$request['materia'])
+                                ->where('activo', 1)
+                                ->where('user', $idCalificado)
+                                ->select('prom4Cursante', 'prom4Facil', 'prom4JE')
+                                ->get();
+
+            $promedioGeneral = ($promedios[0]->{'prom4Cursante'})*0.1+
+                                ($promedios[0]->{'prom4JE'})*0.2+
+                                ($promedios[0]->{'prom4Facil'})*0.7;
+            //dd($promedioGeneral);
             \DB::table('kardexes')
                 ->where('materia_id', (int)$request['materia'])
                 /*->where('gestion', $gestion)
                 ->where('ua_id', $ua)*/
                 ->where('activo', 1)
                 ->where('user', $idCalificado)
-                ->update(['prom4Cursante' => $promedio]);
+                ->update(['prom4Cursante' => $promedio,
+                          'prom4' => $promedioGeneral]);
+                //Actualizamos el promedio general
+                //->update(['porm4' => $promedioGeneral]);
 
             //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
             $cursanteCalificado = $request['cursante'];

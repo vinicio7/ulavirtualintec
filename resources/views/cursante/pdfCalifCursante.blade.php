@@ -21,11 +21,23 @@
 </head>
 <body>
 
+    <div class="" style="margin-bottom: 15px; margin-right: 20px">
+        <pre>UNIVERSIDAD MILITAR "Mcal. BERNARDINO BILBAO RIOJA"
+              E.A.E.N. "CNL. EDUARDO AVAROA"
+                      BOLIVIA
+        </pre>
+    </div>
 
     <div class="" style="text-align:center; margin-bottom: 15px;">
         <p>Cursante Calificado: <?php echo ($cursanteCalificado);?></p>
-        <p>Cursante Calificador: <?php echo ($cursanteCalificador[0]->nombres . ' ' .$cursanteCalificador[0]->paterno  . ' ' .$cursanteCalificador[0]-> materno);?></p>
+        <p>Cursante Calificador: <?php echo ($cursanteCalificador[0]->nombres . ' ' .$cursanteCalificador[0]->paterno  . ' ' .$cursanteCalificador[0]-> materno .' - '. Auth::user()->id);?></p>
         <p>Materia: <?php echo ($materia);?></p>
+        <p>Unidad Académica: <?php echo (\DB::table('kardexes')
+                    ->join('unidad_academicas as ua','ua.id', '=', 'ua_id')
+                    ->where('user', Auth::user()->id)
+                    ->where('activo',1)
+                    ->value('ua.ua'));?></p>
+        <p>Gestión: <?php echo (\DB::table('kardexes')->where('user', Auth::user()->id)->where('activo',1)->value('gestion'));?></p>
     </div>
     <div class="table table-striped" align="center">
         <table cellpadding="10%" border="3" align="center">
@@ -91,6 +103,18 @@
                 <td class="active"><?php echo ($cuatro);?></td>
             </tr>
         </table>
+    </div>
+
+    <div class="" style="margin-bottom: 25px; text-align: center">
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>--------------------------------------------------------------</p>
+        <p>Cursante <?php echo (' ' .$cursanteCalificador[0]->paterno  . ' ' .$cursanteCalificador[0]-> materno) . ' ' .$cursanteCalificador[0]->nombres;?></p>
+        <p>C.I. <?php echo(Auth::user()->id)?></p>
     </div>
 </body>
 </html>

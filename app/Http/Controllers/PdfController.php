@@ -41,6 +41,7 @@ class PdfController extends Controller
         $cuatro = $request['4'];
         $cursanteCalificado = $request['cursanteCalificado'];
         $materia = $request['materia'];
+
         //dd($cursanteCalificado);
         $view =  \View::make('cursante.pdfCalifCursante', compact('uno', 'dos', 'tres', 'cuatro', 'cursanteCalificado',
                                 'materia', 'cursanteCalificador'))->render();

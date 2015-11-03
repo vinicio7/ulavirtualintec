@@ -44,13 +44,11 @@ class ExcelController extends Controller
     {
         $ver = Excel::load($request['file1'], function($reader) {
 
-//            dd($reader->noHeading()->toArray());
+            //dd($reader->noHeading()->toArray());
             //Seleccionamos la materia, unidad academica y gestion del excel
             $materiaId = \DB::table('materias')->where('nombreMateria', $reader->noHeading()->toArray()[0][4])->value('id');
             $ua = \DB::table('unidad_academicas')->where('ua', $reader->noHeading()->toArray()[3][4])->value('id');
             $gestion = $reader->noHeading()->toArray()[4][4];
-
-            //dd($gestion);
 
             foreach ($reader->get() as $notas) {
                 //echo $notas[0];
@@ -67,14 +65,14 @@ class ExcelController extends Controller
                             '11c' => $notas[7],
                             '12a' => $notas[9],
                             '12b' => $notas[10],
-                            'prom1' => $notas[11],
+                            'prom1' => $notas[11]/0.2,
                             '21a' => $notas[13],
                             '21b' => $notas[14],
                             '21c' => $notas[15],
                             '22a' => $notas[17],
                             '22b' => $notas[18],
                             '22c' => $notas[19],
-                            'prom2' => $notas[20],
+                            'prom2' => $notas[20]/0.3,
                             '31a' => $notas[22],
                             '31b' => $notas[23],
                             '31c' => $notas[24],
@@ -82,13 +80,38 @@ class ExcelController extends Controller
                             '31e' => $notas[26],
                             '31f' => $notas[27],
                             '31g' => $notas[28],
-                            'prom3' => $notas[29],
+                            'prom3' => $notas[29]/0.4,
                             '41aFacil' => $notas[31],
                             '41bFacil' => $notas[32],
                             '41cFacil' => $notas[33],
                             '41dFacil' => $notas[34],
-                            'prom4Facil' => $notas[35],
+                            'prom4Facil' => $notas[35]/0.1,
                         ]);
+                //dd($notas[0]);
+
+            //ACTUALIZAMOS EL PARAMETRO 4, QUE EVALUAN JE,CURSANTE Y DOCENTE
+                $promedios = \DB::table('kardexes')
+                    ->where('materia_id', $materiaId)
+                    ->where('activo', 1)
+                    ->where('user', $notas[0])
+                    ->select('prom4Cursante', 'prom4Facil', 'prom4JE')
+                    ->get();
+
+                if($promedios!=null)
+                {
+                    $promedioGeneral = ($promedios[0]->{'prom4Cursante'})*0.1+
+                                        ($promedios[0]->{'prom4JE'})*0.2+
+                                        ($promedios[0]->{'prom4Facil'})*0.7;
+                    //dd($promedioGeneral);
+                    //Actualizamos el promedio general
+                    \DB::table('kardexes')
+                        ->where('materia_id', $materiaId)
+                        /*->where('gestion', $gestion)
+                        ->where('ua_id', $ua)*/
+                        ->where('activo', 1)
+                        ->where('user', $notas[0])
+                        ->update(['prom4' => $promedioGeneral]);
+                }
             }
         })->noHeading()->toArray();
         //return Materia::all();
