@@ -33,7 +33,4 @@
             </table>
         </div>
     </div>
-
-
 @endsection
-

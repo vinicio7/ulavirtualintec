@@ -48,7 +48,6 @@ class PdfController extends Controller
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->download('calificacionCursante.pdf');
-        //return $pdf->stream('prueba.pdf');
     }
 
     public function calificacionDocente(Request $request)
@@ -76,8 +75,6 @@ class PdfController extends Controller
         $dieciocho = $request['18'];
         $diecinueve = $request['19'];
         $veinte = $request['20'];
-        //dd($nombreMateria);
-        //dd($docenteCalificado);
 
         $view =  \View::make('cursante.pdfCalifDocente', compact('cursanteCalificador', 'nombreMateria', 'docenteCalificado',
                                 'uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez',
@@ -86,13 +83,13 @@ class PdfController extends Controller
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->download('calificacionDocente.pdf');
-        //return $pdf->stream('prueba.pdf');
     }
+
+
     //************* +++++ del director +++++++ ****************************
     //del director
     public function cursantes()
     {
-
         $cursantes = \DB::table('users')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
             ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado')

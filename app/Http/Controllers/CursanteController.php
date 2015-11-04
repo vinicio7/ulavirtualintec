@@ -16,21 +16,12 @@ class CursanteController extends Controller
      */
     public function calificarDocente()
     {
-        //$materiaCursante = \DB::table('kardexes')->select('materia_id')->where('user', Auth::user()->id)->get();
         $disciplinas = \DB::table('kardexes')
             ->join('materias as m', 'materia_id', '=', 'm.id')
-            //->join('nota_docentes as nd', 'user', '=', 'nd.id_cursante')
             ->select('m.nombreMateria', 'm.id', 'user')
             ->where('user', '=', Auth::user()->id)
             ->where('activo', '=', true)
-            //->where('ua_id', '=', \DB::table('kardexes')->where('user', Auth::user()->id)->value('ua_id'))
-            //->where('nd.id_cursante', '!=', Auth::user()->id AND 'nd.materia_id', '!=', 'materia_id')
             ->get();
-        //dd($materiaCursante);
-        //dd($disciplinas);
-        /*$califDoc = new NotaDocente;
-        $califDoc -> indicador1 = $request -> 1califDoc;
-        $califDoc -> $this->save();*/
         return view('cursante.calificarDocente', compact('disciplinas'));
     }
 
@@ -46,7 +37,6 @@ class CursanteController extends Controller
 
         //Tomamos el id de usuario docente
         $idDoc = \DB::table('contrato_docentes')->where('materia_id', $materia)->where('activo', true)->where('ua_id', $ua)->value('user');
-        //dd($materia, $idDoc);
 
         $disciplinas = \DB::table('kardexes')
             ->join('materias as m', 'materia_id', '=', 'm.id')
@@ -65,10 +55,9 @@ class CursanteController extends Controller
             //Buscar si existe el registro
             foreach($calificado as $c){
                 if($c -> id_cursante == Auth::user()->id && $c -> materia_id == $materia) //disciplinas -> id)
-
                 {$existe=1;}
-
             }
+
             if($existe == 0) {
                 \DB::table('nota_docentes')->insertGetId(
                     ['id_cursante' => Auth::user()->id,
@@ -143,17 +132,6 @@ class CursanteController extends Controller
             ->where('user', '=', Auth::user()->id)
             ->where('activo', '=', true)
             ->get();
-
-        /* PARA DOCENTES (NO SIRVE ACA)
-         * $disciplinas = \DB::table('kardexes')
-            ->join('materias as m', 'materia_id', '=', 'm.id')
-            ->join('nota_docentes as nd', 'user', '=', 'nd.id_cursante')
-            ->select('m.nombreMateria')
-            ->where('user', '=', Auth::user()->id)
-            ->where('activo', '=', true)
-            ->where('nd.id_cursante', '!=', Auth::user()->id AND 'nd.id_materia', '!=', 'materia_id')
-            //->where('nd.id_materia', '!=', 'materia_id')
-            ->get();*/
         return view('cursante.selecMateriaCalifCursante', compact('disciplinas'));
     }
 
@@ -183,27 +161,15 @@ class CursanteController extends Controller
 
         $usuario_calificador = Auth::user()->id;
 
-        //dd($usuario_calificador);
-        //dd($nombres);
         return view('cursante.calificarCursante', compact('nombres', 'id_materia', 'usuario_calificador'));
     }
 
 
 
-
-    /*function after ($this, $inthat)
-    {
-        if (!is_bool(strpos($inthat, $this)))
-            return substr($inthat, strpos($inthat,$this)+strlen($this));
-    }*/
-
     public function formCalifCursante(Request $request)
     {
-        //dd('s');
         //Tomamos el id del cursante que calificamos
         $idCalificado= substr($request['cursante'], strpos($request['cursante'], '- ')+strlen('- '));
-
-        //dd((int)$request['materia']);
 
         //Realizamos insercion verificando primero que la califcacion no existe
         $existe = 0;
@@ -216,6 +182,7 @@ class CursanteController extends Controller
             if($c -> cursante_calificador == Auth::user()->id && $c -> cursante_calificado == $idCalificado)
             {$existe=1;}
         }
+
         if($existe == 0) {
             \DB::table('nota_intercursantes')->insertGetId(
                 ['cursante_calificador' => Auth::user()->id,
@@ -262,14 +229,10 @@ class CursanteController extends Controller
             //dd($promedioGeneral);
             \DB::table('kardexes')
                 ->where('materia_id', (int)$request['materia'])
-                /*->where('gestion', $gestion)
-                ->where('ua_id', $ua)*/
                 ->where('activo', 1)
                 ->where('user', $idCalificado)
                 ->update(['prom4Cursante' => $promedio,
                           'prom4' => $promedioGeneral]);
-                //Actualizamos el promedio general
-                //->update(['porm4' => $promedioGeneral]);
 
             //Creamos estas varialbes para enviarlas y utilizarlas en la generacion del pdf
             $cursanteCalificado = $request['cursante'];
@@ -295,7 +258,6 @@ class CursanteController extends Controller
             ->where('user', '=', Auth::user()->id)
             ->where('activo', '=', true)
             ->get();
-        //dd($notas);
         return view('cursante.verCalificaciones', compact('notas'));
     }
 

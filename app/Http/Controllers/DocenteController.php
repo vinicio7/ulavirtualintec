@@ -12,8 +12,6 @@ class DocenteController extends Controller
 {
     public function calificar()
     {
-     //  dd('hola');
-
      $materias = \DB::table('contrato_docentes')
                     ->join('materias as m', 'm.id', '=', 'materia_id')
                     ->select('nombreMateria')
@@ -22,15 +20,12 @@ class DocenteController extends Controller
                     ->where('activo',1)
                     ->where('ua_id', \DB::table('contrato_docentes')->where('user', Auth::user()->id)->value('ua_id'))
                     ->get();
-
-     //dd($materias);
      return view('docente.calificar', compact('materias'));
     }
 
     public function verCalificaciones()
     {
         //Tomamos los datos materia_id, gestion y unidad academica id del docente para compararlos con los cursantes que pasan
-        //clases con el.
         $datos = \DB::table('contrato_docentes')
             -> select('materia_id', 'gestion', 'ua_id')
             -> where('user', Auth::user()->id)
@@ -49,7 +44,6 @@ class DocenteController extends Controller
                 ->where('activo', '=', true)
                 ->get();
         }
-        //dd($notas[0]->{'nombres'});
         return view('docente.verCalificaciones', compact('notas'));
     }
 }
