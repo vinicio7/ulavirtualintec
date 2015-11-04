@@ -40,11 +40,6 @@
             BILBOA RIOJA".
         </p>
 
-        <!--p align="justify">
-            <small>Para poder ingresar al Sistema deberá registrarse enviar los datos personales
-                que se piden en el sitio www.constellamaris.com</small>
-        </p-->
-
         </div>
         <div class="col-md-6">
 
@@ -57,8 +52,7 @@
     <hr/>
     <div class="row">
         <div class="col-md-6" align="justify">
-            Sitio web desarrollado por:
-            TF. CGON. Charlie Seoane Sanchez, Fabricio Torrico Barahona, Behimar Alvarado Aranda
+            Sitio web desarrollado por: Fabricio Torrico Barahona, Behimar Alvarado Aranda
         </div>
         <div class="col-md-4 text-right">
             <small>Copyright © 2015</small>

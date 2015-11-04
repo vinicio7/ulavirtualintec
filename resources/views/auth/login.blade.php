@@ -48,16 +48,16 @@
             {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Contraseña']) !!}
         </div>
         {!! Form::submit('Iniciar sesión', ['class' => 'btn btn-primary block full-width m-b']) !!}
-    <button type="button" class="btn btn-primary block full-width m-b" data-toggle="modal" data-target="#myModal">
+    <!--button type="button" class="btn btn-primary block full-width m-b" data-toggle="modal" data-target="#myModal">
         Registrarse
     </button>
 
-        <a href="{{ url('password/email') }}">
+        <!--a href="{{ url('password/email') }}">
             <small>Olvidó su contraseña?</small>
-        </a>
+        </a-->
 
     {!! Form::close() !!}
-    <p class="m-t">
+    <p class="m-t" align="center">
         <small>Sistema de Califiacaciones E.A.E.N. &copy; 2015</small>
     </p>
 </div>

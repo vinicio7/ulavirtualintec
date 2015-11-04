@@ -67,11 +67,11 @@
                         <span class="m-r-sm text-muted welcome-message">SISEAEN</span>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <!--a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                             <i class="fa fa-bell"></i>  <span class="label label-warning">8</span>
                         </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <!--li>
+                        <!--ul class="dropdown-menu dropdown-alerts">
+                            <li>
                                 <a href="mailbox.html">
                                     <div>
                                         <i class="fa fa-envelope fa-fw"></i> You have 16 messages
@@ -87,7 +87,7 @@
                                         <span class="pull-right text-muted small">12 minutes ago</span>
                                     </div>
                                 </a>
-                            </li-->
+                            </li>
                             <li class="divider"></li>
                             <li>
                                 <a href="grid_options.html">
@@ -106,7 +106,7 @@
                                     </a>
                                 </div>
                             </li>
-                        </ul>
+                        </ul-->
                     </li>
 
 
