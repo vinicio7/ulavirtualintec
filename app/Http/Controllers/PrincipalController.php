@@ -251,7 +251,6 @@ class PrincipalController extends Controller
                     ->where('prom4JE',0)
                     //->where('ua_id', unidadDelDirector)
                     ->get();
-        //dd($cursantes);
         return view ('director.calificarCursante', compact('cursantes', 'materiaId'));
     }
 
