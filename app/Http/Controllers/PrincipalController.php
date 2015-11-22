@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\ContratoDocente;
+use App\Entities\Kardex;
 use App\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\View;
 
 class PrincipalController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -196,40 +200,118 @@ class PrincipalController extends Controller
         Session::flash('message','Usuario Eliminado...');
         return redirect()->back();
     }
-
-    public function sortearIndex()
+    public function mostrarGroup()
     {
-        return view('director.sorteo');
+        return view('director.mostrarsorteo');
     }
 
+    public function prueba()
+    {
+        $grupo = DB::table('users')
+            ->where('role','cursante')
+            ->leftJoin('kardexes','users.id','=','user')
+            ->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->where('materia_id',1)
+            ->select('user','nombres','paterno','materno','grupo','grado','profesion')
+
+            ->orderBy('grupo')
+            ->orderBy('nombres')
+            ->get();
+        return $grupo;
+    }
     public function sortearGrupos()
     {
-
-        $alumnos = User::where('role','cursante')->get();
-        //$as =$al->where('role','cursante');
-        //$total = DB::table('users')->where('role','cursante');
-        //for ($i=0 ; $i <= count($alumnos); $i++){
-        //foreach($alumnos as $alumno){
+        $numero = Input::get('numero');
+        $materia = Input::get('materia_id');
+        //$alumnos = User::where('role','cursante')->select('id','nombres','paterno','materno')->get();
+        $alumnos = DB::table('users')
+            ->where('role','cursante')
+            ->leftJoin('kardexes','users.id','=','user')
+            ->where('materia_id',$materia)
+            ->select('users.id','nombres','paterno','materno')
+            ->get();
+        ;
+        $alumnos = collect($alumnos);
+        $leng = $alumnos->count();
         $shuffled = $alumnos->shuffle();
-          //  $var[$i]= $alumno;
-            //$i++;
-        //}
-
-        //$sds = array_chunk($shuffled,2,false);
-
-        return view('director.sorteo', compact('shuffled'));
-        //return $alumno;
-        /*for($a = 1 ; $a<=$total; $a++){
-            if($total % $a == 0){
-                $numero[$a]= $a;
-                $a++;
-            }
-
+        foreach ($shuffled as $shu){
+            $ii[] = $shu->id;
         }
-        return $numero;*/
-
+        $cont =0;
+        $gru = 1;
+        for ($i = 0; $i < $leng ; ++$i) {
+            if($cont == $numero){
+                $cont =0;
+                $gru = $gru + 1;
+            }
+            $cont = $cont + 1;
+            DB::table('kardexes')
+                ->where('user', $ii[$i])
+                ->update(['grupo' => $gru]);
+        }
+        return view('director.sorteo')->with('shuffled',$shuffled)->with('numero',$numero)->with('materia',$materia);
     }
 
+    public function asignarCursante()
+    {
+        $cursantes = DB::table('users')
+            ->where('role','cursante')
+            ->leftJoin('kardexes','users.id','=','user')
+            ->select('users.id','nombres','paterno','materno','materia_id','gestion','grupo')
+            ->orderBy('materia_id')
+            ->get();
+        return view('director.asignarCursante',compact('cursantes'));
+    }
+    public function asignaMateria($id)
+    {
+        $usrMa= DB::table('kardexes')
+            ->where('user',$id)
+            ->select('materia_id')
+            ->get();
+
+        $quu = DB::select('select * from materias where id not in (select kardexes.materia_id from kardexes where kardexes.user=?)',array($id));
+        return view('director.nuevaMateria',compact('quu'))->with('id',$id)->with('usrMa',$usrMa);
+    }
+    public function asign($id)
+    {
+        $cursante = new Kardex();
+        $cursante->user         = $id;
+        $cursante->gestion      = Input::get('gestion');
+        $cursante->materia_id   = Input::get('materia_id');
+        $cursante->ua_id        = Input::get('ua_id');
+        $cursante->save();
+        Session::flash('message','Cursante Asignado Exitosamente');
+        return redirect()->back();
+    }
+    public function asignarDocente()
+    {
+        $docentes = DB::table('users')
+            ->where('role','docente')
+            ->leftJoin('contrato_docentes','users.id','=','user')
+            ->select('users.id','nombres','paterno','materno','materia_id','gestion')
+            ->orderBy('nombres')
+            ->orderBy('materia_id')
+            ->get();
+        return view('director.asignarDocente',compact('docentes'));
+    }
+    public function asignaContrado($id)
+    {
+        $quu = DB::select('select * from materias where id not in (select contrato_docentes.materia_id from contrato_docentes where contrato_docentes.user=?)',array($id));
+        return view('director.nuevoContrado',compact('id','quu'));
+    }
+    public function asignaDo($id)
+    {
+        //echo date("r");
+
+        $docente = new ContratoDocente();
+        $docente->user         = $id;
+        $docente->gestion      = Input::get('gestion');
+        $docente->materia_id   = Input::get('materia_id');
+        $docente->ua_id        = Input::get('ua_id');
+        $docente->save();
+        Session::flash('message','Docente Asignado Exitosamente');
+        return redirect()->back();
+    }
     public function calificarCursanteSelecMateria()
     {
         //dd($disciplinas);

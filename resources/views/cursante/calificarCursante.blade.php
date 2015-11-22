@@ -10,7 +10,7 @@
         <div class="" style="text-align:center; margin-bottom: 15px;">
             <label>Seleccione el Cursante a Evaluar: </label>
             <select class="selectpicker" name="cursante" data-live-search="true">
-                @foreach($nombres as $n)
+                   @foreach($nombres as $n)
                     <?php
                     $existe = 0;
                     $calificado = \DB::table('nota_intercursantes')

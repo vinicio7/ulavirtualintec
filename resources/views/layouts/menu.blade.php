@@ -7,8 +7,6 @@
         </ul>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">otras tareas</span><span class="fa arrow"></span></a>
     </li>
-
-
 @elseif(auth()->user()->role == 'director')
     <li>
         <a href="#"><i class="glyphicon glyphicon-user"></i> <span class="nav-label">Cursantes</span><span class="fa arrow"></span></a>
@@ -16,6 +14,8 @@
             <li><a href="{{ route('nuevoCursante')}}"><i class="glyphicon glyphicon-plus-sign"></i>Inscribir nuevo</a></li>
             <li><a href="{{ route('modificarCursante') }}"><i class="glyphicon glyphicon-edit"></i>Modificar Cursante</a></li>
             <li><a href="{{ route('director.calificarCursanteSelecMateria')}}"><i class="fa fa-edit"></i>Evaluar Cursante</a></li>
+
+
         </ul>
     </li>
     <li>
@@ -28,11 +28,13 @@
     <li>
         <a href="#"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Asignación</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="{{ url('sortear') }}"><i class="fa fa-list-ol"></i>Sorteo de grupos</a></li>
+            <li><a href="{{ url('asignar') }}"><i class="fa fa-list-ol"></i>Asignar Cursante</a></li>
+            <li><a href="{{ url('asignarDocentes') }}"><i class="fa fa-list-ol"></i>Asignar Docente</a></li>
+            <li><a href="{{ route('sortearIndex') }}"><i class="fa fa-list-ol"></i>Sorteo de grupos</a></li>
+
+
         </ul>
     </li>
-
-
 @elseif(auth()->user()->role == 'docente')
     <li>
         <a href="{{ route('docente.calificar')}}"><i class="fa fa-edit"></i> <span class="nav-label">Cargar Calificaciones</span></a>
@@ -46,6 +48,7 @@
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Calificar alumnos</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="form_basic.html">las vergas q tiene q hacer </a></li>
+
         </ul>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">asdfafs</span><span class="fa arrow"></span></a>
     </li>

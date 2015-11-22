@@ -211,17 +211,46 @@ Route::delete('eliminar{id}',[
     'as'     => 'eliminar'
 ]);
 
-/*Route::get('sorteoGrupos',[
-    'uses'  => 'PrincipalController@sortearIndex',
+Route::get('sortear-index',[
+    'uses'  => 'PrincipalController@mostrarGroup',
     'as'    => 'sortearIndex'
-]);*/
-Route::get('sortear', 'PrincipalController@sortearGrupos');
+]);
+Route::post('sortear',[
+    'uses'  => 'PrincipalController@sortearGrupos',
+    'as'    => 'sortear'
+]);
+
+//asigna cursantes a kardex
+Route::get('asignar','PrincipalController@asignarCursante');
+Route::get('asignar-materia-{id}',[
+    'uses'    => 'PrincipalController@asignaMateria',
+    'as'      => 'asignarMateria'
+]);
+Route::post('asignar-materia-{id}',[
+    'uses'    => 'PrincipalController@asign',
+    'as'      => 'asignarMateria'
+]);
+//asigna docentes a contratos
+Route::get('asignarDocentes','PrincipalController@asignarDocente');
+Route::get('asignar-doc{id}',[
+    'uses'    => 'PrincipalController@asignaContrado',
+    'as'      => 'asignarContrato'
+]);
+Route::post('asignar-doc{id}',[
+    'uses'    => 'PrincipalController@asignaDo',
+    'as'      => 'asignarContrado'
+]);
+
+
+
+
 /*Route::get('sorteoDeGrupos',[
     'uses'  => 'PrincipalController@sortearGrupos',
     'as'    => 'sortearIndex'
 ]);*/
 Route::get('pdfCursanes', 'PdfController@cursantes');
 Route::get('pdfDocentes', 'PdfController@docentes');
+Route::get('pdfDocentes{m}', 'PdfController@grupos');
 //PRUEBA DOMPDF
 Route::get('pruebaPDF',[
     'uses' => 'PdfController@invoice',
@@ -247,3 +276,8 @@ Route::post('calificarCursante',[
 Route::post('formCalifCursante',[
     'uses' => 'PrincipalController@formCalifCursante',
     'as'   => 'director.formCalifCursante']);
+
+
+
+
+Route::get('pu','PrincipalController@prueba');

@@ -158,7 +158,17 @@
             </fielset>
         </form>
 
-
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        var materia;
+        for (i=0; i<15 ;i++){
+            materia[]
+        }
+
+
+
+    </script>
 @endsection

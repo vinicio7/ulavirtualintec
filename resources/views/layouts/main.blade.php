@@ -164,12 +164,16 @@
     ga('send', 'pageview');
 
 </script>
-    <script>
-        $(function () {
-            $('#datetimepicker1').datetimepicker({
-            locale: 'es'
-        });
-    });
+
+
+    <script type="text/javascript">
+
+
+
+
     </script>
+</div>
+@section('scripts')
+@show
 </body>
 </html>

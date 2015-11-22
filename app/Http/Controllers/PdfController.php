@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PdfController extends Controller
 {
@@ -117,6 +118,24 @@ class PdfController extends Controller
 
         return $pdf->stream('Docentes.pdf');
     }
+    public function grupos($m)
+    {
+        $grupos = DB::table('users')
+            ->where('role','cursante')
+            ->leftJoin('kardexes','users.id','=','user')
+            ->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->where('materia_id',$m)
+            ->select('user','nombres','paterno','materno','grupo','grado','profesion')
+            ->orderBy('grupo')
+            ->orderBy('nombres')
+            ->get();
+
+        $view = \View::make('director.pdfgrupos',compact('grupos'))->render();
+
+        $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        return $pdf->stream('Grupos.pdf');
+    }
+
 
     //************* +++++ del director +++++++ ****************************
 }
