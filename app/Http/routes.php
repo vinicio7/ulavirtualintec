@@ -256,7 +256,14 @@ Route::get('pruebaPDF',[
     'uses' => 'PdfController@invoice',
     'as'   => 'pruebaPDF']);
 
-
+Route::get('reporte-Cursante',[
+    'uses'  => 'PrincipalController@reportePorCursante',
+    'as'    => 'porCursante'
+]);
+Route::get('solicitud-reporte-{id}',[
+    'uses'  => 'PrincipalController@reporteCursantePdf',
+    'as'    => 'cursantePdf'
+]);
 //****************Rutas director************************
 
 

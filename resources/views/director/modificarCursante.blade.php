@@ -45,9 +45,9 @@
                     <td>{{$cursante->paterno}}</td>
                     <td>{{$cursante->materno}}</td>
                     <td>{{$cursante->email}}</td>
-                    <td>{{$cursante->fnac}}</td>
                     <td>{{$cursante->telefono}}</td>
                     <td>{{$cursante->sexo}}</td>
+                    <td>{{$cursante->fnac}}</td>
                     <td>{{$cursante->direccion}}</td>
                     <td>
                             {!! link_to_route('editCursante',

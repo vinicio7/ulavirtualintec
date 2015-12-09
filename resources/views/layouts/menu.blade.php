@@ -34,7 +34,7 @@
     <li>
         <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="{{ url('asignar') }}"><i class="fa fa-list-ol"></i>Por Cursante</a></li>
+            <li><a href="{{ route('porCursante') }}"><i class="fa fa-list-ol"></i>Por Cursante</a></li>
             <li><a href="{{ route('director.reportePorMateria')}}"><i class="fa fa-list-ol"></i>Por Matria</a></li>
         </ul>
     </li>
