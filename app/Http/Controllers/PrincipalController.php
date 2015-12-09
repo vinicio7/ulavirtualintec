@@ -279,6 +279,7 @@ class PrincipalController extends Controller
         $cursante->gestion      = Input::get('gestion');
         $cursante->materia_id   = Input::get('materia_id');
         $cursante->ua_id        = Input::get('ua_id');
+        $cursante->activo       = 1;
         $cursante->save();
         Session::flash('message','Cursante Asignado Exitosamente');
         return redirect()->back();
@@ -384,5 +385,13 @@ class PrincipalController extends Controller
         }
         return view('director.calificacionExitosa');
         //dd('exitoso');
+    }
+
+    public function reportePorMateria()
+    {
+        $disciplinas = \DB::table('materias')
+                   ->select('id', 'nombreMateria')
+                   ->get();
+        return view('director.reportePorMateriaSelecMateria', compact('disciplinas'));
     }
 }

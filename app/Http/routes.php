@@ -277,6 +277,11 @@ Route::post('formCalifCursante',[
     'uses' => 'PrincipalController@formCalifCursante',
     'as'   => 'director.formCalifCursante']);
 
+//Ruta para escoger materia para generar reporte por materia
+Route::get('reportePorMateria',[
+    'uses' => 'PrincipalController@reportePorMateria',
+    'as'   => 'director.reportePorMateria']);
+
 
 
 
