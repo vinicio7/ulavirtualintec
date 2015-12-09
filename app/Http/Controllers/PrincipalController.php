@@ -390,7 +390,7 @@ class PrincipalController extends Controller
     public function reportePorMateria()
     {
         $disciplinas = \DB::table('materias')
-                   ->select('id', 'nombreMateria')
+                   ->select('nombreMateria')
                    ->get();
         return view('director.reportePorMateriaSelecMateria', compact('disciplinas'));
     }

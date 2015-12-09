@@ -4,7 +4,7 @@
 
     <div class="row border-bottom white-bg dashboard-header">
 
-        {!! Form::open(['route' => 'cursante.calificarCursante', 'method' => 'POST'])!!}
+        {!! Form::open(['route' => 'pdf.reportePorMateria', 'method' => 'POST'])!!}
         <p align="center">
             <label>Seleccione la Disciplina: </label>
         </p>

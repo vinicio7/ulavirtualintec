@@ -136,6 +136,28 @@ class PdfController extends Controller
         return $pdf->stream('Grupos.pdf');
     }
 
+    public function reportePorMateria(REQUEST $request)
+    {
+        $nombreMateria = $request['materia'];
+        $materia = DB::table('materias')->where('nombreMateria',$request['materia'])->value('id');
+        //dd($materia);
+        $cursantes = DB::table('kardexes')
+            ->join('users','users.id','=','user')
+            ->where('materia_id',$materia)
+            ->select('user','nombres','paterno','materno','prom4Cursante','prom4Facil','prom4JE')
+            ->orderBy('paterno')
+            ->get();
+        //dd($cursantes);
+        $view = \View::make('director.pdfReportePorMateria',compact('cursantes', 'nombreMateria'))->render();
+
+        $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        return $pdf->stream('ReportePorMateria.pdf');
+
+
+        /*$pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        return $pdf->download('calificacionDocente.pdf');*/
+    }
 
     //************* +++++ del director +++++++ ****************************
 }

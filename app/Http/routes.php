@@ -282,7 +282,9 @@ Route::get('reportePorMateria',[
     'uses' => 'PrincipalController@reportePorMateria',
     'as'   => 'director.reportePorMateria']);
 
-
-
+//Ruta generar pdf de reporte por Materia
+Route::post('reportePorMateria',[
+    'uses' => 'PdfController@reportePorMateria',
+    'as'   => 'pdf.reportePorMateria']);
 
 Route::get('pu','PrincipalController@prueba');
