@@ -311,6 +311,7 @@
             $final = ($n1+$n2+$n3+$n4+$n5+$n6+$n7+$n8+$n9+$n10+$n11+$n12+$n13+$n14+$n15)/15;
             echo '<td>'.$final .'</td>';
 
+
             if($final <= 100 and $final >=96):
                 echo '<td style="text-align: center">E</td>';
             elseif($final <= 95 and $final >=85)  :
