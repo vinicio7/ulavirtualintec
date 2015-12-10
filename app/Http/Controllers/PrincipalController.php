@@ -394,4 +394,28 @@ class PrincipalController extends Controller
                    ->get();
         return view('director.reportePorMateriaSelecMateria', compact('disciplinas'));
     }
+
+    public function reportePorCursante()
+    {
+        $cursantes = DB::table('users')
+            ->where('role','cursante')
+            //->leftJoin('kardexes','users.id','=','user')
+            ->select('users.id','nombres','paterno','materno')
+
+            ->get();
+        return view('director.reportePorCursante',compact('cursantes'));
+    }
+
+    public function reporteCursantePdf($id)
+    {
+        $cursante = DB::table('users')
+            ->where('users.id',$id)
+            ->leftJoin('kardexes','users.id','=','user')
+            ->get();
+        $view = \View::make('director.RepdfCursante',compact('cursante'))->render();
+
+        $pdf= \PDF::loadHTML($view)->setPaper('letter');
+        return $pdf->stream('Cursate-{users.paterno}.pdf');
+
+    }
 }

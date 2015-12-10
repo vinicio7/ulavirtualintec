@@ -1,29 +1,26 @@
 @extends('layouts.main')
 @section('content')
     <div class="row border-bottom white-bg dashboard-header">
-        <h3>Docentesd</h3>
-        @if($docentes)
+        <h3>Cursantes</h3>
+        @if($cursantes)
             <div class="container">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                         <th>CI</th>
                         <th>Nombres</th>
-                        <th>Materia</th>
-                        <th>Gestión</th>
                         <th>Acción</th>
                         </thead>
-                        @foreach($docentes as $docente)
+                        @foreach($cursantes as $cursante)
                             <tbody >
-                            <td>{{$docente->id}}</td>
-                            <td>{{$docente->nombres}} {{$docente->paterno}} {{$docente->materno}}</td>
-                            <td>{{$docente->materia_id}}</td>
-                            <td>{{$docente->gestion}}</td>
+                            <td>{{$cursante->id}}</td>
+                            <td>{{$cursante->nombres}} {{$cursante->paterno}} {{$cursante->materno}}</td>
                             <td>
-                                {!! link_to_route('asignarContrato',
-                                                            $title = 'Asignar',
-                                                            $parameters = $docente->id,
+                                {!! link_to_action('PrincipalController@reporteCursantePdf',
+                                                            $title = 'Imprimir',
+                                                            $parameters = $cursante->id,
                                                             $attributes = ['class'=>'btn btn-primary']) !!}
+
                             </td>
                             </tbody>
                         @endforeach
@@ -32,6 +29,6 @@
             </div>
     </div>
     @else
-        <p>No existen Docentes</p>
+        <p>No hay Cursantes Registrados</p>
     @endif
 @endsection
