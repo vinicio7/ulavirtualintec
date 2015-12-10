@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f11852ff-4a2a-4fa9-8fb1-4e476bebe5df" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/director/pdfReportePorMateria.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PdfController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PdfController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PrincipalController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PrincipalController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/director/reportePorMateriaSelecMateria.blade.php" afterPath="$PROJECT_DIR$/resources/views/director/reportePorMateriaSelecMateria.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+    <list default="true" id="f11852ff-4a2a-4fa9-8fb1-4e476bebe5df" name="Default" comment="FINAL CON REPOERTES POR MATERIA">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="siseaen.iws" />
@@ -61,7 +55,7 @@
       <file leaf-file-name="pdfReportePorMateria.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/director/pdfReportePorMateria.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.66487455">
+            <state vertical-scroll-proportion="0.9390681">
               <caret line="69" column="50" selection-start-line="69" selection-start-column="50" selection-end-line="69" selection-end-column="50" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -728,7 +722,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449621219597</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="FINAL CON REPOERTES POR MATERIA">
+      <created>1449629647431</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1449629647431</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TodoView">
@@ -793,7 +793,8 @@
     <MESSAGE value="Sirve todo, antes de borrar lo que no se usa" />
     <MESSAGE value="FINAL!!" />
     <MESSAGE value="FINAL con menu de reportes" />
-    <option name="LAST_COMMIT_MESSAGE" value="FINAL con menu de reportes" />
+    <MESSAGE value="FINAL CON REPOERTES POR MATERIA" />
+    <option name="LAST_COMMIT_MESSAGE" value="FINAL CON REPOERTES POR MATERIA" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1184,7 +1185,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/director/pdfReportePorMateria.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66487455">
+        <state vertical-scroll-proportion="0.9390681">
           <caret line="69" column="50" selection-start-line="69" selection-start-column="50" selection-end-line="69" selection-end-column="50" />
           <folding>
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
