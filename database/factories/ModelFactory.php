@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Entities\Grade::class, function (Faker\Generator $faker) {
     return [
         'grado'  => $faker->name,
-        'fuerza' => $faker->name
+
     ];
 });
 
@@ -51,8 +51,7 @@ $factory->define(App\Entities\User::class, function(Faker\Generator $faker){
         'direccion' => $faker->address,
         'profesion' => $faker->title,
         'grade_id'  => $faker->numberBetween($min = 1, $max = 5),
-        'hin'       => $faker->time($format = 'H:i:s', $max = 'now'),
-        'hout'       => $faker->time($format = 'H:i:s', $max = 'now')
+
     ];
 });
 
@@ -132,5 +131,10 @@ $factory->define(App\Entities\ContratoDocente::class, function(Faker\Generator $
         'gestion'    => $faker -> randomElement($array = array ('I/2015', 'II/2015')),
         'activo'     => $faker -> boolean(),
         'ua_id'      => $faker -> numberBetween($min = 1, $max = 3),
+    ];
+});
+$factory->define(App\Entities\Leader::class, function(Faker\Generator $faker){
+    return [
+        'cargo'     =>$faker -> name
     ];
 });

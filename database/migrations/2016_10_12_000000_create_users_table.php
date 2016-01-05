@@ -30,8 +30,9 @@ class CreateUsersTable extends Migration
             $table->string('direccion');
             $table->string('profesion')->nullable();
             $table->integer('grade_id')->unsigned();
-            $table->time('hin');
-            $table->time('hout');
+            $table->string('parentesco')->nullable();
+            $table->string('nomYap')->nullable();
+            $table->integer('tel')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

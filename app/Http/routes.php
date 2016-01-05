@@ -260,10 +260,7 @@ Route::get('reporte-Cursante',[
     'uses'  => 'PrincipalController@reportePorCursante',
     'as'    => 'porCursante'
 ]);
-Route::get('solicitud-reporte-{id}',[
-    'uses'  => 'PrincipalController@reporteCursantePdf',
-    'as'    => 'cursantePdf'
-]);
+
 //****************Rutas director************************
 
 
@@ -293,5 +290,62 @@ Route::get('reportePorMateria',[
 Route::post('reportePorMateria',[
     'uses' => 'PdfController@reportePorMateria',
     'as'   => 'pdf.reportePorMateria']);
-
+Route::post('reportePorAlumno',[
+    'uses'  => 'PrincipalController@reporteCursantePdf',
+    'as'    => 'porAlumno'
+]);
 Route::get('pu','PrincipalController@prueba');
+
+/*
+ * admin
+ */
+Route::get('lista_grados',[
+    'uses'  => 'AdminController@gradosList',
+    'as'    => 'grados'
+]);
+Route::post('lista_grados',[
+    'uses'  => 'AdminController@gradosNew',
+    'as'    => 'nuevoGrado'
+]);
+Route::get('editar_grados_{id}',[
+    'uses'  => 'AdminController@gradosEdit',
+    'as'    => 'editGrado'
+]);
+Route::put('actualizar_grados_{id}',[
+    'uses'  => 'AdminController@gradosUpdate',
+    'as'    => 'updateGrado'
+]);
+Route::get('eliminar_grados{id}',[
+    'uses'  => 'AdminController@destroyGrado',
+    'as'    => 'eliminarGrado'
+]);
+
+Route::get('lista_directores',[
+    'uses'  => 'AdminController@jefesList',
+    'as'    => 'directores'
+]);
+Route::get('editar_cargos_{id}',[
+    'uses'  => 'AdminController@cargosEdit',
+    'as'    => 'editCargo'
+]);
+Route::put('actualizar_cargos_{id}',[
+    'uses'  => 'AdminController@cargosUpdate',
+    'as'    => 'updateCargo'
+]);
+
+Route::post('nuevo_jefe',[
+    'uses'  => 'AdminController@jefesNew',
+    'as'    => 'nuevoJefe'
+]);
+Route::get('editar_jefe_{id}',[
+    'uses'  => 'AdminController@jefesEdit',
+    'as'    => 'editJefe'
+]);
+Route::put('actualizar_jefe_{id}',[
+    'uses'  => 'AdminController@jefesUpdate',
+    'as'    => 'updateJefe'
+]);
+Route::get('eliminar_jefe_{id}',[
+    'uses'  => 'AdminController@destroyJefe',
+    'as'    => 'eliminarJefe'
+]);

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGradesTable extends Migration
+class CreateLeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,10 @@ class CreateGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades', function (Blueprint $table) {
-            $table->engine='InnoDB';
-
+        Schema::create('leaders', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('grado');
-            $table->string('fuerza');
+            $table->string('nombreCompleto');
+            $table->string('cargo');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateGradesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('grades');
+        Schema::drop('leaders');
     }
 }

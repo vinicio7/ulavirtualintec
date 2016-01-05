@@ -28,17 +28,16 @@
             <th>Sexo</th>
             <th>Fecha de Nacimiento</th>
             <th>Direccion</th>
+            <th>Parentesco</th>
+            <th>Nombres</th>
+            <th>Telefono</th>
             <th colspan="2">Acción</th>
             </thead>
             @foreach($docentes as $docente)
                 @if($docente->role == 'docente')
                     <tbody>
                     <td>{{$docente->id}}</td>
-                    @if($docente->grado == 'Civil')
-                        <td>{{$docente->profesion}}</td>
-                    @else
-                        <td>{{$docente->grado}}</td>
-                    @endif
+                    <td>{{$docente->grado}}</td>
                     <td>{{$docente->nombres}}</td>
                     <td>{{$docente->paterno}}</td>
                     <td>{{$docente->materno}}</td>
@@ -47,6 +46,9 @@
                     <td>{{$docente->sexo}}</td>
                     <td>{{$docente->fnac}}</td>
                     <td>{{$docente->direccion}}</td>
+                    <td>{{$docente->parentesco}}</td>
+                    <td>{{$docente->nomYap}}</td>
+                    <td>{{$docente->tel}}</td>
                     <td>
                         {!! link_to_route('editDocente',
                                             $title = 'Editar',

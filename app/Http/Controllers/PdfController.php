@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Entities\NotaDocente;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Entities\Leader;
+use App\Entities\Jefe;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -93,7 +95,7 @@ class PdfController extends Controller
     {
         $cursantes = \DB::table('users')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
-            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado','users.parentesco','users.nomYap','users.tel')
             ->where('role','cursante')
             ->get();
         $view = \View::make('director.pdfCursantes',compact('cursantes'))->render();
@@ -108,7 +110,7 @@ class PdfController extends Controller
     {
         $docentes = \DB::table('users')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
-            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado','users.parentesco','users.nomYap','users.tel')
             ->where('role','docente')
             ->get();
         $view = \View::make('director.pdfDocentes',compact('docentes'))->render();
@@ -147,8 +149,13 @@ class PdfController extends Controller
             ->select('user','nombres','paterno','materno','prom4Cursante','prom4Facil','prom4JE')
             ->orderBy('paterno')
             ->get();
-        //dd($cursantes);
-        $view = \View::make('director.pdfReportePorMateria',compact('cursantes', 'nombreMateria'))->render();
+        $directores = Leader::all();
+        $nombreJefe = $request['jefe'];
+        $jefes = DB::table('jeves')
+            ->where('jefe_est',$nombreJefe)
+            ->get();
+
+        $view = \View::make('director.pdfReportePorMateria',compact('cursantes', 'nombreMateria','directores','jefes'))->render();
 
         $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
         return $pdf->stream('ReportePorMateria.pdf');

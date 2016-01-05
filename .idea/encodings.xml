@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/app/Http/routes.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_09_17_185833_create_nota_docentes_table.php" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/database/migrations/2015_10_12_222552_create_nota_intercursantes_table.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/directores.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/admin/grados.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificacionExitosaCursante.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificacionExitosaDocente.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/cursante/calificadoCompleto.blade.php" charset="UTF-8" />

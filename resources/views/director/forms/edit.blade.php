@@ -77,7 +77,30 @@
         {!! Form::date('fnac', \Carbon\Carbon::now()) !!}
 
     </div>
+    <h3 class="col-md-offset-1">Persona de referencia</h3>
+    <hr>
+    <div class="form-group has-feedback">
+        <label for="parentesco"class="col-sm-3 control-label">Parentesco</label>
+        <div class="col-sm-9">
 
+            {!! Form::text('parentesco',null,['class'=>'form-control', 'placeholder'=>'Parentesco']) !!}
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <label class="col-sm-3 control-label">Nombre y Apellido</label>
+        <div class="col-sm-9">
+            {!! Form::text('nomYap',null,['class'=>'form-control', 'placeholder'=>'Nombres y Apellidos']) !!}
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <label class="col-sm-3 control-label">Telefono</label>
+        <div class="col-sm-9">
+            {!! Form::text('tel',null,['class'=>'form-control', 'placeholder'=>'Telefono']) !!}
+            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        </div>
+    </div>
     <h4 class="col-md-offset-1">Direccion</h4>
     <hr>
     <div class="form-group has-feedback">
@@ -90,18 +113,46 @@
     <h3 class="col-md-offset-1">Datos Profesionales</h3>
     <hr>
     <div class="form-group has-feedback">
-        {!! Form::label('grade_id', 'Grado', array('class' => 'col-sm-3 control-label')) !!}
+        {!! Form::label('grade_id', 'Profesión', array('class' => 'col-sm-3 control-label')) !!}
         <div class="col-sm-9">
-            {!! Form::select('grade_id', array('1' => 'CIVIL','2' => 'CN. DAEN.','3' => 'CN. DEMN.','4' => 'CF. DEMN.','5' => 'CF. DIM.','6' => 'CC. DEMN.','7' => 'CC. DIM.','8' => 'CNL. DEM.','9' => 'CNL. DIM.','10' => 'TCNL. DEM.','11' => 'TCNL. DIM.')) !!}{{-- si quieres ->* , null, ['class' => 'form-control'] *<-  --}}
+            {!! Form::select('grade_id', array('militar' => 'MILITAR','policia' => 'POLICIA','civil' => 'CIVIL'), null,['class' => 'form-control','id' => 'Profesion','onclick'=>'acc()']) !!}{{-- si quieres ->* , null, ['class' => 'form-control'] *<-  --}}
         </div>
     </div>
-    <div class="form-group has-feedback">
-
-        {!! Form::label('profesion', 'Profesión', array('class' => 'col-sm-3 control-label')) !!}
+    <hr>
+    <div id="civ" class="hidden form-group">
+        <label class="col-sm-3 control-label" id="g">Grado</label>
         <div class="col-sm-9">
-
-            {!! Form::text('profesion',null,['class'=>'form-control', 'placeholder'=>'Profesión']) !!}
-            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+            <select class="form-control" placeholder="" name="grade_idc" id="civil">
+                @foreach($grados as $grado)
+                    @if($grado->fuerza == 'civil')
+                        <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div id="mil" class="hidden form-group">
+        <label class="col-sm-3 control-label" id="gg">Grado</label>
+        <div class="col-sm-9">
+            <select class="form-control" placeholder="" name="grade_idm" id="militar">
+                @foreach($grados as $grado)
+                    @if($grado->fuerza == 'militar')
+                        <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div id="pol" class="hidden form-group">
+        <label class="col-sm-3 control-label" id="ggg">Grado</label>
+        <div class="col-sm-9">
+            <select class="form-control" placeholder="" name="grade_idp" id="policia">
+                @foreach($grados as $grado)
+                    @if($grado->fuerza == 'policia')
+                        <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
     </div>
     <div class="form-group">

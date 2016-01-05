@@ -19,14 +19,14 @@
     <!--link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"-->
 </head>
-<body style="font-size: 8pt">
+<body >
 
 
 <div class="" style="text-align:center; margin-bottom: 15px;">
     <h3>Lista de Docentes | Escuela de Altos Estudios Nacionales</h3>
 </div>
 <div class="table table-striped" align="center">
-    <table cellpadding="10%" border="3" align="center">
+    <table border=1 cellspacing=0 align="center" style="font-size: 15px">
 
         <tr>
             <th class="success" width="10px">CI</th>

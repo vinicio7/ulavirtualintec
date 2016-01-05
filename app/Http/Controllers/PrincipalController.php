@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Entities\ContratoDocente;
+use App\Entities\Jefe;
 use App\Entities\Kardex;
+use App\Entities\Leader;
+use App\Entities\Grade;
 use App\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -25,12 +28,14 @@ class PrincipalController extends Controller
      */
     public function index()
     {
-        return view('director.inscribirCursante');
+        $grados = Grade::all();
+        return view('director.inscribirCursante',compact('grados'));
     }
 
     public function insDocente()
     {
-        return view('director.inscribirDocente');
+        $grados = Grade::all();
+        return view('director.inscribirDocente',compact('grados'));
     }
 
     //registra un cursante
@@ -48,12 +53,17 @@ class PrincipalController extends Controller
             'telefono'  => 'numeric',
             'fnac'      => 'date',
             'direccion' => 'string',
-            'profesion' => 'string'
+            'profesion' => 'string',
+            'parentesco' => 'string',
+            'nomYap'    => 'string',
+            'tel'       =>'numeric'
         ]);
         if ($v ->fails())
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
+        $var = $request['profesion'];
+
         //$pass = Input::get('password');
         //$cursante->create($request->all());
         $cursante->id           = Input::get('id');
@@ -66,9 +76,18 @@ class PrincipalController extends Controller
         $cursante->telefono     = Input::get('telefono');
         $cursante->sexo         = Input::get('sexo');
         $cursante->fnac         = Input::get('fnac');
-        $cursante->grade_id     = Input::get('grade_id');
+        if($var == 'militar'){
+            $cursante->grade_id     = Input::get('grade_idm');
+        }elseif( $var == 'policia'){
+            $cursante->grade_id     = Input::get('grade_idp');
+        }elseif($var == 'civil'){
+            $cursante->grade_id     = Input::get('grade_idc');
+        }
         $cursante->direccion    = strtoupper(Input::get('direccion'));
-        $cursante->profesion    = strtoupper(Input::get('profesion'));
+        $cursante->profesion    = $var;
+        $cursante->parentesco   = Input::get('parentesco');
+        $cursante->nomYap       = Input::get('nomYap');
+        $cursante->tel          = Input::get('tel');
         $cursante->role = 'cursante';
         $cursante->save();
         //$cursantes = User::all();
@@ -80,7 +99,7 @@ class PrincipalController extends Controller
         //$cursantes = User::all();
         $cursantes = DB::table('users')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
-            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado','users.parentesco','users.nomYap','users.tel')
             ->get();
         return view('director.modificarCursante', compact('cursantes'));
         //return $cursantes;
@@ -88,13 +107,15 @@ class PrincipalController extends Controller
     public function editarCursante($id)
     {
         $cursante =User::find($id);
+        $grados = Grade::all();
         //return $cursante;
-        return view('director.editarCursante',compact('cursante'));
+        return view('director.editarCursante',compact('cursante','grados'));
     }
 
     public function actualizarCursante($id,Request $request )
     {
         $cursante =User::find($id);
+        $var = $request['profesion'];
         //$cursante->fill($request->all());
         $cursante->id           = Input::get('id');
         $cursante->nickname     = Input::get('nickname');
@@ -106,9 +127,18 @@ class PrincipalController extends Controller
         $cursante->telefono     = Input::get('telefono');
         $cursante->sexo         = Input::get('sexo');
         $cursante->fnac         = Input::get('fnac');
-        $cursante->grade_id     = Input::get('grade_id');
+        if($var == 'militar'){
+            $cursante->grade_id     = Input::get('grade_idm');
+        }elseif( $var == 'policia'){
+            $cursante->grade_id     = Input::get('grade_idp');
+        }elseif($var == 'civil'){
+            $cursante->grade_id     = Input::get('grade_idc');
+        }
         $cursante->direccion    = strtoupper(Input::get('direccion'));
-        $cursante->profesion    = strtoupper(Input::get('profesion'));
+        $cursante->profesion    = $var;
+        $cursante->parentesco   = Input::get('parentesco');
+        $cursante->nomYap       = Input::get('nomYap');
+        $cursante->tel          = Input::get('tel');
         $cursante->save();
         return redirect('modificarCursante')->with('update', true);
     }
@@ -127,12 +157,13 @@ class PrincipalController extends Controller
             'telefono'  => 'numeric',
             'fnac'      => 'date',
             'direccion' => 'string',
-            'profesion' => 'string'
+
         ]);
         if ($v ->fails())
         {
             return redirect()->back()->withInput()->withErrors($v->errors());
         }
+        $var = $request['profesion'];
        // $pass = Input::get('password');
         //$cursante->create($request->all());
         $docente->id            = Input::get('id');
@@ -145,9 +176,18 @@ class PrincipalController extends Controller
         $docente->telefono      = Input::get('telefono');
         $docente->sexo          = Input::get('sexo');
         $docente->fnac          = Input::get('fnac');
-        $docente->grade_id      = Input::get('grade_id');
-        $docente->direccion     = strtoupper(Input::get('direccion'));
-        $docente->profesion     = strtoupper(Input::get('profesion'));
+        if($var == 'militar'){
+            $docente->grade_id     = Input::get('grade_idm');
+        }elseif( $var == 'policia'){
+            $docente->grade_id     = Input::get('grade_idp');
+        }elseif($var == 'civil'){
+            $docente->grade_id     = Input::get('grade_idc');
+        }
+        $docente->direccion    = strtoupper(Input::get('direccion'));
+        $docente->profesion    = $var;
+        $docente->parentesco   = Input::get('parentesco');
+        $docente->nomYap       = Input::get('nomYap');
+        $docente->tel          = Input::get('tel');
         $docente->role = 'docente';
         $docente->save();
     }
@@ -156,21 +196,21 @@ class PrincipalController extends Controller
         //$cursantes = User::all();
         $docentes = DB::table('users')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
-            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado','users.parentesco','users.nomYap','users.tel')
             ->get();
         return view('director.modificarDocente', compact('docentes'));
         //return $docentes;
     }
     public function editarDocente($id)
     {
-        $docente =User::find($id);
-        //return $cursante;
+        $docente = User::find($id);
         return view('director.editarDocente',compact('docente'));
     }
     public function actualizarDocente($id,Request $request )
     {
-        $cursante =User::find($id);
+        $cursante = User::find($id);
         //$cursante->fill($request->all());
+        $var = $request['profesion'];
         $cursante->id           = Input::get('id');
         $cursante->nickname     = Input::get('nickname');
         $cursante->password     = Input::get('password');
@@ -181,9 +221,18 @@ class PrincipalController extends Controller
         $cursante->telefono     = Input::get('telefono');
         $cursante->sexo         = Input::get('sexo');
         $cursante->fnac         = Input::get('fnac');
-        $cursante->grade_id     = Input::get('grade_id');
+        if($var == 'militar'){
+            $cursante->grade_id     = Input::get('grade_idm');
+        }elseif( $var == 'policia'){
+            $cursante->grade_id     = Input::get('grade_idp');
+        }elseif($var == 'civil'){
+            $cursante->grade_id     = Input::get('grade_idc');
+        }
         $cursante->direccion    = strtoupper(Input::get('direccion'));
-        $cursante->profesion    = strtoupper(Input::get('profesion'));
+        $cursante->profesion    = $var;
+        $cursante->parentesco   = Input::get('parentesco');
+        $cursante->nomYap       = Input::get('nomYap');
+        $cursante->tel          = Input::get('tel');
         $cursante->save();
         return redirect('modificarDocente')->with('update', true);
     }
@@ -392,7 +441,9 @@ class PrincipalController extends Controller
         $disciplinas = \DB::table('materias')
                    ->select('nombreMateria')
                    ->get();
-        return view('director.reportePorMateriaSelecMateria', compact('disciplinas'));
+
+        $jefes = Jefe::all();
+        return view('director.reportePorMateriaSelecMateria', compact('disciplinas','jefes'));
     }
 
     public function reportePorCursante()
@@ -403,18 +454,30 @@ class PrincipalController extends Controller
             ->select('users.id','nombres','paterno','materno')
 
             ->get();
-        return view('director.reportePorCursante',compact('cursantes'));
+
+        $jefes = Jefe::all();
+
+        return view('director.reportePorCursante',compact('cursantes','directores','jefes'));
     }
 
-    public function reporteCursantePdf($id)
+    public function reporteCursantePdf(Request $request)
     {
+        $id = $request['cursante'];
+
         $cursante = DB::table('users')
             ->where('users.id',$id)
-            ->leftJoin('kardexes','users.id','=','user')
+            ->join('kardexes','users.id','=','user')
             ->get();
-        $view = \View::make('director.RepdfCursante',compact('cursante'))->render();
+        $directores = Leader::all();
+        $nombreJefe = $request['jefe'];
+        $jefes = DB::table('jeves')
+            ->where('jefe_est',$nombreJefe)
+            ->get();
+
+        $view = \View::make('director.RepdfCursante',compact('cursante','directores','jefes'))->render();
 
         $pdf= \PDF::loadHTML($view)->setPaper('letter');
+
         return $pdf->stream('Cursate-{users.paterno}.pdf');
 
     }

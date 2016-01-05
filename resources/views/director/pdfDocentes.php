@@ -26,36 +26,37 @@
     <h3>Lista de Docentes | Escuela de Altos Estudios Nacionales</h3>
 </div>
 <div class="table table-striped" align="center">
-    <table cellpadding="10%" border="3" align="center">
+    <table border=1 cellspacing=0 align="center">
 
         <tr>
             <th class="success" width="10px">CI</th>
-            <th class="success" width="20%">Grado / Profesión</th>
-            <th class="success" width="20%">Nombre</th>
-            <th class="success" width="20%">Apellido Paterno</th>
-            <th class="success" width="20%">Apellido Materno</th>
-            <th class="success" width="20%">Email</th>
-            <th class="success" width="20%">Telefono</th>
+            <th class="success" width="1%">Grado / Profesión</th>
+            <th class="success" width="10%">Nombre</th>
+            <th class="success" width="10%">Apellido Paterno</th>
+            <th class="success" width="10%">Apellido Materno</th>
+            <th class="success" width="10%">Email</th>
+            <th class="success" width="10%">Telefono</th>
 
-            <th class="success" width="20%">Fecha de Nacimiento</th>
-            <th class="success" width="20%">Dirección</th>
+            <th class="success" width="10%">Fecha de Nacimiento</th>
+            <th class="success" width="10%">Dirección</th>
+            <th class="success" width="20%">Parentesco</th>
+            <th class="success" width="20%">Nombre y Apellido</th>
+            <th class="success" width="20%">Telefono</th>
         </tr>
         <?php foreach($docentes as $docente): ?>
             <tr align="center">
                 <td class=" text-center"> <?php echo e($docente->id); ?></td>
-                <?php if ($docente->grado == 'Civil'): ?>
-                    <td class="text-center"> <?php echo e($docente->profesion); ?></td>
-                <?php else : ?>
-                    <td class="text-center"> <?php echo e($docente->grado); ?></td>
-                <?php endif; ?>
+                <td class="text-center"> <?php echo e($docente->grado); ?></td>
                 <td class=" text-center"> <?php echo e($docente->nombres); ?></td>
                 <td class=" text-center"> <?php echo e($docente->paterno); ?></td>
                 <td class=" text-center"> <?php echo e($docente->materno); ?></td>
                 <td class=" text-center"> <?php echo e($docente->email); ?></td>
                 <td class=" text-center"> <?php echo e($docente->telefono); ?></td>
-
                 <td class=" text-center"> <?php echo e($docente->fnac); ?></td>
                 <td class=" text-center"> <?php echo e($docente->direccion); ?></td>
+                <td class=" text-center"> <?php echo e($docente->parentesco); ?></td>
+                <td class=" text-center"> <?php echo e($docente->nomYap); ?></td>
+                <td class=" text-center"> <?php echo e($docente->tel); ?></td>
             </tr>
         <?php endforeach; ?>
 

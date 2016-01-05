@@ -11,12 +11,8 @@
             </div>
         @endif
 
-        @if(Session::has('status'))
-        <div class="alert alert-dismissible alert-success" class="col-md-10">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <i class="fa fa-check-square"></i>Usuario Creado!!
-        </div>
-        @endif
+
+
         <form class="form-horizontal" action="nuevoCursante" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
             <fielset>
                 <h3 class="col-md-offset-1">Datos de Usuario</h3>
@@ -111,6 +107,29 @@
                     <input type="date" name="fnac">
                 </div>
 
+                <h3 class="col-md-offset-1">Persona de referencia</h3>
+                <hr>
+                <div class="form-group has-feedback">
+                    <label for="parentesco"class="col-sm-3 control-label">Parentesco</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Parentesco" name="parentesco" required="required">
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="col-sm-3 control-label">Nombre y Apellido</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Nombres y Apellidos" name="nomYap" required="required">
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="col-sm-3 control-label">Telefono</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Telefono" name="tel" required="required">
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
                 <h4 class="col-md-offset-1">Direccion</h4>
                 <hr>
                 <div class="form-group has-feedback">
@@ -123,30 +142,56 @@
                 <h3 class="col-md-offset-1">Datos Profesionales</h3>
                 <hr>
                 <div class="form-group has-feedback">
-                    <label class="col-sm-3 control-label">Grado</label>
+                    <div class="form-group has-feedback">
+                        <label for="Profesion"class="col-sm-3 control-label">Profesión</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="profesion" id="Profesion" onclick="acc()">
+                                <option value="">Eliga una opcion</option>
+                                <option value="militar">MILITAR</option>
+                                <option value="policia">POLICIA</option>
+                                <option value="civil">CIVIL</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div id="civ" class="hidden form-group">
+                    <label class="col-sm-3 control-label" id="g">Grado</label>
                     <div class="col-sm-9">
-                        <select class="form-control" placeholder="Si Usted. es miembro de las Fuerzas Armadas" name="grade_id">
-                            <option value="1">CIVIL</option>
-                            <option value="2">CN. DAEN.</option>
-                            <option value="3">CN. DEMN.</option>
-                            <option value="4">CF. DEMN.</option>
-                            <option value="5">CF. DIM.</option>
-                            <option value="6">CC. DEMN.</option>
-                            <option value="7">CC. DIM.</option>
-                            <option value="8">CNL. DEM.</option>
-                            <option value="9">CNL. DIM.</option>
-                            <option value="10">TCNL. DEM.</option>
-                            <option value="11">TCNL. DIM.</option>
+                        <select class="form-control" placeholder="" name="grade_idc" id="civil">
+                            @foreach($grados as $grado)
+                                @if($grado->fuerza == 'civil')
+                                    <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
+                                @endif
+                            @endforeach
                         </select>
                     </div>
                 </div>
-                <div class="form-group has-feedback">
-                    <label for="Profesion"class="col-sm-3 control-label">Profesión</label>
+                <div id="mil" class="hidden form-group">
+                    <label class="col-sm-3 control-label" id="gg">Grado</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Profesión" name="profesion" required="required">
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        <select class="form-control" placeholder="" name="grade_idm" id="militar">
+                            @foreach($grados as $grado)
+                                @if($grado->fuerza == 'militar')
+                                    <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
+                <div id="pol" class="hidden form-group">
+                    <label class="col-sm-3 control-label" id="ggg">Grado</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" placeholder="" name="grade_idp" id="policia">
+                            @foreach($grados as $grado)
+                                @if($grado->fuerza == 'policia')
+                                    <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-md-9 col-md-offset-3">
                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -157,8 +202,33 @@
 
             </fielset>
         </form>
-
-
     </div>
-
 @endsection
+@section('scripts')
+    <script>
+        function acc(){
+            var prof = document.getElementById('Profesion').value;
+
+            switch(prof) {
+                case 'civil':
+                    document.getElementById('pol').classList.add('hidden');
+                    document.getElementById('mil').classList.add('hidden');
+                    document.getElementById('civ').classList.remove('hidden');
+                break;
+                case 'policia':
+                    document.getElementById('civ').classList.add('hidden');
+                    document.getElementById('mil').classList.add('hidden');
+                    document.getElementById('pol').classList.remove('hidden');
+
+                    break;
+                case 'militar':
+                    document.getElementById('civ').classList.add('hidden');
+                    document.getElementById('pol').classList.add('hidden');
+                    document.getElementById('mil').classList.remove('hidden');
+                    break;
+            }
+        }
+    </script>
+@endsection
+
+        <option value="">{{$grado->id}} {{$grado->grado}}</option>

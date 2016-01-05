@@ -29,6 +29,9 @@
                     <th>Sexo</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Direccion</th>
+                    <th>Parentesco</th>
+                    <th>Nombres</th>
+                    <th>Telefono</th>
 
                     <th colspan="2">Acción</th>
                 </thead>
@@ -36,11 +39,7 @@
                     @if($cursante->role == 'cursante')
                     <tbody>
                     <td>{{$cursante->id}}</td>
-                    @if($cursante->grado == 'Civil')
-                        <td>{{$cursante->profesion}}</td>
-                    @else
-                        <td>{{$cursante->grado}}</td>
-                    @endif
+                    <td>{{$cursante->grado}}</td>
                     <td>{{$cursante->nombres}}</td>
                     <td>{{$cursante->paterno}}</td>
                     <td>{{$cursante->materno}}</td>
@@ -49,6 +48,9 @@
                     <td>{{$cursante->sexo}}</td>
                     <td>{{$cursante->fnac}}</td>
                     <td>{{$cursante->direccion}}</td>
+                    <td>{{$cursante->parentesco}}</td>
+                    <td>{{$cursante->nomYap}}</td>
+                    <td>{{$cursante->tel}}</td>
                     <td>
                             {!! link_to_route('editCursante',
                                             $title = 'Editar',

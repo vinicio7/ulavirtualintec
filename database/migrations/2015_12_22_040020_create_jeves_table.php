@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGradesTable extends Migration
+class CreateJevesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,10 @@ class CreateGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('grades', function (Blueprint $table) {
-            $table->engine='InnoDB';
-
+        Schema::create('jeves', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('grado');
-            $table->string('fuerza');
+            $table->string('jefe_est');
+            $table->string('localidad');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateGradesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('grades');
+        Schema::drop('jeves');
     }
 }

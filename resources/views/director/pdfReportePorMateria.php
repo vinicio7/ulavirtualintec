@@ -34,7 +34,7 @@ DISCIPLINA: <?php echo($nombreMateria)?>
 </div>
 
 <div class="table table-striped" align="center">
-    <table cellpadding="10%" border="3" align="center">
+    <table border=1 cellspacing=0 align="center">
 
         <tr>
             <th class="success" width="20%">C.I.</th>
@@ -62,17 +62,20 @@ DISCIPLINA: <?php echo($nombreMateria)?>
     </table>
 </div>
 
-<div class="" style="margin-bottom: 25px">
+<div style="margin-bottom: 50px">
     <p>&nbsp;</p>
     <pre>
            -------------------------------------               ----------------------------------------
-          CN. DAEN. William Boris Galindo Ramirez            Cnl. DAEN. Nelson Gabriel Merca Murillo MSc.
-        JEFE DPTO. EVAL. Y ACRED - E.A.E.N. LA PAZ                 JEFE DE ESTUDIOS - E.A.E.N. LA PAZ
+          <?php echo $directores[2]->nombreCompleto; ?>            <?php echo $jefes[0]->jefe_est; ?>
+        <br>
+        <?php echo $directores[2]->cargo; ?>                 <?php echo $jefes[0]->localidad; ?>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
            ----------------------------------                     -----------------------------------
-        CN. DAEN. Rolando Hugo Ayllón Orozco MSc.             Gral. Div. Edwin Teddy Ayllón Montaño MSc.
-              SUB DIRECTOR NACIONAL E.A.E.N                           DIRECTOR NACIONAL E.A.E.N.
+        <?php echo $directores[1]->nombreCompleto;?>              <?php echo $directores[0]->nombreCompleto;?>
+        <br>
+            <?php echo $directores[1]->cargo;?>                           <?php echo $directores[0]->cargo;?>
+
     </pre>
 </div>
 </body>

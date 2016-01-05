@@ -38,12 +38,12 @@ class UserTableSeeder extends Seeder
     {
         factory(App\Entities\User::class)->create([
             'id'        => '3',
-            'nickname'  => 'charlie',
-            'nombres'   => 'Charlie',
-            'paterno'   => 'Seoane',
-            'materno'   => 'Sánchez',
-            'email'     => 'charlie@hotmail.com',
-            'password'  => bcrypt('admin'),
+            'nickname'  => 'admin',
+            'nombres'   => 'Admin',
+            'paterno'   => '',
+            'materno'   => '',
+            'email'     => 'behialvarado@gmail.com',
+            'password'  => 'admin',
             'sexo'      => 'masculino',
             'role'      => 'admin',
         ]);
@@ -100,7 +100,7 @@ class UserTableSeeder extends Seeder
             'paterno'   => 'APP',
             'materno'   => '',
             'email'     => 'director@gmail.com',
-            'password'  => bcrypt('director'),
+            'password'  => 'director',
             'sexo'      => 'masculino',
             'role'      => 'director',
         ]);

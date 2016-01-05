@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidadAcademicaTableSeeder::class);
         $this->call(KardexTableSeeder::class);
         $this->call(ContratoDocTableSeeder::class);
-
+        $this->call(LeaderTableSeeder::class);
         Model::reguard();
     }
 }
