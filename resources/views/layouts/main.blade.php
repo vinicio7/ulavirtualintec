@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EAEN | Calificaciones</title>
+    <title>INTEC | Aula virtual</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -23,20 +23,76 @@
 
 </head>
 
-<body>
-<div id="wrapper">
-
-    <nav class="navbar-default navbar-static-side" role="navigation">
+<body style="background-color: #202121">
+<div id="wrapper" style="background-color: #202121">
+ {{--modal--}}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel">Perfil</h2>
+                </div>
+                <form class="form-horizontal" action="{{route('subirImagen')}}" method="post" enctype="multipart/form-data" data-toggle="validator">
+                <div class="modal-body">
+                        <div class="form-group has-feedback" >
+                            <input type="text" name="id_user" id="id_user" value="{{ auth()->user()->id }}" hidden="">
+                            <label for="foto">Fotografia</label>
+                            <input type="file" name="foto" id="foto" accept=".jpg">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> Guardar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{--modal--}}
+    @if($errors->has())
+        <div class="alert alert-warning" role="alert">
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
+    @if(Session::has('message'))
+        <div class="alert alert-dismissible alert-success" class="col-md-10">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <i class="fa fa-check-square"></i>{{Session::get('message')}}
+        </div>
+    @endif
+    @if(Session::has('status'))
+        <div class="alert alert-dismissible alert-success" class="col-md-10">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <i class="fa fa-check-square"></i>Fotografia Subida!!
+        </div>
+    @endif
+    <nav class="navbar-default navbar-static-side" role="navigation" style="background-color: #202121">
         <div class="sidebar-collapse">
-            <ul class="nav" id="side-menu">
-                <li class="nav-header">
+            <ul class="nav" id="side-menu" style="background-color: #202121">
+                <li class="nav-header" style="background-color: #202121!important; background:#202121">
                     <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="fotosUsuarios/{{auth()->user()->id}}.jpg" />
+                            <a data-toggle="modal" data-target="#myModal"><img style="width: 100px;height: 100px" class="img-circle" src="fotosUsuarios/{{auth()->user()->id}}.jpg" /></a>
                              </span>
                         <!--a data-toggle="dropdown" class="dropdown-toggle" href="#"-->
                         <a>
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{auth()->user()->completeName()}}</strong>
-                             </span> <span class="text-muted text-xs block"--> {{auth()->user()->getRole()}} <!--b class="caret"></b--></span> </span> </a>
+                             </span> 
+                             @if(auth()->user()->getRole() == 'Cursante')
+                             <span class="text-muted text-xs block"-->Alumno <!--b class="caret"></b-->
+                             </span> 
+                             @endif
+                             @if(auth()->user()->getRole() == 'admin')
+                             <span class="text-muted text-xs block"-->Administrador <!--b class="caret"></b-->
+                             </span> 
+                             @endif
+                             @if(auth()->user()->getRole() == 'Docente')
+                             <span class="text-muted text-xs block"-->Docente <!--b class="caret"></b-->
+                             </span> 
+                             @endif
+                         </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Datos Personales</a></li>
                             <!--li><a href="contacts.html">Contacts</a></li>
@@ -64,7 +120,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">SISEAEN</span>
+                        <span class="m-r-sm text-muted welcome-message">INTEC</span>
                     </li>
                     <li class="dropdown">
                         <!--a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -118,7 +174,6 @@
                 </ul>
             </nav>
         </div>
-
         @yield('content')
 
     </div>
@@ -151,6 +206,8 @@
 <!-- ChartJS-->
 <script src="js/Chart.min.js"></script>
 <!-- Toastr -->
+<script src="js/skycons.js"></script>
+<script src="js/bars.js"></script>
 <script src="js/toastr.min.js"></script>
 
     <script src="js/validator.js"></script>

@@ -9,18 +9,18 @@
     @if(Session::has('update'))
         <div class="alert alert-dismissible alert-success" class="col-md-10">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <i class="fa fa-check-square"></i>Cursante Actualizado!!
+            <i class="fa fa-check-square"></i>Alumno Actualizado!!
         </div>
     @endif
 
     <div class="row border-bottom white-bg dashboard-header">
-        <h2>Modificar Cursante</h2>
+        <h2>Modificar Alumno</h2>
 
         <div class="table-responsive">
             <table class="table table-hover ">
                 <thead>
-                    <th>CI</th>
-                    <th>Grado/Profesión</th>
+                    <th>Identificacion</th>
+                    <th>Grado</th>
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>

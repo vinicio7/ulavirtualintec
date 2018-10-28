@@ -11,7 +11,7 @@
                 <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
             </div>
             <div class="form-group">
-                {!! Form::select('fuerza', array('militar' => 'MILITAR', 'policia' => 'POLICIA', 'civil' => 'CIVIL')) !!}
+                {!! Form::select('fuerza', array('2018' => '2018', '2019' => '2019', '2020' => '2020')) !!}
             </div>
 
         {!! Form::submit('Actualizar',['class'=>'btn btn-primary']) !!}

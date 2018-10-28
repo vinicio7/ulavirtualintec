@@ -37,17 +37,17 @@
 </div>
 @section('content')
 
-<div class="ibox-content">
+<div class="ibox-content" style="background-color: #00000061">
     {!! Form::open(['route' => 'login', 'method' => 'POST', 'role' => 'form']) !!}
 
         <div class="form-group">
-            {!! Form::text('nickname', old('nickname'), ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
+            {!! Form::text('nickname', old('nickname'), ['class' => 'form-control', 'placeholder' => 'Usuario','style' => 'background-color:#00000033;color:white;']) !!}
 
         </div>
         <div class="form-group">
-            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Contraseña']) !!}
+            {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Contraseña', 'style' => 'background-color:#00000033;color:white;']) !!}
         </div>
-        {!! Form::submit('Iniciar sesión', ['class' => 'btn btn-primary block full-width m-b']) !!}
+        {!! Form::submit('Iniciar sesión', ['class' => 'btn btn-primary block full-width m-b','style' => 'background-color: #ff8001!important;border-color:#ff8001']) !!}
     <!--button type="button" class="btn btn-primary block full-width m-b" data-toggle="modal" data-target="#myModal">
         Registrarse
     </button>
@@ -58,7 +58,6 @@
 
     {!! Form::close() !!}
     <p class="m-t" align="center">
-        <small>Sistema de Califiacaciones E.A.E.N. &copy; 2015</small>
     </p>
 </div>
 

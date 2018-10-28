@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\CalificarTareas;
 use App\Entities\Kardex;
 use App\Entities\NotaDocente;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class CursanteController extends Controller
 {
@@ -140,30 +142,37 @@ class CursanteController extends Controller
     public function calificarCursante(Request $request)
     {
         //Tomamos el id de materia
-        $id_materia = \DB::table('materias')->where('nombreMateria', $request['materia'])->value('id');
+       
 
-        //Tomamos el grupo al que pertenece el usuario
-        $grupo = \DB::table('kardexes')
-            ->where('user', Auth::user()->id)
-            ->where('materia_id', $id_materia)
-            ->where('activo', '=', true)
-            ->value('grupo');
-
-        //Tomamos los nombres de los cursantes que pertenecen al gurpo en dicha materia
-        $nombres = \DB::table('users')
-            ->join('kardexes as k', 'users.id', '=', 'k.user')
-            ->select('users.nombres', 'users.paterno', 'users.materno', 'users.id')
-            ->where('k.grupo', $grupo)
-            ->where('k.materia_id', $id_materia)
-            ->where('user', '!=', Auth::user()->id)
-            ->where('k.activo', '=', true)
-            ->get();
-
-        $usuario_calificador = Auth::user()->id;
-
-        return view('cursante.calificarCursante', compact('nombres', 'id_materia', 'usuario_calificador'));
+        return view('cursante.calificarCursante');
     }
 
+public function tarea($id)
+    {
+        //Tomamos el id de materia
+        return view('cursante.tarea',compact('id'));
+    }
+
+public function tarea_ver($id)
+    {
+        //Tomamos el id de materia
+        return view('cursante.tareax',compact('id'));
+    }
+
+public function calificar_tarea($id, Request $request)
+    {
+        $data = CalificarTareas::find($id);
+        //$cursante->fill($request->all());
+        $data->calificacion           = Input::get('calificacion');
+        $data->save();
+        \Session::flash('message','Tarea calificada...');
+        return redirect()->back();
+    }
+
+    public function ver_notas()
+    {
+        return view('cursante.ver_notas');
+    }
 
 
     public function formCalifCursante(Request $request)

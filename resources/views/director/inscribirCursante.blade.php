@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
     <div class="row border-bottom white-bg dashboard-header">
-        <h2>Nuevo Cursante</h2>
+        <h2>Nuevo Alumno</h2>
         <hr>
         @if($errors->has())
             <div class="alert alert-warning" role="alert">
@@ -10,33 +10,38 @@
                 @endforeach
             </div>
         @endif
-
+         @if(Session::has('status'))
+            <div class="alert alert-dismissible alert-success" class="col-md-10">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <i class="fa fa-check-square"></i>Alumno Creado!!
+            </div>
+        @endif
 
 
         <form class="form-horizontal" action="nuevoCursante" method="post" data-toggle="validator"><!--ponwer action osea la ruta -->
             <fielset>
-                <h3 class="col-md-offset-1">Datos de Usuario</h3>
+                <h3 class="col-md-offset-1" style="font-weight: bold;color:black">Datos de Usuario</h3>
                 <hr>
                 <div class="form-group has-feedback">
-                    <label for="ci"class="col-sm-3 control-label">CI</label>
+                    <label for="ci"class="col-sm-3 control-label">Identificacion</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Carnet de Identidad" name="id" required="required">
+                        <input type="text" class="form-control" placeholder="Numero de identificacion" name="id" required="required">
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Expedido</label>
+                    <label class="col-sm-3 control-label">Lugar de origen</label>
                     <div class="col-sm-4">
                         <select class="form-control" placeholder="Expedido en:" name="expedido">
-                            <option value="LP">La Paz</option>
-                            <option value="CBBA">Cochabamba</option>
-                            <option value="SCZ">Santa Cruz</option>
-                            <option value="P">Potosi</option>
-                            <option value="O">Oruro</option>
-                            <option value="S">Chuquisaca</option>
-                            <option value="Ta">Tarija</option>
-                            <option value="PA">Pando</option>
-                            <option value="BE">Beni</option>
+                            <option value="LP">Barberena</option>
+                            <option value="CBBA">Casillas</option>
+                            <option value="SCZ">Chiquimulilla</option>
+                            <option value="P">Cuilapa</option>
+                            <option value="O">Nueva Santa Rosa</option>
+                            <option value="S">Oratorio</option>
+                            <option value="Ta">Pueblo nuevo Viñas</option>
+                            <option value="PA">Santa Cruz Naranjo</option>
+                            <option value="BE">Otro</option>
                         </select>
                     </div>
                 </div>
@@ -44,7 +49,7 @@
                 <div class="form-group has-feedback">
                     <label for="Nickname"class="col-sm-3 control-label">Nombre de Usuario</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Nickname" name="nickname" required="required">
+                        <input type="text" class="form-control" placeholder="nombre de usuario" name="nickname" required="required">
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -55,7 +60,8 @@
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
-                <h3 class="col-md-offset-1">Datos Personales</h3>
+                <br>
+                <h3 class="col-md-offset-1" style="font-weight: bold;color:black">Datos Personales</h3>
                 <hr>
                 <div class="form-group has-feedback">
                     <label for="Nombre"class="col-sm-3 control-label">Nombre</label>
@@ -104,10 +110,19 @@
                 </div>
                 <div class="form-group has-feedback">
                     <label for="fnac"class="col-sm-3 control-label">Fecha de nacimiento</label>
-                    <input type="date" name="fnac">
+                    <div class="col-sm-9">   
+                            <input type="date" name="fnac">
+                        </div> 
                 </div>
-
-                <h3 class="col-md-offset-1">Persona de referencia</h3>
+                <div class="form-group has-feedback">
+                    <label for="Direccion"class="col-sm-3 control-label">Dirección</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Dirección" name="direccion" required="required">
+                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <br>
+                <h3 class="col-md-offset-1" style="font-weight: bold;color:black">Persona de referencia</h3>
                 <hr>
                 <div class="form-group has-feedback">
                     <label for="parentesco"class="col-sm-3 control-label">Parentesco</label>
@@ -130,67 +145,8 @@
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
-                <h4 class="col-md-offset-1">Direccion</h4>
-                <hr>
-                <div class="form-group has-feedback">
-                    <label for="Direccion"class="col-sm-3 control-label">Dirección</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Dirección" name="direccion" required="required">
-                        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                    </div>
-                </div>
-                <h3 class="col-md-offset-1">Datos Profesionales</h3>
-                <hr>
-                <div class="form-group has-feedback">
-                    <div class="form-group has-feedback">
-                        <label for="Profesion"class="col-sm-3 control-label">Profesión</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" name="profesion" id="Profesion" onclick="acc()">
-                                <option value="">Eliga una opcion</option>
-                                <option value="militar">MILITAR</option>
-                                <option value="policia">POLICIA</option>
-                                <option value="civil">CIVIL</option>
-
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div id="civ" class="hidden form-group">
-                    <label class="col-sm-3 control-label" id="g">Grado</label>
-                    <div class="col-sm-9">
-                        <select class="form-control" placeholder="" name="grade_idc" id="civil">
-                            @foreach($grados as $grado)
-                                @if($grado->fuerza == 'civil')
-                                    <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div id="mil" class="hidden form-group">
-                    <label class="col-sm-3 control-label" id="gg">Grado</label>
-                    <div class="col-sm-9">
-                        <select class="form-control" placeholder="" name="grade_idm" id="militar">
-                            @foreach($grados as $grado)
-                                @if($grado->fuerza == 'militar')
-                                    <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div id="pol" class="hidden form-group">
-                    <label class="col-sm-3 control-label" id="ggg">Grado</label>
-                    <div class="col-sm-9">
-                        <select class="form-control" placeholder="" name="grade_idp" id="policia">
-                            @foreach($grados as $grado)
-                                @if($grado->fuerza == 'policia')
-                                    <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
+               
+                
 
                 <div class="form-group">
                     <div class="col-md-9 col-md-offset-3">
@@ -204,31 +160,6 @@
         </form>
     </div>
 @endsection
-@section('scripts')
-    <script>
-        function acc(){
-            var prof = document.getElementById('Profesion').value;
+   
 
-            switch(prof) {
-                case 'civil':
-                    document.getElementById('pol').classList.add('hidden');
-                    document.getElementById('mil').classList.add('hidden');
-                    document.getElementById('civ').classList.remove('hidden');
-                break;
-                case 'policia':
-                    document.getElementById('civ').classList.add('hidden');
-                    document.getElementById('mil').classList.add('hidden');
-                    document.getElementById('pol').classList.remove('hidden');
 
-                    break;
-                case 'militar':
-                    document.getElementById('civ').classList.add('hidden');
-                    document.getElementById('pol').classList.add('hidden');
-                    document.getElementById('mil').classList.remove('hidden');
-                    break;
-            }
-        }
-    </script>
-@endsection
-
-        <option value="">{{$grado->id}} {{$grado->grado}}</option>

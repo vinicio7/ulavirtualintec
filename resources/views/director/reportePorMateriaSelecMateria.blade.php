@@ -6,7 +6,7 @@
 
         {!! Form::open(['route' => 'pdf.reportePorMateria', 'method' => 'POST'])!!}
         <p align="center">
-            <label>Seleccione la Disciplina: </label>
+            <label>Seleccione el curso: </label>
         </p>
         <div class="form-group" align="center">
             <select class="selectpicker" name="cursante" data-live-search="true">

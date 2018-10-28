@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Inicio de Sesión</title>
+    <title>INTEC - Aula virtual</title>
 
     {!! Html::style('css/bootstrap.css') !!}
     {!! Html::style('font-awesome/css/font-awesome.css') !!}
@@ -17,7 +17,7 @@
 
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" style="background-image: url('img/foondo.jpg');">
 
 <div class="loginColumns animated fadeInDown">
 
@@ -25,19 +25,16 @@
 
 
         <div class="col-md-6">
-            <h2 class="font-bold"> Sistema de Calificaciones Escuela de Altos Estudios Nacionales</h2>
+            <h1 class="font-bold" style="font-size: 60px; color: #ff8000; font-weight: bold"> INTEC</h1>
 
             <p align="justify">
 
-            Bienvenidos al Sistema Calificaciones de la Escuela de Altos Estudios Nacionales "SISEAEN",
-            donde podrá acceder a calificar y ver calificaciones del postgrado que cursa.
+            Bienvenidos a aula virtual de la academia de computacion INTEC.
 
         </p>
 
         <p align="justify">
-            La escuela de Altos Estudios Nacionales es la unidad universitaria de Postgrado de mayor jerarquía en el
-            Estado Plurinacional de Bolivia y se halla bajo tuición académica de la Universidad Militar "MCAL. BERNARDINO
-            BILBOA RIOJA".
+            El portal le permitira interactuar virtualmente para eficientar los procesos de tareas, notas, pagos, A cualquier hora y en cualquier momento.
         </p>
 
         </div>
@@ -52,10 +49,10 @@
     <hr/>
     <div class="row">
         <div class="col-md-6" align="justify">
-            Sitio web desarrollado por: Fabricio Torrico Barahona, Behimar Alvarado Aranda
+            <strong style="color: white">Sitio web desarrollado por: Oscar Palala</strong>
         </div>
         <div class="col-md-4 text-right">
-            <small>Copyright © 2015</small>
+            <strong><small style="color:#ff8000">Copyright © 2018</small></strong>
         </div>
     </div>
 </div>

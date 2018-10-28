@@ -1,8 +1,8 @@
 <fielset>
-    <h3 class="col-md-offset-1">Datos de Usuario</h3>
+    <h3 class="col-md-offset-1" style="font-weight: bold;color:black">Datos de Usuario</h3>
     <hr>
     <div class="form-group has-feedback">
-        {!! Form::label('id', 'Carnet de Identidad', array('class' => 'col-sm-3 control-label')) !!}
+        {!! Form::label('id', 'DPI', array('class' => 'col-sm-3 control-label')) !!}
         <div class="col-sm-9">
             {!! Form::text('id',null,['class'=>'form-control', 'placeholder'=>'Carnet de Identidad']) !!}
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
@@ -11,7 +11,7 @@
     <div class="form-group">
         {!! Form::label('expedido', 'Expedido', array('class' => 'col-sm-3 control-label')) !!}
         <div class="col-sm-4">
-            {!! Form::select('expedido', array('LP' => 'La Paz', 'CBBA' => 'Cochabamba','SCZ'=>'Santa Cruz', 'P'=>'Potosi', 'O'=>'Oruro','S'=>'Chuquisaca','TA'=>'Tarija','PA'=>'Pando','BE'=>'Beni')) !!}
+            {!! Form::select('expedido', array('LP' => 'Barberena', 'CBBA' => 'Casillas','SCZ'=>'Chiquimulilla', 'P'=>'Cuilapa', 'O'=>'Nueva Santa Rosa','S'=>'Oratorio','TA'=>'Pueblo Nuevo Viñas','PA'=>'Santa Cruz Naranjo','BE'=>'Otros')) !!}
 
         </div>
     </div>
@@ -30,7 +30,7 @@
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>
-    <h3 class="col-md-offset-1">Datos Personales</h3>
+    <h3 class="col-md-offset-1" style="font-weight: bold;color:black">Datos Personales</h3>
     <hr>
     <div class="form-group has-feedback">
         {!! Form::label('nombres', 'Nombre', array('class' => 'col-sm-3 control-label')) !!}
@@ -74,10 +74,11 @@
     </div>
     <div class="form-group has-feedback">
         {!! Form::label('fnac', 'Fecha de Nacimiento', array('class' => 'col-sm-3 control-label')) !!}
+        <div class="col-sm-9">
         {!! Form::date('fnac', \Carbon\Carbon::now()) !!}
-
+        </div>
     </div>
-    <h3 class="col-md-offset-1">Persona de referencia</h3>
+    <h3 class="col-md-offset-1" style="font-weight: bold;color:black">Persona de referencia</h3>
     <hr>
     <div class="form-group has-feedback">
         <label for="parentesco"class="col-sm-3 control-label">Parentesco</label>
@@ -101,8 +102,6 @@
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>
-    <h4 class="col-md-offset-1">Direccion</h4>
-    <hr>
     <div class="form-group has-feedback">
         {!! Form::label('direccion', 'Dirección', array('class' => 'col-sm-3 control-label')) !!}
         <div class="col-sm-9">
@@ -110,51 +109,8 @@
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>
-    <h3 class="col-md-offset-1">Datos Profesionales</h3>
-    <hr>
-    <div class="form-group has-feedback">
-        {!! Form::label('grade_id', 'Profesión', array('class' => 'col-sm-3 control-label')) !!}
-        <div class="col-sm-9">
-            {!! Form::select('grade_id', array('militar' => 'MILITAR','policia' => 'POLICIA','civil' => 'CIVIL'), null,['class' => 'form-control','id' => 'Profesion','onclick'=>'acc()']) !!}{{-- si quieres ->* , null, ['class' => 'form-control'] *<-  --}}
-        </div>
-    </div>
-    <hr>
-    <div id="civ" class="hidden form-group">
-        <label class="col-sm-3 control-label" id="g">Grado</label>
-        <div class="col-sm-9">
-            <select class="form-control" placeholder="" name="grade_idc" id="civil">
-                @foreach($grados as $grado)
-                    @if($grado->fuerza == 'civil')
-                        <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-    </div>
-    <div id="mil" class="hidden form-group">
-        <label class="col-sm-3 control-label" id="gg">Grado</label>
-        <div class="col-sm-9">
-            <select class="form-control" placeholder="" name="grade_idm" id="militar">
-                @foreach($grados as $grado)
-                    @if($grado->fuerza == 'militar')
-                        <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-    </div>
-    <div id="pol" class="hidden form-group">
-        <label class="col-sm-3 control-label" id="ggg">Grado</label>
-        <div class="col-sm-9">
-            <select class="form-control" placeholder="" name="grade_idp" id="policia">
-                @foreach($grados as $grado)
-                    @if($grado->fuerza == 'policia')
-                        <option value="{{$grado->id}}">{{$grado->id}} {{$grado->grado}}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-    </div>
+    
+   
     <div class="form-group">
         <div class="col-md-9 col-md-offset-3">
             {!! Form::submit('Actualizar',['class'=>'btn btn-primary']) !!}

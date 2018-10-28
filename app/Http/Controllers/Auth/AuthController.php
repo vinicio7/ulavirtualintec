@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
+use App\Entities\Visitas;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -87,6 +88,9 @@ class AuthController extends Controller
      */
     public function redirectPath()
     {
+        $visitas = Visitas::first();
+        $visitas->numero = $visitas->numero +1;
+        $visitas->save();
         return route('user.main');
     }
 

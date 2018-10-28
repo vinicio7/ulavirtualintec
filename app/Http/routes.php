@@ -53,6 +53,8 @@ Route::get('uu',function(){
 });
 
 
+
+
 //************************ Rutas Cursante ******************
 
 
@@ -95,8 +97,20 @@ Route::post('formCalifCursanteC',
 //Ruta ver calificaciones cursante
 Route::get('calificaciones',
     [
-        'uses' => 'CursanteController@verCalificaciones',
-        'as'   => 'cursante.verCalificaciones'
+        'uses' => 'CursanteController@calificarCursante',
+        'as'   => 'cursante.calificarCursante'
+    ]);
+
+Route::get('prueba{id}',
+    [
+        'uses' => 'CursanteController@tarea',
+        'as'   => 'cursante.prueba'
+    ]);
+
+Route::get('xpruebax{id}',
+    [
+        'uses' => 'CursanteController@tarea_ver',
+        'as'   => 'cursante.pruebax'
     ]);
 
 
@@ -168,9 +182,23 @@ Route::get('sorteo','PrincipalController@sortearGrupos' );
 Route::get('nuevoCursante',[
     'uses' => 'PrincipalController@index',
     'as'   => 'nuevoCursante']);
+
+Route::get('dashboard',[
+    'uses' => 'PrincipalController@dashboard',
+    'as'   => 'dashboard']);
+
 Route::post('nuevoCursante',[
     'uses' => 'PrincipalController@store',
     'as'   => 'nuevoCursante']);
+
+Route::post('calificaciones',[
+    'uses'  => 'AdminController@subirTarea',
+    'as'    => 'subirTarea'
+]);
+
+Route::post('selecMateriaCalificacionCursante',[
+    'uses' => 'PrincipalController@nuevaTarea',
+    'as'   => 'selecMateriaCalificacionCursante']);
 
 Route::get('nuevoDocente',[
     'uses' => 'PrincipalController@insDocente',
@@ -198,7 +226,7 @@ Route::get('editarDocente{id}',[
     'uses'  =>'PrincipalController@editarDocente',
     'as'    =>'editDocente'
 ]);
-Route::put('actualizarDocente{id}',[
+Route::get('actualizarDocente{id}',[
     'uses'  => 'PrincipalController@actualizarDocente',
     'as'    => 'upDocente'
 ]);
@@ -303,10 +331,32 @@ Route::get('lista_grados',[
     'uses'  => 'AdminController@gradosList',
     'as'    => 'grados'
 ]);
+
+Route::get('mensajes',[
+    'uses'  => 'AdminController@mensajes',
+    'as'    => 'mensajes'
+]);
+
+Route::get('mensajes{id}',[
+    'uses'  => 'AdminController@verMensaje',
+    'as'    => 'verMensaje'
+]);
+
 Route::post('lista_grados',[
     'uses'  => 'AdminController@gradosNew',
     'as'    => 'nuevoGrado'
 ]);
+
+Route::post('subirImagen',[
+    'uses'  => 'AdminController@subirImagen',
+    'as'    => 'subirImagen'
+]);
+
+Route::post('mensajes',[
+    'uses'  => 'AdminController@nuevoMensaje',
+    'as'    => 'nuevoMensaje'
+]);
+
 Route::get('editar_grados_{id}',[
     'uses'  => 'AdminController@gradosEdit',
     'as'    => 'editGrado'
@@ -319,6 +369,24 @@ Route::get('eliminar_grados{id}',[
     'uses'  => 'AdminController@destroyGrado',
     'as'    => 'eliminarGrado'
 ]);
+
+Route::get('eliminar_tarea{id}',[
+    'uses'  => 'AdminController@destroyTarea',
+    'as'    => 'eliminarTarea'
+]);
+
+Route::get('calificar_tarea{id}',[
+    'uses'  => 'CursanteController@calificar_tarea',
+    'as'    => 'calificar_tarea'
+]);
+
+Route::get('ver_notas{id}',[
+    'uses'  => 'CursanteController@ver_notas',
+    'as'    => 'cursante.ver_notas'
+]);
+
+
+
 
 Route::get('lista_directores',[
     'uses'  => 'AdminController@jefesList',

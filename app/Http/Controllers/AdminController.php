@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Tarea;
+use App\Entities\User;
 use App\Entities\Grade;
+use App\Entities\Mensaje;
+use App\Entities\Bandeja;
+use App\Entities\Materia;
 use App\Entities\Jefe;
+use App\Entities\CalificarTareas;
 use App\Entities\Leader;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -17,47 +23,151 @@ class AdminController extends Controller
 {
     public function gradosList()
     {
-        $grados = Grade::all();
+        $grados = Materia::all();
         return view('admin.grados',compact('grados'));
+    }
+
+    public function mensajes()
+    {
+        return view('admin.mensajes');
+    }
+
+    public function verMensaje($id)
+    {
+        $bandeja = Bandeja::where('id_mensaje',$id)->first();
+        $bandeja->estado = 1;
+        $bandeja->save();
+        return view('admin.verMensaje',compact('id'));
     }
 
     public function gradosNew(Request $request)
     {
-        $grado = new Grade;
-        $v = Validator::make($request->all(),[
-            'grado'  => 'required|unique:grades',
-        ]);
-        if ($v ->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($v->errors());
-        }
-        $grado->grado   = Input::get('grado');
-        $grado->fuerza   = Input::get('fuerza');
+        $grado = new Materia;
+        $grado->nombreMateria   = Input::get('grado');
         $grado->save();
         return redirect('lista_grados')->with('status', true);
+    }
+
+    public function nuevoMensaje(Request $request)
+    {
+        if(auth()->user()->role == 'admin'){
+            $usuarios = "";
+            if (Input::get('para') == 1) {
+                $usuarios = User::all();       
+            } if (Input::get('para') == 2) {
+                $usuarios = User::where('role','docente')->get();  
+            }if (Input::get('para') == 3) {
+                $usuarios = User::where('role','cursante')->get();  
+            }
+            foreach ($usuarios as $usuario) {
+                $mensaje                = new Mensaje;
+                $mensaje->enviado       = Input::get('id_user');
+                $mensaje->fecha         = date("d-m-Y");
+                $mensaje->contenido     = Input::get('mensaje');
+                $mensaje->asunto        = Input::get('asunto');
+                $mensaje->save();
+                $bandeja                = new Bandeja;
+                $bandeja->id_user       = $usuario->id;
+                $bandeja->id_mensaje    = $mensaje->id;
+                $bandeja->estado        = 0;
+                $bandeja->save();
+            }
+            return redirect('mensajes')->with('status', true);
+        }
+        if(auth()->user()->role == 'docente'){
+                $mensaje                = new Mensaje;
+                $mensaje->enviado       = Input::get('id_user');
+                $mensaje->fecha         = date("d-m-Y");
+                $mensaje->contenido     = Input::get('mensaje');
+                $mensaje->asunto        = Input::get('asunto');
+                $mensaje->save();
+                $bandeja                = new Bandeja;
+                $bandeja->id_user       = Input::get('para');
+                $bandeja->id_mensaje    = $mensaje->id;
+                $bandeja->estado        = 0;
+                $bandeja->save();
+                return redirect('mensajes')->with('status', true);
+        }
+        if(auth()->user()->role == 'cursante'){
+                $mensaje                = new Mensaje;
+                $mensaje->enviado       = Input::get('id_user');
+                $mensaje->fecha         = date("d-m-Y");
+                $mensaje->contenido     = Input::get('mensaje');
+                $mensaje->asunto        = Input::get('asunto');
+                $mensaje->save();
+                $bandeja                = new Bandeja;
+                $bandeja->id_user       = Input::get('para');
+                $bandeja->id_mensaje    = $mensaje->id;
+                $bandeja->estado        = 0;
+                $bandeja->save();
+                return redirect('mensajes')->with('status', true);
+        }
 
     }
 
     public function gradosEdit($id)
     {
-        $grado = Grade::find($id);
+        $grado = Materia::find($id);
         return view('admin.editarGrado',compact('grado'));
     }
     public function gradosUpdate($id , Request $request)
     {
-        $grado = Grade::find($id);
+        $grado = Materia::find($id);
         //$cursante->fill($request->all());
-        $grado->grado           = Input::get('grado');
-        $grado->fuerza           = Input::get('fuerza');
+        $grado->nombreMateria           = Input::get('grado');
         $grado->save();
-        Session::flash('message','Grado Actualizado...');
+        Session::flash('message','Curso Actualizado...');
         return redirect('lista_grados');
     }
     public function destroyGrado($id)
     {
 
-        Grade::destroy($id);
-        Session::flash('message','Grado Eliminado...');
+        Materia::destroy($id);
+        Session::flash('message','Curso Eliminado...');
+        return redirect()->back();
+    }
+
+    public function subirTarea(Request $request)
+    {
+        $validar = CalificarTareas::where('tarea_id',$request->input('tarea_id'))->where('alumno_id',$request->input('alumno'))->first();
+        if(!$validar){
+            $file = $request->file('file');
+            $path = public_path().trim(' \tareas\ ');
+            $ext = $file->getClientOriginalExtension();
+            $file_name = time().$request->input('tarea_id').$request->input('alumno_id').".".$ext;
+            $file->move($path , $file_name);
+            $path2 = trim(' tareas\ ');
+        
+            $nueva_calificacion = new CalificarTareas;
+            $nueva_calificacion->file           = $path2. $file_name;
+            $nueva_calificacion->tarea_id       = $request->input('tarea_id');
+            $nueva_calificacion->alumno_id      = $request->input('alumno_id');
+            $nueva_calificacion->calificacion   = 0;
+            $nueva_calificacion->save();
+        }
+        //Tarea::destroy($id);
+        Session::flash('message','Tarea Subida...');
+        return redirect()->back();
+    }
+
+    public function subirImagen(Request $request)
+    {
+       
+        $file = $request->file('foto');
+        $path = public_path().trim(' \fotosUsuarios\ ');
+        $ext = $file->getClientOriginalExtension();
+        $file_name = $request->input('id_user').".".$ext;
+        $file->move($path , $file_name);
+        //Tarea::destroy($id);
+        Session::flash('message','Fotografia Subida...');
+        return redirect()->back();
+    }
+
+    public function destroyTarea($id)
+    {
+
+        Tarea::destroy($id);
+        Session::flash('message','Tarea Eliminada...');
         return redirect()->back();
     }
 

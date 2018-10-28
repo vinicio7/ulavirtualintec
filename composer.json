@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "yajra/laravel-datatables-oracle": "^5.11",
-        "barryvdh/laravel-dompdf": "0.6.*",
+        "barryvdh/laravel-dompdf": "~0.8.0",
         "maatwebsite/excel": "~2.0"
     },
     "require-dev": {

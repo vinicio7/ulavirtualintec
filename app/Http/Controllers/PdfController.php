@@ -98,12 +98,16 @@ class PdfController extends Controller
             ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado','users.parentesco','users.nomYap','users.tel')
             ->where('role','cursante')
             ->get();
-        $view = \View::make('director.pdfCursantes',compact('cursantes'))->render();
+        //$view = \View::make('director.pdfCursantes',compact('cursantes'))->render();
+        //$pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        //return $pdf->stream('Cursantes.pdf');
 
-        $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
 
-
-        return $pdf->stream('Cursantes.pdf');
+        $view =  \View::make('director.pdfCursantes', compact('cursantes'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4','landscape');
+        return $pdf->download('Alumnos.pdf');
     }
 
     public function docentes()
@@ -114,11 +118,12 @@ class PdfController extends Controller
             ->where('role','docente')
             ->get();
         $view = \View::make('director.pdfDocentes',compact('docentes'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        $pdf->setPaper('A4','landscape');
 
-        $pdf= \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
 
-
-        return $pdf->stream('Docentes.pdf');
+        return $pdf->download('Docentes.pdf');
     }
     public function grupos($m)
     {

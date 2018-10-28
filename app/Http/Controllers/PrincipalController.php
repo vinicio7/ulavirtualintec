@@ -6,6 +6,7 @@ use App\Entities\ContratoDocente;
 use App\Entities\Jefe;
 use App\Entities\Kardex;
 use App\Entities\Leader;
+use App\Entities\Tarea;
 use App\Entities\Grade;
 use App\Entities\User;
 use Illuminate\Http\Request;
@@ -30,6 +31,11 @@ class PrincipalController extends Controller
     {
         $grados = Grade::all();
         return view('director.inscribirCursante',compact('grados'));
+    }
+
+    public function dashboard()
+    {
+        return view('layouts.dashboard');
     }
 
     public function insDocente()
@@ -92,6 +98,38 @@ class PrincipalController extends Controller
         $cursante->save();
         //$cursantes = User::all();
         return redirect('nuevoCursante')->with('status', true);
+
+    }
+
+    public function nuevaTarea(Request $request)
+    {
+        $tarea = new Tarea;
+        $v = Validator::make($request->all(),[
+            'curso'         => 'required',
+            'nombre'        => 'required',
+            'descripcion'   => 'required',
+            'ponderacion'   => 'required'
+        ]);
+        if ($v ->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($v->errors());
+        }
+        $file = Input::file('file');
+        $path = public_path().trim(' \tareas\ ');
+        $file_name = $file->getClientOriginalName();
+        $file->move($path , $file_name);
+        $path2 = trim(' tareas\ ');
+
+        $tarea->docente_id   = Input::get('docente_id');
+        $tarea->materia_id   = Input::get('curso');
+        $tarea->grupo        = Input::get('grupo');
+        $tarea->nombre       = Input::get('nombre');
+        $tarea->descripcion  = Input::get('descripcion');
+        $tarea->archivo      = $path2. $file_name;
+        $tarea->ponderacion  = Input::get('ponderacion');
+        $tarea->save();
+        //$cursantes = User::all();
+        return redirect('selecMateriaCalificacionCursante')->with('status', true);
 
     }
     public function mostrarCursantes()//lista a los cursantes
@@ -166,7 +204,7 @@ class PrincipalController extends Controller
         $var = $request['profesion'];
        // $pass = Input::get('password');
         //$cursante->create($request->all());
-        $docente->id            = Input::get('id');
+        $docente->dpi            = Input::get('id');
         $docente->nickname      = Input::get('nickname');
         $docente->password      = Input::get('password');
         $docente->nombres       = strtoupper(Input::get('nombres'));
@@ -190,13 +228,14 @@ class PrincipalController extends Controller
         $docente->tel          = Input::get('tel');
         $docente->role = 'docente';
         $docente->save();
+        return redirect('nuevoDocente')->with('status', true);
     }
     public function mostrarDocentes()//lista a los docentes
     {
         //$cursantes = User::all();
         $docentes = DB::table('users')
-            ->leftJoin('grades', 'users.grade_id','=','grades.id')
-            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','grades.grado','users.parentesco','users.nomYap','users.tel')
+            //->leftJoin('grades', 'users.grade_id','=','grades.id')
+            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.profesion','users.direccion','users.dpi','users.parentesco','users.nomYap','users.tel')
             ->get();
         return view('director.modificarDocente', compact('docentes'));
         //return $docentes;
@@ -210,7 +249,7 @@ class PrincipalController extends Controller
     {
         $cursante = User::find($id);
         //$cursante->fill($request->all());
-        $var = $request['profesion'];
+        //$var = $request['profesion'];
         $cursante->id           = Input::get('id');
         $cursante->nickname     = Input::get('nickname');
         $cursante->password     = Input::get('password');
@@ -221,15 +260,15 @@ class PrincipalController extends Controller
         $cursante->telefono     = Input::get('telefono');
         $cursante->sexo         = Input::get('sexo');
         $cursante->fnac         = Input::get('fnac');
-        if($var == 'militar'){
-            $cursante->grade_id     = Input::get('grade_idm');
-        }elseif( $var == 'policia'){
-            $cursante->grade_id     = Input::get('grade_idp');
-        }elseif($var == 'civil'){
-            $cursante->grade_id     = Input::get('grade_idc');
-        }
+        //if($var == 'militar'){
+          //  $cursante->grade_id     = Input::get('grade_idm');
+        //}elseif( $var == 'policia'){
+         //   $cursante->grade_id     = Input::get('grade_idp');
+        //}elseif($var == 'civil'){
+         //   $cursante->grade_id     = Input::get('grade_idc');
+        //}
         $cursante->direccion    = strtoupper(Input::get('direccion'));
-        $cursante->profesion    = $var;
+        //$cursante->profesion    = $var;
         $cursante->parentesco   = Input::get('parentesco');
         $cursante->nomYap       = Input::get('nomYap');
         $cursante->tel          = Input::get('tel');

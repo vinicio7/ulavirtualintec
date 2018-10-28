@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Grado</h4>
+                    <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Curso</h4>
                 </div>
                 <form class="form-horizontal" action="{{route('nuevoGrado')}}" method="post" data-toggle="validator">
                 <div class="modal-body">
@@ -15,14 +15,14 @@
                             <input type="text" class="form-control" id="grado" name="grado" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
-                    <div class="form-group">
-                        <select class="form-control" placeholder="" name="fuerza">
-                            <option value="militar">MILITAR</option>
-                            <option value="policia">POLICIA</option>
-                            <option value="civil">CIVIL</option>
-
-                        </select>
-                    </div>
+                          <div class="form-group has-feedback" >
+                            <label for="grado">Precio</label>
+                            <input type="text" class="form-control" id="precio" name="precio" required>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                          <div class="form-group has-feedback" >
+                           <input type="checkbox" name="">Inscripcion
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -37,7 +37,7 @@
     <div class="container">
         <div class="row border-bottom white-bg dashboard-header">
             <div class="col-sm-10">
-                <h2>Grados</h2>
+                <h2>Cursos</h2>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     Agregar
                 </button>
@@ -57,7 +57,7 @@
                 @if(Session::has('status'))
                     <div class="alert alert-dismissible alert-success" class="col-md-10">
                         <button type="button" class="close" data-dismiss="alert">×</button>
-                        <i class="fa fa-check-square"></i>Grado Creado!!
+                        <i class="fa fa-check-square"></i>Curso Creado!!
                     </div>
                 @endif
                 <div class="table-responsive">
@@ -65,15 +65,13 @@
                     <table class="table table-hover ">
                         <thead>
 
-                        <th>Grado</th>
-                        <th>Fuerza</th>
+                        <th>Curso</th>
                         <th colspan="2" style="text-align: center;">Acción</th>
                         </thead>
                         <tbody>
                         @foreach($grados as $grado)
                             <tr>
-                                <td>{{$grado->grado}}</td>
-                                <td>{{$grado->fuerza}}</td>
+                                <td>{{$grado->nombreMateria}}</td>
                                 <td align="right">
                                     {!! link_to_route('editGrado',
                                                     $title = 'Editar',

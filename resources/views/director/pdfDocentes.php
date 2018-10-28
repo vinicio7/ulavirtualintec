@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EAEN | Calificaciones</title>
+    <title>INTEC | Docentes</title>
 
     <!--link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet"-->
@@ -19,34 +19,32 @@
     <!--link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"-->
 </head>
-<body style="font-size: 8pt">
+<body style="font-size: 10pt">
 
 
 <div class="" style="text-align:center; margin-bottom: 15px;">
-    <h3>Lista de Docentes | Escuela de Altos Estudios Nacionales</h3>
+    <h1>Lista de Docentes | INTEC</h1>
 </div>
 <div class="table table-striped" align="center">
-    <table border=1 cellspacing=0 align="center">
+    <table border=1 cellspacing=0 align="center"  style="  border-collapse: separate;">
 
-        <tr>
-            <th class="success" width="10px">CI</th>
-            <th class="success" width="1%">Grado / Profesión</th>
+        <tr style="background-color: gray; font-size: 16px">
+            <th class="success" width="12px">DPI</th>
             <th class="success" width="10%">Nombre</th>
             <th class="success" width="10%">Apellido Paterno</th>
             <th class="success" width="10%">Apellido Materno</th>
             <th class="success" width="10%">Email</th>
             <th class="success" width="10%">Telefono</th>
 
-            <th class="success" width="10%">Fecha de Nacimiento</th>
-            <th class="success" width="10%">Dirección</th>
-            <th class="success" width="20%">Parentesco</th>
+            <th class="success" width="14%">Fecha de Nacimiento</th>
+            <th class="success" width="13%">Dirección</th>
+            <th class="success" width="1%">Parentesco</th>
             <th class="success" width="20%">Nombre y Apellido</th>
             <th class="success" width="20%">Telefono</th>
         </tr>
         <?php foreach($docentes as $docente): ?>
             <tr align="center">
                 <td class=" text-center"> <?php echo e($docente->id); ?></td>
-                <td class="text-center"> <?php echo e($docente->grado); ?></td>
                 <td class=" text-center"> <?php echo e($docente->nombres); ?></td>
                 <td class=" text-center"> <?php echo e($docente->paterno); ?></td>
                 <td class=" text-center"> <?php echo e($docente->materno); ?></td>
