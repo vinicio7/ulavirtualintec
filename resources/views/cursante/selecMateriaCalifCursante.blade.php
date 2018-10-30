@@ -23,9 +23,9 @@
     if (auth()->user()->role == 'docente') {
        //$grupo = ContratoDocente::where('user',auth()->user()->id);
        $grupo = \DB::table('contrato_docentes')->where('user',auth()->user()->id)->first();
-       $nombre_grupo = $grupo->gestion;
+       $horario = \DB::table('horarios')->where('id',$grupo->gestion)->first();
+       $nombre_grupo = $horario->descripcion;
        $id_user =  auth()->user()->id;
-
     }
     $tareas = \DB::table('tareas')->where('docente_id',auth()->user()->id)->get();
 
@@ -40,7 +40,7 @@
                 <form class="form-horizontal" action="{{route('selecMateriaCalificacionCursante')}}" method="post" data-toggle="validator" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="text" name="docente_id" id="docente_id" value="{{ $id_user }}" hidden="true">
-                    <input type="text" name="grupo" id="grupo" value="{{ $nombre_grupo }}" hidden="true">
+                    <input type="text" name="grupo" id="grupo" value="{{ $grupo->id }}" hidden="true">
                         <div class="form-group has-feedback" >
                             <label for="grado">Curso</label>
                             <select class="form-control" name="curso" id="curso">
@@ -55,6 +55,10 @@
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                         </div>
+                         <div class="form-group has-feedback" >
+                            <label for="grado">Ponderacion</label>
+                            <input type="number" min="1" class="form-control" id="ponderacion" name="ponderacion" required>
+                        </div>
                         <div class="form-group has-feedback" >
                             <label for="grado">Descripcion</label><br>
                             <textarea class="form-control" placeholder="Ingrese la descripcion de la tarea" name="descripcion" id="descripcion"></textarea>
@@ -62,10 +66,6 @@
                         <div class="form-group has-feedback" >
                             <label>Imagen o archivo adicional:</label><br>
                            <input type="file" name="file" id="file">
-                        </div>
-                        <div class="form-group has-feedback" >
-                            <label for="grado">Ponderacion</label>
-                            <input type="number" min="1" class="form-control" id="ponderacion" name="ponderacion" required>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -79,7 +79,7 @@
 
    <div class="inner-block" style="padding-top: 0px">
     <div class="portlet-grid-page">  
-        <h1 style="color: #5cb85c"> Lista de tareas - {{$nombre_grupo}}</h1> 
+        <h1 style="color: #5cb85c"> Lista de tareas</h1> 
         <br>
           <button type="button" class="btn btn-lg btn-success btn-rounced" data-toggle="modal" data-target="#myModal2" style="border-radius: 6px;background-color: #5cb85c;border-color: #5cb85c"> + Nueva tarea</button>  
           <br>
@@ -94,12 +94,17 @@
                         if($materia){
                             $materia_nombre = $materia->nombreMateria;
                         }
+                        $horario = \DB::table('horarios')->where('id',$tarea->grupo)->first();
+                        $horario_nombre = "";
+                        if($horario){
+                            $horario_nombre = $horario->descripcion;
+                        }
                     ?>
                      <div class="portlet-grid panel-primary">
                         <div class="panel-heading" style="background-color: #337ab7;border-color: #337ab7">
                             <h3 class="panel-title"><strong>Curso:</strong> {{ $materia_nombre }} </h3>
-                            <h3 class="panel-title"><strong>Grupo:</strong>{{ $tarea->grupo}} </h3>
-                            <h3 class="panel-title"><strong>Tarea: </strong>{{ $tarea->nombre }} </h3>
+                            <h3 class="panel-title"><strong>Grupo:</strong> {{ $horario_nombre }} </h3>
+                            <h3 class="panel-title"><strong>Tarea: </strong> {{ $tarea->nombre }} </h3>
                         </div> 
                         <div class="panel-body">
                             Valor: {{$tarea->ponderacion}} pts<br>

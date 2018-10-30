@@ -30,14 +30,17 @@
     <li>
         <a href="#"><i class="fa fa-file-text-o fa-2x" style="margin-left: 10px;color:white;height: 40px;width: 40px;"></i> <span class="nav-label" style="color:white">Reportes</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
-            <li><a href="{{ route('porCursante') }}"><i class="fa fa-list-ol"></i>Por Alumno</a></li>
-            <li><a href="{{ route('director.reportePorMateria')}}"><i class="fa fa-list-ol"></i>Por Materia</a></li>
+            <li><a href="{{ route('porCursante') }}"><i class="fa fa-list-ol"></i>Por Horario</a></li>
+            <li><a href="{{ route('director.reportePorMateria')}}"><i class="fa fa-list-ol"></i>Por alumno</a></li>
         </ul>
     </li>
    <li>
         <a href="#"><i class="fa fa-cogs fa-2x" style="margin-left: 10px;color:white;height: 40px;width: 40px;"></i> <span class="nav-label" style="color:white">Administración</span><span class="fa arrow"></span></a>
         <ul class="nav nav-second-level">
             <li><a href="{{ route('grados') }}"><i class="fa fa-list-ol"></i>Cursos </a></li>
+        </ul>
+        <ul class="nav nav-second-level">
+            <li><a href="{{ route('horarios') }}"><i class="fa fa-folder"></i>Horarios </a></li>
         </ul>
         <ul class="nav nav-second-level">
             <li><a href="{{ route('mensajes') }}"><i class="fa fa-send"></i>Bandeja de entrada </a></li>

@@ -3,12 +3,18 @@
 
 <?php
     use App\Entities\User;
+    use App\Entities\Tarea;
+    use App\Entities\Horarios;
     $grados = User::all();
     $count = count($grados);
     $users = User::orderby('created_at','DESC')->get(); 
     $contador = 0;
     $visitantes = \DB::table('visitas_login')->first();
     $calculo_visitantes = $visitantes->numero;
+    $nuevos_mensajes = \DB::table('bandeja')->where('id_user',auth()->user()->id)->where('estado',0)->get();
+    $cantidad_mensajes = count ($nuevos_mensajes);
+    $horarios = Horarios::all();
+    //$tareas_ = Tareas::where()
 ?>
 <div class="inner-block">
 <!--market updates updates-->
@@ -42,7 +48,7 @@
       <div class="col-md-4 market-update-gd">
         <div class="market-update-block clr-block-3">
           <div class="col-md-8 market-update-left">
-            <h3>1</h3>
+            <h3>{{$cantidad_mensajes}}</h3>
             <h4>Nuevos Mensajes</h4>
             <p>Se ha recibido mensajeria con dudas o consultas</p>
           </div>
@@ -108,17 +114,14 @@
           <div class="home-progres-main">
              <h3>Tareas entregadas por grupo</h3>
            </div>
-          <div class='bar_group'>
-          <div class='bar_group__bar thin' label='Sabado 7:00 - 10:00' show_values='true' tooltip='true' value='1'></div>
-          <div class='bar_group__bar thin' label='Sabado 10:00 - 1:00' show_values='true' tooltip='true' value='0'></div>
-          <div class='bar_group__bar thin' label='Sabado 01:00 - 04:00' show_values='true' tooltip='true' value='0'></div>
-          <div class='bar_group__bar thin' label='Sabado 04:00 - 07:00' show_values='true' tooltip='true' value='0'></div>
-
-          <div class='bar_group__bar thin' label='Domingo 7:00 - 10:00' show_values='true' tooltip='true' value='1'></div>
-          <div class='bar_group__bar thin' label='Domingo 10:00 - 1:00' show_values='true' tooltip='true' value='0'></div>
-          <div class='bar_group__bar thin' label='Domingo 01:00 - 04:00' show_values='true' tooltip='true' value='0'></div>
-          <div class='bar_group__bar thin' label='Domingo 04:00 - 07:00' show_values='true' tooltip='true' value='0'></div>
-        
+          <div class='bar_group' style="height: 200px;width: 430px; overflow-y: auto;">
+            @foreach($horarios as $horario)
+            <?php
+              $tareas = Tarea::Where('grupo',$horario->id)->get();
+              $contador = count($tareas);
+            ?>
+              <div style="margin-right: 15px" class='bar_group__bar thin' label='{{$horario->descripcion}}' show_values='true' tooltip='false' value='{{$contador}}'></div>
+            @endforeach
         </div>
 
         <!--//Progress bars-->

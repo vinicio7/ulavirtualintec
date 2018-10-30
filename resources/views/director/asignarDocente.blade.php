@@ -15,23 +15,29 @@
                         </thead>
                         @foreach($docentes as $docente)
                             <tbody >
-                            <td>{{$docente->id}}</td>
+                            <td>{{$docente->dpi}}</td>
                             <td>{{$docente->nombres}} {{$docente->paterno}} {{$docente->materno}}</td>
                             
                             <?php
                                 $materia_nombre = '';
-                                //$materia =  Materia::where('id',$cursante->materia_id)->first();
-                                $materia = \DB::table('materias')->where('id',$docente->materia_id)->first();
-                                if ($materia){
+                                //$materia =  Materia::where('id',$docente->materia_id)->first();
+                                $asignado = \DB::table('contrato_docentes')->where('user',$docente->id)->first();
+                                if ($asignado){
+                                    $materia = \DB::table('materias')->where('id',$asignado->materia_id)->first();
                                     $materia_nombre = $materia->nombreMateria;
+                                    $horario = \DB::table('horarios')->where('id',$asignado->gestion)->first();
+                                    $horario_nombre = $horario->descripcion;
+                                    //$grupo = $asignado->grupo;
                                 }else
                                 {
                                     $materia_nombre = "Sin asignar";
+                                    $horario_nombre = "- - -";
+                                    //$grupo = "- - -";
                                 }
                             ?>
                             <td>{{$materia_nombre}}</td>
 
-                            <td>{{$docente->gestion}}</td>
+                            <td>{{$horario_nombre}}</td>
                             <td>
                                 {!! link_to_route('asignarContrato',
                                                             $title = 'Asignar',

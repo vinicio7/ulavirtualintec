@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Tarea;
 use App\Entities\User;
 use App\Entities\Grade;
+use App\Entities\Horarios;
 use App\Entities\Mensaje;
 use App\Entities\Bandeja;
 use App\Entities\Materia;
@@ -27,6 +28,12 @@ class AdminController extends Controller
         return view('admin.grados',compact('grados'));
     }
 
+    public function horariosList()
+    {
+        $horarios = Horarios::paginate(5);
+        return view('admin.horarios',compact('horarios'));
+    }
+
     public function mensajes()
     {
         return view('admin.mensajes');
@@ -46,6 +53,14 @@ class AdminController extends Controller
         $grado->nombreMateria   = Input::get('grado');
         $grado->save();
         return redirect('lista_grados')->with('status', true);
+    }
+
+    public function horariosNew(Request $request)
+    {
+        $horario = new Horarios;
+        $horario->descripcion   = Input::get('horario');
+        $horario->save();
+        return redirect('lista_horarios')->with('status', true);
     }
 
     public function nuevoMensaje(Request $request)
@@ -110,6 +125,13 @@ class AdminController extends Controller
         $grado = Materia::find($id);
         return view('admin.editarGrado',compact('grado'));
     }
+
+     public function horariosEdit($id)
+    {
+        $horario = Horarios::find($id);
+        return view('admin.editarHorario',compact('horario'));
+    }
+
     public function gradosUpdate($id , Request $request)
     {
         $grado = Materia::find($id);
@@ -119,11 +141,30 @@ class AdminController extends Controller
         Session::flash('message','Curso Actualizado...');
         return redirect('lista_grados');
     }
+
+    public function horariosUpdate($id , Request $request)
+    {
+        $horario = Horarios::find($id);
+        //$cursante->fill($request->all());
+        $horario->descripcion           = Input::get('horario');
+        $horario->save();
+        Session::flash('message','Horario Actualizado...');
+        return redirect('lista_horarios');
+    }
+    
     public function destroyGrado($id)
     {
 
         Materia::destroy($id);
         Session::flash('message','Curso Eliminado...');
+        return redirect()->back();
+    }
+
+    public function destroyHorario($id)
+    {
+
+        Horarios::destroy($id);
+        Session::flash('message','Horario Eliminado...');
         return redirect()->back();
     }
 
@@ -159,7 +200,7 @@ class AdminController extends Controller
         $file_name = $request->input('id_user').".".$ext;
         $file->move($path , $file_name);
         //Tarea::destroy($id);
-        Session::flash('message','Fotografia Subida...');
+        Session::flash('message2','Fotografia Subida...');
         return redirect()->back();
     }
 

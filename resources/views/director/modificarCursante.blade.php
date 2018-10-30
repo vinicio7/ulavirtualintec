@@ -38,7 +38,7 @@
                 @foreach($cursantes as $cursante)
                     @if($cursante->role == 'cursante')
                     <tbody>
-                    <td>{{$cursante->id}}</td>
+                    <td>{{$cursante->dpi}}</td>
                     <td>{{$cursante->grado}}</td>
                     <td>{{$cursante->nombres}}</td>
                     <td>{{$cursante->paterno}}</td>

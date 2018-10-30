@@ -18,7 +18,6 @@
         <div class="table-responsive">
         <table class="table table-hover">
             <thead>
-            <th>Id</th>
             <th>DPI</th>
             <th>Nombre</th>
             <th>Apellido Paterno</th>
@@ -36,7 +35,6 @@
             @foreach($docentes as $docente)
                 @if($docente->role == 'docente')
                     <tbody>
-                    <td>{{$docente->id}}</td>
                     <td>{{$docente->dpi}}</td>
                     <td>{{$docente->nombres}}</td>
                     <td>{{$docente->paterno}}</td>

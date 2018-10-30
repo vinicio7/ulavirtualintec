@@ -9,6 +9,7 @@ use App\Entities\Leader;
 use App\Entities\Tarea;
 use App\Entities\Grade;
 use App\Entities\User;
+use App\Entities\Horarios;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -137,7 +138,7 @@ class PrincipalController extends Controller
         //$cursantes = User::all();
         $cursantes = DB::table('users')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
-            ->select('users.id','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado','users.parentesco','users.nomYap','users.tel')
+            ->select('users.id','users.dpi','users.nombres','users.paterno','users.materno','users.email','users.telefono','users.role','users.sexo','users.fnac','users.direccion','users.profesion','grades.grado','users.parentesco','users.nomYap','users.tel')
             ->get();
         return view('director.modificarCursante', compact('cursantes'));
         //return $cursantes;
@@ -342,23 +343,12 @@ class PrincipalController extends Controller
 
     public function asignarCursante()
     {
-        $cursantes = DB::table('users')
-            ->where('role','cursante')
-            ->leftJoin('kardexes','users.id','=','user')
-            ->select('users.id','nombres','paterno','materno','materia_id','gestion','grupo')
-            ->orderBy('materia_id')
-            ->get();
+        $cursantes = User::where('role','cursante')->get();
         return view('director.asignarCursante',compact('cursantes'));
     }
     public function asignaMateria($id)
     {
-        $usrMa= DB::table('kardexes')
-            ->where('user',$id)
-            ->select('materia_id')
-            ->get();
-
-        $quu = DB::select('select * from materias where id not in (select kardexes.materia_id from kardexes where kardexes.user=?)',array($id));
-        return view('director.nuevaMateria',compact('quu'))->with('id',$id)->with('usrMa',$usrMa);
+        return view('director.nuevaMateria')->with('id',$id);
     }
     public function asign($id)
     {
@@ -366,7 +356,7 @@ class PrincipalController extends Controller
         $cursante->user         = $id;
         $cursante->gestion      = Input::get('gestion');
         $cursante->materia_id   = Input::get('materia_id');
-        $cursante->ua_id        = Input::get('ua_id');
+        $cursante->ua_id        = 0;
         $cursante->activo       = 1;
         $cursante->save();
         Session::flash('message','Cursante Asignado Exitosamente');
@@ -374,13 +364,7 @@ class PrincipalController extends Controller
     }
     public function asignarDocente()
     {
-        $docentes = DB::table('users')
-            ->where('role','docente')
-            ->leftJoin('contrato_docentes','users.id','=','user')
-            ->select('users.id','nombres','paterno','materno','materia_id','gestion')
-            ->orderBy('nombres')
-            ->orderBy('materia_id')
-            ->get();
+       $docentes = User::where('role','docente')->get();
         return view('director.asignarDocente',compact('docentes'));
     }
     public function asignaContrado($id)
@@ -475,49 +459,57 @@ class PrincipalController extends Controller
         //dd('exitoso');
     }
 
-    public function reportePorMateria()
-    {
-        $disciplinas = \DB::table('materias')
-                   ->select('nombreMateria')
-                   ->get();
-
-        $jefes = Jefe::all();
-        return view('director.reportePorMateriaSelecMateria', compact('disciplinas','jefes'));
-    }
-
     public function reportePorCursante()
     {
-        $cursantes = DB::table('users')
-            ->where('role','cursante')
-            //->leftJoin('kardexes','users.id','=','user')
-            ->select('users.id','nombres','paterno','materno')
+        $horarios = DB::table('horarios')->get();
+        return view('director.reportePorCursante',compact('horarios'));
+    }
 
-            ->get();
+    public function reportePorMateria()
+    {
+        $horarios = DB::table('horarios')->get();
+        $materias = DB::table('materias')->get();
+        $alumnos = User::where('role','cursante')->get();
+        return view('director.reportePorMateriaSelecMateria',compact('horarios','materias','alumnos'));
+    }
 
-        $jefes = Jefe::all();
-
-        return view('director.reportePorCursante',compact('cursantes','directores','jefes'));
+    public function reportex()
+    {
+        $horarios = DB::table('horarios')->get();
+        $materias = DB::table('materias')->get();
+        $alumnos = User::where('role','cursante')->get();
+        $array = array();
+        foreach ($alumnos as $alumno) {
+            $validar = kardex::where('user',$alumno->id)->where('materia_id',Input::get('curso'))->first();
+            if ($validar) {
+                array_push($array, $alumno);
+            }
+        }
+        $alumnos = $array;
+        return view('director.reportePorMateriaSelecMateria',compact('horarios','materias','alumnos'));
     }
 
     public function reporteCursantePdf(Request $request)
     {
-        $id = $request['cursante'];
+        $id = $request['horario'];
+        $nombre = Horarios::where('id',$id)->first();
+        $view = \View::make('director.RepdfCursante',compact('id'))->render();
 
-        $cursante = DB::table('users')
-            ->where('users.id',$id)
-            ->join('kardexes','users.id','=','user')
-            ->get();
-        $directores = Leader::all();
-        $nombreJefe = $request['jefe'];
-        $jefes = DB::table('jeves')
-            ->where('jefe_est',$nombreJefe)
-            ->get();
+        $pdf= \PDF::loadHTML($view)->setPaper('A4','landscape');
 
-        $view = \View::make('director.RepdfCursante',compact('cursante','directores','jefes'))->render();
-
-        $pdf= \PDF::loadHTML($view)->setPaper('letter');
-
-        return $pdf->stream('Cursate-{users.paterno}.pdf');
+        return $pdf->stream('{nombre->descripcion}.pdf');
 
     }
+    public function reporteMateriaPdf(Request $request)
+    {
+        $id = $request['alumno'];
+        $nombre = User::where('id',$id)->first();
+        $view = \View::make('director.pdfReportePorMateria',compact('id'))->render();
+
+        $pdf= \PDF::loadHTML($view)->setPaper('A4','landscape');
+
+        return $pdf->stream('{nombre->nombres}.pdf');
+
+    }
+
 }

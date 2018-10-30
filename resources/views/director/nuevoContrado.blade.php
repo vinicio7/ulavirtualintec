@@ -1,5 +1,11 @@
 @extends('layouts.main')
 @section('content')
+<?php
+    use App\Entities\Materia;
+    use App\Entities\Horarios;
+    $materias = Materia::all();
+    $horarios = Horarios::all();
+?>
     <div class="row border-bottom white-bg dashboard-header">
         <h3>Asignacion Docente</h3>
         @if(Session::has('message'))
@@ -15,14 +21,9 @@
                 <label class="col-sm-3 control-label">Horario</label>
                 <div class="col-sm-4">
                     <select class="form-control" placeholder="Gestion Academica" name="gestion">
-                        <option value="Sabado 7:00 - 10:00">Sabado 7:00 - 10:00</option>
-                        <option value="Sabado 10:00 - 1:00">Sabado 10:00 - 1:00</option>
-                        <option value="Sabado 01:00 - 04:00">Sabado 01:00 - 04:00</option>
-                        <option value="Sabado 04:00 - 07:00">Sabado 04:00 - 07:00</option>
-                        <option value="Domingo 7:00 - 10:00">Domingo 7:00 - 10:00</option>
-                        <option value="Domingo 10:00 - 1:00">Domingo 10:00 - 1:00</option>
-                        <option value="Domingo 01:00 - 04:00">Domingo 01:00 - 04:00</option>
-                        <option value="Domingo 04:00 - 07:00">Domingo 04:00 - 07:00</option>
+                        @foreach($horarios as $horario)
+                            <option value="{{$horario->id}}">{{$horario->descripcion}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -30,11 +31,9 @@
                     <label class="col-sm-3 control-label">Curso</label>
                     <div class="col-sm-4">
                         <select class="form-control" placeholder="Gestion Academica" name="materia_id">
-                            <?php
-                            foreach( $quu as $mat){
-                                echo '<option value="'.$mat->id.'">'. $mat->nombreMateria .'</option>';
-                            }
-                            ?>
+                           @foreach($materias as $curso)
+                            <option value="{{$curso->id}}">{{$curso->nombreMateria}}</option>
+                        @endforeach
 
                         </select>
                     </div>
@@ -57,5 +56,8 @@
                 </div>
             </fielset>
         </form>
+        <form class="form-horizontal" action="{{url('asignarDocentes')}}" method="get" data-toggle="validator">
+                    <center><button class="btn btn-danger"><i class="fa fa-undo"></i> Regresar</button></center>
+                </form>
     </div>
 @endsection

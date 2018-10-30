@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
+<html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EAEN | Calificaciones</title>
+    <title>INTEC | Alumnos</title>
 
     <!--link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet"-->
@@ -18,65 +16,49 @@
 
     <!--link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"-->
-</head>
-<body>
+</head><body style="font-size: 9pt">
 
-<div class="" style="margin-bottom: 15px; margin-right: 20px">
-        <pre>UNIVERSIDAD MILITAR "Mcal. BERNARDINO BILBAO RIOJA"
-              E.A.E.N. "CNL. EDUARDO AVAROA"
-                      BOLIVIA
-        </pre>
-    <pre>RESULTADO FINAL DEL CONCEPTO AL CURSANTE
+<?php
+    use App\Entities\User;
+    $usuario = User::where('id',$id)->first();
+?>
 
-DISCIPLINA: <?php echo($nombreMateria)?>
-    </pre>
-
+<div class="" style="text-align:center; margin-bottom: 4px;">
+    <h1>Reporte de alumno | INTEC</h1>
+    <h3><?php echo e($usuario->nombres);echo e(" ".$usuario->paterno);echo e(" ".$usuario->materno); ?></h2>
 </div>
+<center>
+    <div class="table table-striped" align="center">
+        <table cellpadding="4%" border=1 cellspacing=0  align="center" style="  border-collapse: separate;">
 
-<div class="table table-striped" align="center">
-    <table border=1 cellspacing=0 align="center">
+            <tr style="background-color: gray; font-size: 16px">
+                <th class="success" width="10px">Tarea</th>
+                <th class="success" width="10%">Curso</th>
+                <th class="success" width="40%">Docente</th>
+                <th class="success" width="10%">Ponderacion</th>
+                <th class="success" width="10%">Punteo</th>
+            </tr>
+            <?php 
+            use App\Entities\Tarea;
+            use App\Entities\Materia;
+            use App\Entities\CalificarTareas;
+            $tareas = CalificarTareas::where('alumno_id',$id)->get();
+            foreach($tareas as $tarea):
+                $tarea2 = Tarea::where('id',$tarea->tarea_id)->first();   
+                $curso  = Materia::where('id',$tarea2->materia_id)->first(); 
+                $user   = User::where('id',$tarea2->docente_id)->first();
 
-        <tr>
-            <th class="success" width="20%">C.I.</th>
-            <th class="success" width="20%">Apellido Paterno</th>
-            <th class="success" width="20%">Apellido Materno</th>
-            <th class="success" width="20%">Nombre</th>
-            <th class="success" width="20%">Hetero-Evaluación</th>
-            <th class="success" width="20%">Facilitador</th>
-            <th class="success" width="20%">Jefe Depto. Evaluación</th>
-            <th class="success" width="20%">Promedio</th>
-        </tr>
-        <?php foreach($cursantes as $c): ?>
-            <tr align="center">
-                <td class=" text-center"> <?php echo ($c->user); ?></td>
-                <td class=" text-center"> <?php echo ($c->paterno); ?></td>
-                <td class=" text-center"> <?php echo ($c->materno); ?></td>
-                <td class=" text-center"> <?php echo ($c->nombres); ?></td>
-                <td class=" text-center"> <?php echo ($c->prom4Cursante); ?></td>
-                <td class=" text-center"> <?php echo ($c->prom4Facil); ?></td>
-                <td class=" text-center"> <?php echo ($c->prom4JE); ?></td>
-                <td class=" text-center"> <?php echo (number_format(($c->prom4Cursante+$c->prom4Facil+$c->prom4JE)/3, 2, '.', ',')); ?></td>
+                        ?>
+                <tr align="center">
+                    <td class=" text-center"> <?php echo e($tarea2->nombre); ?></td>
+                    <td class=" text-center"> <?php echo e($curso->nombreMateria); ?></td>
+                    <td class=" text-center"> <?php echo e($user->nombres);echo e(" ".$user->paterno);echo e(" ".$user->materno); ?></td>
+                    <td class=" text-center"> <?php echo e($tarea2->ponderacion); ?></td>
+                    <td class=" text-center"> <?php echo e($tarea->calificacion); ?></td>
                 </tr>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
 
-    </table>
-</div>
-
-<div style="margin-bottom: 50px">
-    <p>&nbsp;</p>
-    <pre>
-           -------------------------------------               ----------------------------------------
-          <?php echo $directores[2]->nombreCompleto; ?>            <?php echo $jefes[0]->jefe_est; ?>
-        <br>
-        <?php echo $directores[2]->cargo; ?>                 <?php echo $jefes[0]->localidad; ?>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-           ----------------------------------                     -----------------------------------
-        <?php echo $directores[1]->nombreCompleto;?>              <?php echo $directores[0]->nombreCompleto;?>
-        <br>
-            <?php echo $directores[1]->cargo;?>                           <?php echo $directores[0]->cargo;?>
-
-    </pre>
-</div>
-</body>
-</html>
+        </table>
+    </div>
+</center>
+</body></html>

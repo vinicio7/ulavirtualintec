@@ -22,11 +22,40 @@
 
 
 </head>
-
+<style type="text/css">
+    #myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+#myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid #ddd; /* Add a grey border */
+    font-size: 18px; /* Increase font-size */
+}
+#myTable th, #myTable td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+}
+#myTable tr {
+    /* Add a bottom border to all table rows */
+    border-bottom: 1px solid #ddd; 
+}
+#myTable tr.header, #myTable tr:hover {
+    /* Add a grey background color to the table header and on hover */
+    background-color: #f1f1f1;
+}
+</style>
 <body style="background-color: #202121">
 <div id="wrapper" style="background-color: #202121">
  {{--modal--}}
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -57,13 +86,13 @@
             @endforeach
         </div>
     @endif
-    @if(Session::has('message'))
+    @if(Session::has('message2'))
         <div class="alert alert-dismissible alert-success" class="col-md-10">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <i class="fa fa-check-square"></i>{{Session::get('message')}}
+            <i class="fa fa-check-square"></i>{{Session::get('message2')}}
         </div>
     @endif
-    @if(Session::has('status'))
+    @if(Session::has('status2'))
         <div class="alert alert-dismissible alert-success" class="col-md-10">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <i class="fa fa-check-square"></i>Fotografia Subida!!
@@ -74,7 +103,7 @@
             <ul class="nav" id="side-menu" style="background-color: #202121">
                 <li class="nav-header" style="background-color: #202121!important; background:#202121">
                     <div class="dropdown profile-element"> <span>
-                            <a data-toggle="modal" data-target="#myModal"><img style="width: 100px;height: 100px" class="img-circle" src="fotosUsuarios/{{auth()->user()->id}}.jpg" /></a>
+                            <a data-toggle="modal" data-target="#myModal3"><img style="width: 100px;height: 100px" class="img-circle" src="fotosUsuarios/{{auth()->user()->id}}.jpg" /></a>
                              </span>
                         <!--a data-toggle="dropdown" class="dropdown-toggle" href="#"-->
                         <a>
@@ -209,7 +238,21 @@
 <script src="js/skycons.js"></script>
 <script src="js/bars.js"></script>
 <script src="js/toastr.min.js"></script>
-
+<script src="js/jquery-1.11.2.min.js"></script>
+<script>
+function myFunction() {
+  // Declare variables 
+ var $rows = $('#myTable tr');
+$('#myInput').keyup(function() {
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+    $('.header').show();
+});
+}
+</script>
     <script src="js/validator.js"></script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

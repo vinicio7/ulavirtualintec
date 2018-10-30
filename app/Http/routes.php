@@ -250,6 +250,7 @@ Route::post('sortear',[
 
 //asigna cursantes a kardex
 Route::get('asignar','PrincipalController@asignarCursante');
+
 Route::get('asignar-materia-{id}',[
     'uses'    => 'PrincipalController@asignaMateria',
     'as'      => 'asignarMateria'
@@ -314,10 +315,15 @@ Route::get('reportePorMateria',[
     'uses' => 'PrincipalController@reportePorMateria',
     'as'   => 'director.reportePorMateria']);
 
+Route::get('reportex',[
+    'uses' => 'PrincipalController@reportex',
+    'as'   => 'director.reportex']);
+
 //Ruta generar pdf de reporte por Materia
 Route::post('reportePorMateria',[
-    'uses' => 'PdfController@reportePorMateria',
+    'uses' => 'PrincipalController@reporteMateriaPdf',
     'as'   => 'pdf.reportePorMateria']);
+
 Route::post('reportePorAlumno',[
     'uses'  => 'PrincipalController@reporteCursantePdf',
     'as'    => 'porAlumno'
@@ -330,6 +336,11 @@ Route::get('pu','PrincipalController@prueba');
 Route::get('lista_grados',[
     'uses'  => 'AdminController@gradosList',
     'as'    => 'grados'
+]);
+
+Route::get('lista_horarios',[
+    'uses'  => 'AdminController@horariosList',
+    'as'    => 'horarios'
 ]);
 
 Route::get('mensajes',[
@@ -346,6 +357,10 @@ Route::post('lista_grados',[
     'uses'  => 'AdminController@gradosNew',
     'as'    => 'nuevoGrado'
 ]);
+Route::post('lista_horarios',[
+    'uses'  => 'AdminController@horariosNew',
+    'as'    => 'nuevoHorario'
+]);
 
 Route::post('subirImagen',[
     'uses'  => 'AdminController@subirImagen',
@@ -361,13 +376,29 @@ Route::get('editar_grados_{id}',[
     'uses'  => 'AdminController@gradosEdit',
     'as'    => 'editGrado'
 ]);
+
+Route::get('editar_horario_{id}',[
+    'uses'  => 'AdminController@horariosEdit',
+    'as'    => 'editHorario'
+]);
+
 Route::put('actualizar_grados_{id}',[
     'uses'  => 'AdminController@gradosUpdate',
     'as'    => 'updateGrado'
 ]);
+
+Route::put('actualizar_horarios_{id}',[
+    'uses'  => 'AdminController@horariosUpdate',
+    'as'    => 'updateHorario'
+]);
+
 Route::get('eliminar_grados{id}',[
     'uses'  => 'AdminController@destroyGrado',
     'as'    => 'eliminarGrado'
+]);
+Route::get('eliminar_horario{id}',[
+    'uses'  => 'AdminController@destroyHorario',
+    'as'    => 'eliminarHorario'
 ]);
 
 Route::get('eliminar_tarea{id}',[
