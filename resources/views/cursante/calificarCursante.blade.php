@@ -28,7 +28,7 @@
        //$nombre_grupo = $grupo->gestion;
        //$
     //}
-    $user = \DB::table('kardexes')->where('user',$id_user)->first();
+    $user = \DB::table('kardex1')->where('user',$id_user)->first();
     $tareas = \DB::table('tareas')->where('materia_id',$user->materia_id)->get();
 ?>
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

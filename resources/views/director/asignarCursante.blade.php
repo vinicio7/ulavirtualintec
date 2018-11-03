@@ -22,7 +22,7 @@
                      <?php
                         $materia_nombre = '';
                         //$materia =  Materia::where('id',$cursante->materia_id)->first();
-                        $asignado = \DB::table('kardexes')->where('user',$cursante->id)->first();
+                        $asignado = \DB::table('kardex1')->where('user',$cursante->id)->first();
                         if ($asignado){
                             $materia = \DB::table('materias')->where('id',$asignado->materia_id)->first();
                             $materia_nombre = $materia->nombreMateria;

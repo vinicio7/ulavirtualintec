@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKardexesTable extends Migration
+class Prueba extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateKardexesTable extends Migration
      */
     public function up()
     {
-        Schema::create('kardexes1', function (Blueprint $table) {
+         Schema::create('kardexes1', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');

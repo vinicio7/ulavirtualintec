@@ -32,7 +32,7 @@
         <p>Cursante Calificado: <?php echo ($cursanteCalificado);?></p>
         <p>Cursante Calificador: <?php echo ($cursanteCalificador[0]->nombres . ' ' .$cursanteCalificador[0]->paterno  . ' ' .$cursanteCalificador[0]-> materno .' - '. Auth::user()->id);?></p>
         <p>Materia: <?php echo ($materia);?></p>
-        <p>Unidad Académica: <?php echo (\DB::table('kardexes')
+        <p>Unidad Académica: <?php echo (\DB::table('kardex1')
                     ->join('unidad_academicas as ua','ua.id', '=', 'ua_id')
                     ->where('user', Auth::user()->id)
                     ->where('activo',1)

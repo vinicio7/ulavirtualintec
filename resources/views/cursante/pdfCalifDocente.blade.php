@@ -34,12 +34,12 @@
     <p>Cursante Calificador: <?php echo ($cursanteCalificador[0]->nombres . ' ' .$cursanteCalificador[0]->paterno  . ' ' .$cursanteCalificador[0]-> materno);?></p>
     <p>Docentente Calificado: <?php echo ($docenteCalificado[0]->nombres . ' ' .$docenteCalificado[0]->paterno  . ' ' .$docenteCalificado[0]-> materno);?></p>
     <p>Materia: <?php echo ($nombreMateria);?></p>
-    <p>Unidad Académica: <?php echo (\DB::table('kardexes')
+    <p>Unidad Académica: <?php echo (\DB::table('kardex1')
                 ->join('unidad_academicas as ua','ua.id', '=', 'ua_id')
                 ->where('user', Auth::user()->id)
                 ->where('activo',1)
                 ->value('ua.ua'));?></p>
-    <p>Gestión: <?php echo (\DB::table('kardexes')->where('user', Auth::user()->id)->where('activo',1)->value('gestion'));?></p>
+    <p>Gestión: <?php echo (\DB::table('kardex1')->where('user', Auth::user()->id)->where('activo',1)->value('gestion'));?></p>
 
     <table cellpadding="10%" border="3" align="center" width="400">
         <tr>
