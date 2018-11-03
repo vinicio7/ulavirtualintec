@@ -28,7 +28,7 @@
        //$nombre_grupo = $grupo->gestion;
        //$
     //}
-    $tareaas = array();
+    $tareas = array();
     $user = \DB::table('kardex1')->where('user',$id_user)->first();
     if ($user) {
         $tareas = \DB::table('tareas')->where('materia_id',$user->materia_id)->get();
