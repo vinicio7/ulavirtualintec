@@ -37,7 +37,7 @@ class DocenteController extends Controller
             $notas = \DB::table('kardex1')
                 ->join('materias as m', 'materia_id', '=', 'm.id')
                 ->join('users as u', 'user', '=', 'u.id')
-                ->select('u.nombres', 'u.paterno', 'u.materno', 'grade_id', 'profesion', 'prom1', 'prom2', 'prom3', 'prom4')
+                //->select('u.nombres', 'u.paterno', 'u.materno', 'grade_id', 'profesion', 'prom1', 'prom2', 'prom3', 'prom4')
                 ->where('materia_id', '=', $datos[0]->{'materia_id'})
                 ->where('gestion', '=', $datos[0]->{'gestion'})
                 ->where('ua_id', '=', $datos[0]->{'ua_id'})
