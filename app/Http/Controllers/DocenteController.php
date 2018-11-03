@@ -34,7 +34,7 @@ class DocenteController extends Controller
         //Verificamos que el docente tenga contrato
         if($datos[0]->{'materia_id'} != null)
         {
-            $notas = \DB::table('kardexes')
+            $notas = \DB::table('kardex1')
                 ->join('materias as m', 'materia_id', '=', 'm.id')
                 ->join('users as u', 'user', '=', 'u.id')
                 ->select('u.nombres', 'u.paterno', 'u.materno', 'grade_id', 'profesion', 'prom1', 'prom2', 'prom3', 'prom4')

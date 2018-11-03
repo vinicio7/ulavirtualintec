@@ -298,7 +298,7 @@ class PrincipalController extends Controller
     {
         $grupo = DB::table('users')
             ->where('role','cursante')
-            ->leftJoin('kardexes','users.id','=','user')
+            ->leftJoin('kardex1','users.id','=','user')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
             ->where('materia_id',1)
             ->select('user','nombres','paterno','materno','grupo','grado','profesion')
@@ -315,7 +315,7 @@ class PrincipalController extends Controller
         //$alumnos = User::where('role','cursante')->select('id','nombres','paterno','materno')->get();
         $alumnos = DB::table('users')
             ->where('role','cursante')
-            ->leftJoin('kardexes','users.id','=','user')
+            ->leftJoin('kardex1','users.id','=','user')
             ->where('materia_id',$materia)
             ->select('users.id','nombres','paterno','materno')
             ->get();
@@ -334,7 +334,7 @@ class PrincipalController extends Controller
                 $gru = $gru + 1;
             }
             $cont = $cont + 1;
-            DB::table('kardexes')
+            DB::table('kardex1')
                 ->where('user', $ii[$i])
                 ->update(['grupo' => $gru]);
         }
@@ -397,7 +397,7 @@ class PrincipalController extends Controller
         $materiaId = \DB::table('materias')->where('nombreMateria',$request['materia'])->value('id');
 
         //Seleccionamos los cursantes que pasan esa materia
-        $cursantes = \DB::table('kardexes')
+        $cursantes = \DB::table('kardex1')
                     ->join('users as u', 'user', '=', 'u.id')
                     ->select('u.nombres', 'u.paterno', 'u.materno', 'u.id')
                     ->where('materia_id', $materiaId)
@@ -418,7 +418,7 @@ class PrincipalController extends Controller
             $cursanteId = substr($request['cursante'], strpos($request['cursante'], '- ')+strlen('- '));
 
             //Insertamos valores
-            \DB::table('kardexes')
+            \DB::table('kardex1')
                 ->where('materia_id', $request['materia'])
                 ->where('user', $cursanteId)
                 ->where('activo', 1)
@@ -435,7 +435,7 @@ class PrincipalController extends Controller
                     ]);
 
             //3 Promedios del parametro 4
-            $promedios = \DB::table('kardexes')
+            $promedios = \DB::table('kardex1')
                 ->where('materia_id', (int)$request['materia'])
                 ->where('activo', 1)
                 ->where('user', $cursanteId)
@@ -449,7 +449,7 @@ class PrincipalController extends Controller
             //dd($promedios);
 
             //Insertamos valores
-            \DB::table('kardexes')
+            \DB::table('kardex1')
                 ->where('materia_id', $request['materia'])
                 ->where('user', $cursanteId)
                 ->where('activo', 1)

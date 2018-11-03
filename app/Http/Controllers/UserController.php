@@ -28,7 +28,7 @@ class UserController extends Controller
             return view('layouts.dashboard');
         }
         elseif(auth()->user()->role == 'docente'){
-            $disciplinas = \DB::table('kardexes')
+            $disciplinas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria')
             ->where('user', '=', \Auth::user()->id)
@@ -37,7 +37,7 @@ class UserController extends Controller
         return view('cursante.selecMateriaCalifCursante', compact('disciplinas'));
         }
         elseif (auth()->user()->role == 'cursante') {
-            $disciplinas = \DB::table('kardexes')
+            $disciplinas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria')
             ->where('user', '=', \Auth::user()->id)

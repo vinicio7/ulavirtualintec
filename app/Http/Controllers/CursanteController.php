@@ -18,7 +18,7 @@ class CursanteController extends Controller
      */
     public function calificarDocente()
     {
-        $disciplinas = \DB::table('kardexes')
+        $disciplinas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria', 'm.id', 'user')
             ->where('user', '=', Auth::user()->id)
@@ -34,13 +34,13 @@ class CursanteController extends Controller
 
 
         //Tomamos la unidad academica de usuario cursnate
-        $ua = \DB::table('kardexes')->where('user', Auth::user()->id)->value('ua_id');
+        $ua = \DB::table('kardex1')->where('user', Auth::user()->id)->value('ua_id');
 
 
         //Tomamos el id de usuario docente
         $idDoc = \DB::table('contrato_docentes')->where('materia_id', $materia)->where('activo', true)->where('ua_id', $ua)->value('user');
 
-        $disciplinas = \DB::table('kardexes')
+        $disciplinas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria')
             ->where('user', '=', Auth::user()->id)
@@ -128,7 +128,7 @@ class CursanteController extends Controller
 
     public function selecMateriaCalificarCursante()
     {
-        $disciplinas = \DB::table('kardexes')
+        $disciplinas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria')
             ->where('user', '=', Auth::user()->id)
@@ -208,7 +208,7 @@ public function calificar_tarea($id, Request $request)
                 ]
             );
 
-            //Sacar promedio para ingresar a la tabla kardexes
+            //Sacar promedio para ingresar a la tabla kardex1
             $calificaciones = \DB::table('nota_intercursantes')
                 ->select('prom4')
                 ->where('cursante_calificado', $idCalificado)
@@ -225,7 +225,7 @@ public function calificar_tarea($id, Request $request)
             foreach($calificaciones as $c) {$suma=$suma+$c->prom4;}
             $promedio=$suma/$total;
 
-            $promedios = \DB::table('kardexes')
+            $promedios = \DB::table('kardex1')
                                 ->where('materia_id', (int)$request['materia'])
                                 ->where('activo', 1)
                                 ->where('user', $idCalificado)
@@ -236,7 +236,7 @@ public function calificar_tarea($id, Request $request)
                                 ($promedios[0]->{'prom4JE'})*0.2+
                                 ($promedios[0]->{'prom4Facil'})*0.7;
             //dd($promedioGeneral);
-            \DB::table('kardexes')
+            \DB::table('kardex1')
                 ->where('materia_id', (int)$request['materia'])
                 ->where('activo', 1)
                 ->where('user', $idCalificado)
@@ -261,7 +261,7 @@ public function calificar_tarea($id, Request $request)
 
     public function verCalificaciones()
     {
-        $notas = \DB::table('kardexes')
+        $notas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria','prom1', 'prom2', 'prom3', 'prom4')
             ->where('user', '=', Auth::user()->id)

@@ -129,7 +129,7 @@ class PdfController extends Controller
     {
         $grupos = DB::table('users')
             ->where('role','cursante')
-            ->leftJoin('kardexes','users.id','=','user')
+            ->leftJoin('kardex1','users.id','=','user')
             ->leftJoin('grades', 'users.grade_id','=','grades.id')
             ->where('materia_id',$m)
             ->select('user','nombres','paterno','materno','grupo','grado','profesion')
@@ -148,7 +148,7 @@ class PdfController extends Controller
         $nombreMateria = $request['materia'];
         $materia = DB::table('materias')->where('nombreMateria',$request['materia'])->value('id');
         //dd($materia);
-        $cursantes = DB::table('kardexes')
+        $cursantes = DB::table('kardex1')
             ->join('users','users.id','=','user')
             ->where('materia_id',$materia)
             ->select('user','nombres','paterno','materno','prom4Cursante','prom4Facil','prom4JE')

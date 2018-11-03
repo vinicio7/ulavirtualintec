@@ -51,7 +51,7 @@ class ExcelController extends Controller
 
             foreach ($reader->get() as $notas) {
                 //echo $notas[0];
-                    \DB::table('kardexes')
+                    \DB::table('kardex1')
                     ->where('materia_id', $materiaId)
                     ->where('gestion', $gestion)
                     ->where('ua_id', $ua)
@@ -88,7 +88,7 @@ class ExcelController extends Controller
                         ]);
 
             //ACTUALIZAMOS EL PARAMETRO 4, QUE EVALUAN JE,CURSANTE Y DOCENTE
-                $promedios = \DB::table('kardexes')
+                $promedios = \DB::table('kardex1')
                     ->where('materia_id', $materiaId)
                     ->where('activo', 1)
                     ->where('user', $notas[0])
@@ -102,7 +102,7 @@ class ExcelController extends Controller
                                         ($promedios[0]->{'prom4Facil'})*0.7;
 
                     //Actualizamos el promedio general
-                    \DB::table('kardexes')
+                    \DB::table('kardex1')
                         ->where('materia_id', $materiaId)
                         /*->where('gestion', $gestion)
                         ->where('ua_id', $ua)*/
