@@ -28,8 +28,11 @@
        //$nombre_grupo = $grupo->gestion;
        //$
     //}
+    $tareaas = array();
     $user = \DB::table('kardex1')->where('user',$id_user)->first();
-    $tareas = \DB::table('tareas')->where('materia_id',$user->materia_id)->get();
+    if ($user) {
+        $tareas = \DB::table('tareas')->where('materia_id',$user->materia_id)->get();
+    }
 ?>
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -86,7 +89,8 @@
           <h1 style="color:#68AE00">Lista de tareas</h1>
         
             <div class="portlet-grid-page">
-                @foreach($tareas as $tarea)
+                @if(count($tareas) > 0)
+                    @foreach($tareas as $tarea)
                 
                     <?php 
                         $materia = \DB::table('materias')->where('id',$tarea->materia_id)->first();
@@ -123,7 +127,8 @@
                         </div>
                     </div> 
                     
-                @endforeach  
+                    @endforeach  
+                @endif
            </div>
         
        
