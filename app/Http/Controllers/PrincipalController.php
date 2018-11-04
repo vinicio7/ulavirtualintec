@@ -364,7 +364,7 @@ class PrincipalController extends Controller
     }
     public function asignarDocente()
     {
-       $docentes = User::where('role','docente')->get();
+       $docentes = ContratoDocente::all();
         return view('director.asignarDocente',compact('docentes'));
     }
     public function asignaContrado($id)

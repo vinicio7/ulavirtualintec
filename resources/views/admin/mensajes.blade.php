@@ -40,7 +40,7 @@
                                 @endif
                                 @if(auth()->user()->role == 'cursante')
                                     <option value="1">Administrador</option>
-                                    <option value="1">{{$docente}}</option>
+                                    <option value="{{$docente->id}}">{{$docente}}</option>
                                 @endif
                                 @if(auth()->user()->role == 'docente')
                                     <option value="1">Administrador</option>

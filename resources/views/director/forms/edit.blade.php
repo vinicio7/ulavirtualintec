@@ -4,7 +4,7 @@
     <div class="form-group has-feedback">
         {!! Form::label('id', 'DPI', array('class' => 'col-sm-3 control-label')) !!}
         <div class="col-sm-9">
-            {!! Form::text('id',null,['class'=>'form-control', 'placeholder'=>'Carnet de Identidad']) !!}
+            {!! Form::text('dpi',null,['class'=>'form-control', 'placeholder'=>'Carnet de Identidad']) !!}
             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
         </div>
     </div>

@@ -28,6 +28,7 @@
        $id_user =  auth()->user()->id;
     }
     $tareas = \DB::table('tareas')->where('docente_id',auth()->user()->id)->get();
+    $horarios = \DB::table('horarios')->get();
 
 ?>
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -40,12 +41,21 @@
                 <form class="form-horizontal" action="{{route('selecMateriaCalificacionCursante')}}" method="post" data-toggle="validator" enctype="multipart/form-data">
                 <div class="modal-body">
                     <input type="text" name="docente_id" id="docente_id" value="{{ $id_user }}" hidden="true">
-                    <input type="text" name="grupo" id="grupo" value="{{ $grupo->id }}" hidden="true">
+                    
                         <div class="form-group has-feedback" >
                             <label for="grado">Curso</label>
                             <select class="form-control" name="curso" id="curso">
                                 @foreach($grados as $grado)
                                 <option value="{{$grado->id}}">{{$grado->nombreMateria}}</option>
+                                @endforeach
+                            </select>
+                            <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <div class="form-group has-feedback" >
+                            <label for="grado">Horario</label>
+                            <select class="form-control" name="grupo" id="grupo">
+                                @foreach($horarios as $horario)
+                                <option value="{{$grado->id}}">{{$horario->descripcion}}</option>
                                 @endforeach
                             </select>
                             <span class="glyphicon form-control-feedback" aria-hidden="true"></span>

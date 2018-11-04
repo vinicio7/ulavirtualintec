@@ -15,13 +15,13 @@
                         </thead>
                         @foreach($docentes as $docente)
                             <tbody >
-                            <td>{{$docente->dpi}}</td>
-                            <td>{{$docente->nombres}} {{$docente->paterno}} {{$docente->materno}}</td>
+                            
                             
                             <?php
+                                $item = App\Entities\User::where('id',$docente->user)->first();
                                 $materia_nombre = '';
-                                //$materia =  Materia::where('id',$docente->materia_id)->first();
-                                $asignado = \DB::table('contrato_docentes')->where('user',$docente->id)->first();
+                                //$materia =  Materia::where('id',$item->materia_id)->first();
+                                $asignado = $docente;
                                 if ($asignado){
                                     $materia = \DB::table('materias')->where('id',$asignado->materia_id)->first();
                                     $materia_nombre = $materia->nombreMateria;
@@ -35,13 +35,15 @@
                                     //$grupo = "- - -";
                                 }
                             ?>
+                            <td>{{$item->dpi}}</td>
+                            <td>{{$item->nombres}} {{$item->paterno}} {{$item->materno}}</td>
                             <td>{{$materia_nombre}}</td>
 
                             <td>{{$horario_nombre}}</td>
                             <td>
                                 {!! link_to_route('asignarContrato',
                                                             $title = 'Asignar',
-                                                            $parameters = $docente->id,
+                                                            $parameters = $docente->user,
                                                             $attributes = ['class'=>'btn btn-primary']) !!}
                             </td>
                             </tbody>

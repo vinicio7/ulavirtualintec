@@ -97,7 +97,7 @@
                                     <td>{{ $contador}}</td>
                                     <td>{{ $user->nickname}}</td>
                                     <td>{{ $nombre}}</td> 
-                                    <td>{{ $user->nomYap}}</td>                                
+                                    <td>{{ $user->nombres}} {{ $user->paterno}} {{ $user->materno}}</td>                                
                                  </tr>
                                @endif  
                               @endforeach

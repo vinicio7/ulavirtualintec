@@ -40,7 +40,7 @@
                             $alumno = User::where('id',$tarea->alumno_id)->first();
                             $tarea_doc  = Tarea::where('id',$tarea->tarea_id)->first();
                         ?>
-                            <td class='active'>{{ $alumno->nomYap }}</td>
+                            <td class='active'>{{ $alumno->nombres }}{{ $alumno->paterno }}{{ $alumno->materno }}</td>
                             <td class="active">{{ $tarea_doc->nombre }}</td>
                             <td class="active"><a href="{{ $tarea->file }}" download>Descargar</a></td>
                             <td class="active">
