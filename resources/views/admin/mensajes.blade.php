@@ -16,7 +16,7 @@
         $list_ca = Kardex::where('user',$id_user)->first();
         $user_ca = ContratoDocente::where('materia_id',$list_ca->materia_id)->where('gestion',$list_ca->gestion)->first();
         $usuario = User::find($user_ca->user);
-        $docente  = $usuario->nombres." ".$usuario->paterno." ".$usuario->materno;
+        $docente_nombre  = $usuario->nombres." ".$usuario->paterno." ".$usuario->materno;
     }
 ?>
     {{--modal--}}
@@ -40,7 +40,7 @@
                                 @endif
                                 @if(auth()->user()->role == 'cursante')
                                     <option value="1">Administrador</option>
-                                    <option value="{{$docente->id}}">{{$docente}}</option>
+                                    <option value="{{$usuario->id}}">{{$docente_nombre}}</option>
                                 @endif
                                 @if(auth()->user()->role == 'docente')
                                     <option value="1">Administrador</option>
@@ -122,39 +122,38 @@
                                         Fecha
                                     </td>
                             </tr>
-                            
-                            @foreach($bandeja as $individual)
-                                @if($individual->estado == 0)
-                                    <tr class="unread checked">
-                                @else
-                                    <tr class="checked">
-                                @endif
-                                    <?php
-                                        $mensaje = Mensaje::where('id',$individual->id_mensaje)->first();
-                                        $usuario = User::where('id',$mensaje->enviado)->first();
-                                        //dd($usuario);
-                                        $nombre_enviado = $usuario->nombres.$usuario->apellidos;
-                                    ?>
-                                    <td width="10%">
-                                        <center>
-                                            <form class="form-horizontal" action="{{route('verMensaje',$individual->id) }}" method="get" data-toggle="validator">
-                                                <button class="btn btn-info"><i class="fa fa-eye"></i>  Leer</button>
-                                            </form>
-                                        </center>
-                                    </td>
-                                    <td width="20%" style="padding-top: 15px;">
-                                        {{$nombre_enviado}}
-                                    </td>
-                                    <td width="20%" style="padding-top: 15px;">
-                                        {{$mensaje->asunto}}
-                                    </td>
-                                    <td width="20%" style="padding-top: 15px;">
-                                        {{$mensaje->fecha}}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            
-                            
+                            @if(count($bandeja)> 0)
+                                @foreach($bandeja as $individual)
+                                    @if($individual->estado == 0)
+                                        <tr class="unread checked">
+                                    @else
+                                        <tr class="checked">
+                                    @endif
+                                        <?php
+                                            $mensaje = Mensaje::where('id',$individual->id_mensaje)->first();
+                                            $usuario = User::where('id',$mensaje->enviado)->first();
+                                            //dd($usuario);
+                                            $nombre_enviado = $usuario->nombres.$usuario->apellidos;
+                                        ?>
+                                        <td width="10%">
+                                            <center>
+                                                <form class="form-horizontal" action="{{route('verMensaje',$individual->id) }}" method="get" data-toggle="validator">
+                                                    <button class="btn btn-info"><i class="fa fa-eye"></i>  Leer</button>
+                                                </form>
+                                            </center>
+                                        </td>
+                                        <td width="20%" style="padding-top: 15px;">
+                                            {{$nombre_enviado}}
+                                        </td>
+                                        <td width="20%" style="padding-top: 15px;">
+                                            {{$mensaje->asunto}}
+                                        </td>
+                                        <td width="20%" style="padding-top: 15px;">
+                                            {{$mensaje->fecha}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
 

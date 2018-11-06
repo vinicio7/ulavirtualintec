@@ -102,7 +102,7 @@
                         $status = "No enviada";
                         if($validar)
                         {
-                            if ($validar->ponderacion == 0 ) {
+                            if ($validar->calificacion == 0 ) {
                                 $status = "Enviada - Sin calificar";
                             }else{
                                 $status = "Enviada - Calificada";
