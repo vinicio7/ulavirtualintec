@@ -343,7 +343,7 @@ class PrincipalController extends Controller
 
     public function asignarCursante()
     {
-        $cursantes = User::where('role','cursante')->get();
+        $cursantes = Kardex::all();
         return view('director.asignarCursante',compact('cursantes'));
     }
     public function asignaMateria($id)

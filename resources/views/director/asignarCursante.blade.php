@@ -15,26 +15,21 @@
                     <th>Acción</th>
                     </thead>
                     @foreach($cursantes as $cursante)
+                    <?php
+                        $user = DB::table('users')->where('id',$cursante->user)->first();
+                        //$cursante = User::where('id',$cursante->user)->first();
+                    ?>
                     <tbody >
-                    <td>{{$cursante->dpi}}</td>
-                    <td>{{$cursante->nombres}} {{$cursante->paterno}} {{$cursante->materno}}</td>
+                    <td>{{$user->dpi}}</td>
+                    <td>{{$user->nombres}} {{$user->paterno}} {{$user->materno}}</td>
                     
                      <?php
                         $materia_nombre = '';
-                        //$materia =  Materia::where('id',$cursante->materia_id)->first();
-                        $asignado = \DB::table('kardex1')->where('user',$cursante->id)->first();
-                        if ($asignado){
-                            $materia = \DB::table('materias')->where('id',$asignado->materia_id)->first();
+                            $materia = \DB::table('materias')->where('id',$cursante->materia_id)->first();
                             $materia_nombre = $materia->nombreMateria;
-                            $horario = \DB::table('horarios')->where('id',$asignado->gestion)->first();
+                            $horario = \DB::table('horarios')->where('id',$cursante->gestion)->first();
                             $horario_nombre = $horario->descripcion;
-                            $grupo = $asignado->grupo;
-                        }else
-                        {
-                            $materia_nombre = "Sin asignar";
-                            $horario_nombre = "- - -";
-                            $grupo = "- - -";
-                        }
+                            $grupo = $cursante->grupo;
                     ?>
                     <td>{{$materia_nombre}}</td>
                     
