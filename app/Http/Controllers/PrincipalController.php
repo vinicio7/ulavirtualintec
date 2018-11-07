@@ -73,7 +73,7 @@ class PrincipalController extends Controller
 
         //$pass = Input::get('password');
         //$cursante->create($request->all());
-        $cursante->dpi           = Input::get('dpi');
+        $cursante->dpi          = Input::get('dpi');
         $cursante->nickname     = Input::get('nickname');
         $cursante->password     = Input::get('password');
         $cursante->nombres      = strtoupper(Input::get('nombres'));

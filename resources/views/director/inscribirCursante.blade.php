@@ -25,7 +25,7 @@
                 <div class="form-group has-feedback">
                     <label for="ci"class="col-sm-3 control-label">Identificacion</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="Numero de identificacion" name="id" required="required">
+                        <input type="text" class="form-control" placeholder="Numero de identificacion" name="dpi" required="required">
                         <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
