@@ -9,14 +9,10 @@
     $id_user =  auth()->user()->id;
     $bandeja = Bandeja::where('id_user',$id_user)->get();
     if (auth()->user()->role == 'docente') {
-        $user_ca = ContratoDocente::where('user',$id_user)->first();
-        $list_ca = Kardex::where('materia_id',$user_ca->materia_id)->where('gestion',$user_ca->gestion)->get();
+        $alumnos = User::where('role','cursante')->get();
     }
     if (auth()->user()->role == 'cursante') {
-        $list_ca = Kardex::where('user',$id_user)->first();
-        $user_ca = ContratoDocente::where('materia_id',$list_ca->materia_id)->where('gestion',$list_ca->gestion)->first();
-        $usuario = User::find($user_ca->user);
-        $docente_nombre  = $usuario->nombres." ".$usuario->paterno." ".$usuario->materno;
+        $docentes = User::where('role','docente')->get();
     }
 ?>
     {{--modal--}}
@@ -40,16 +36,14 @@
                                 @endif
                                 @if(auth()->user()->role == 'cursante')
                                     <option value="1">Administrador</option>
-                                    <option value="{{$usuario->id}}">{{$docente_nombre}}</option>
+                                    @foreach($docentes as $item)
+                                        <option value="{{$item->id}}">{{$item->nombre}} {{$item->paterno}} {{$item->materno}}</option>
+                                    @endforeach
                                 @endif
                                 @if(auth()->user()->role == 'docente')
                                     <option value="1">Administrador</option>
-                                    @foreach($list_ca as $item)
-                                    <?php
-                                        $usuario = User::find($item->user);
-                                        $nombre  = $usuario->nombres." ".$usuario->paterno." ".$usuario->materno;
-                                    ?>
-                                    <option value="{{$item->user}}">{{$nombre}}</option>
+                                     @foreach($alumnos as $item)
+                                        <option value="{{$item->id}}">{{$item->nombre}} {{$item->paterno}} {{$item->materno}}</option>
                                     @endforeach
                                 @endif
                             </select>
