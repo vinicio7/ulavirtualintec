@@ -25,12 +25,14 @@
                                 if ($asignado){
                                     if ($asignado->materia_id == 0) {
                                         $materia_nombre = '';
+                                        $horario_nombre = '';
                                     } else {
                                         $materia = \DB::table('materias')->where('id',$asignado->materia_id)->first();
                                         $materia_nombre = $materia->nombreMateria;
+                                        $horario = \DB::table('horarios')->where('id',$asignado->gestion)->first();
+                                        $horario_nombre = $horario->descripcion;
                                     }
-                                    $horario = \DB::table('horarios')->where('id',$asignado->gestion)->first();
-                                    $horario_nombre = $horario->descripcion;
+                                    
                                     //$grupo = $asignado->grupo;
                                 }else
                                 {
