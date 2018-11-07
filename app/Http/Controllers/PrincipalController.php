@@ -8,6 +8,8 @@ use App\Entities\Kardex;
 use App\Entities\Leader;
 use App\Entities\Tarea;
 use App\Entities\Grade;
+use App\Entities\Bandeja;
+use App\Entities\Mensaje;
 use App\Entities\User;
 use App\Entities\Horarios;
 use Illuminate\Http\Request;
@@ -305,7 +307,18 @@ class PrincipalController extends Controller
                 Kardex::destroy($item->id);
             }
         }
-            
+        $kardexes = Mensaje::where('enviado',$id)->get();
+        if (count($kardexes) > 0) {
+            foreach ($kardexes as $item) {
+                Mensaje::destroy($item->id);
+            }
+        }
+         $kardexes = Bandeja::where('id_user',$id)->get();
+        if (count($kardexes) > 0) {
+            foreach ($kardexes as $item) {
+                Bandeja::destroy($item->id);
+            }
+        }
         //kardex1::destroy()
         Session::flash('message','Usuario Eliminado...');
         return redirect()->back();
@@ -317,6 +330,18 @@ class PrincipalController extends Controller
         if (count($kardexes) > 0) {
             foreach ($kardexes as $item) {
                 ContratoDocente::destroy($item->id);
+            }
+        }
+        $kardexes = Mensaje::where('enviado',$id)->get();
+        if (count($kardexes) > 0) {
+            foreach ($kardexes as $item) {
+                Mensaje::destroy($item->id);
+            }
+        }
+         $kardexes = Bandeja::where('id_user',$id)->get();
+        if (count($kardexes) > 0) {
+            foreach ($kardexes as $item) {
+                Bandeja::destroy($item->id);
             }
         }
         Session::flash('message','Usuario Eliminado...');
