@@ -6,8 +6,6 @@
     use App\Entities\Kardex;
     use App\Entities\Bandeja;
     use App\Entities\User;
-    //use \Auth;
-    dd(Auth::user());
     $id_user =  auth()->user()->id;
     $bandeja = Bandeja::where('id_user',$id_user)->get();
     if (auth()->user()->role == 'docente') {
