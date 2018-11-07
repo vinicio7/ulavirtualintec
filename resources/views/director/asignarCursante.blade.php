@@ -24,11 +24,16 @@
                     <td>{{$user->nombres}} {{$user->paterno}} {{$user->materno}}</td>
                     
                      <?php
-                        $materia_nombre = '';
+                            $materia_nombre = '';
+                            $horario_nombre = '';
                             $materia = \DB::table('materias')->where('id',$cursante->materia_id)->first();
-                            $materia_nombre = $materia->nombreMateria;
+                            if ($materia) {
+                                $materia_nombre = $materia->nombreMateria;
+                            }
                             $horario = \DB::table('horarios')->where('id',$cursante->gestion)->first();
-                            $horario_nombre = $horario->descripcion;
+                            if ($horario) {
+                                $horario_nombre = $horario->descripcion;
+                            }
                             $grupo = $cursante->grupo;
                     ?>
                     <td>{{$materia_nombre}}</td>

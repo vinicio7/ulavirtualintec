@@ -226,7 +226,7 @@ Route::get('editarDocente{id}',[
     'uses'  =>'PrincipalController@editarDocente',
     'as'    =>'editDocente'
 ]);
-Route::get('actualizarDocente{id}',[
+Route::put('actualizarDocente{id}',[
     'uses'  => 'PrincipalController@actualizarDocente',
     'as'    => 'upDocente'
 ]);

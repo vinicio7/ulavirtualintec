@@ -73,7 +73,7 @@ class PrincipalController extends Controller
 
         //$pass = Input::get('password');
         //$cursante->create($request->all());
-        $cursante->id           = Input::get('id');
+        $cursante->dpi           = Input::get('dpi');
         $cursante->nickname     = Input::get('nickname');
         $cursante->password     = Input::get('password');
         $cursante->nombres      = strtoupper(Input::get('nombres'));
@@ -97,6 +97,15 @@ class PrincipalController extends Controller
         $cursante->tel          = Input::get('tel');
         $cursante->role = 'cursante';
         $cursante->save();
+
+        $nuevo = new Kardex;
+        $nuevo->materia_id = 0;
+        $nuevo->user = $cursante->id;
+        $nuevo->gestion = 0;
+        $nuevo->grupo = 0;
+        $nuevo->activo = 1;
+        $nuevo->ua_id = 0;
+        $nuevo->save();
         //$cursantes = User::all();
         return redirect('nuevoCursante')->with('status', true);
 
@@ -156,7 +165,7 @@ class PrincipalController extends Controller
         $cursante =User::find($id);
         $var = $request['profesion'];
         //$cursante->fill($request->all());
-        $cursante->id           = Input::get('id');
+        $cursante->dpi          = Input::get('dpi');
         $cursante->nickname     = Input::get('nickname');
         $cursante->password     = Input::get('password');
         $cursante->nombres      = strtoupper(Input::get('nombres'));
@@ -248,10 +257,12 @@ class PrincipalController extends Controller
     }
     public function actualizarDocente($id,Request $request )
     {
+        //dd('llego');
         $cursante = User::find($id);
+        //dd($cursante);
         //$cursante->fill($request->all());
         //$var = $request['profesion'];
-        $cursante->id           = Input::get('id');
+        $cursante->dpi           = Input::get('dpi');
         $cursante->nickname     = Input::get('nickname');
         $cursante->password     = Input::get('password');
         $cursante->nombres      = strtoupper(Input::get('nombres'));
