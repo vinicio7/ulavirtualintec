@@ -299,7 +299,7 @@ class PrincipalController extends Controller
     public function destroyCu($id)
     {
         User::destroy($id);
-        $kardex = Kardex::where()   
+        $//kardex = Kardex::where() ;  
         //kardex1::destroy()
         Session::flash('message','Usuario Eliminado...');
         return redirect()->back();
