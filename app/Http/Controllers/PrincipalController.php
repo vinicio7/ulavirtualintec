@@ -238,6 +238,14 @@ class PrincipalController extends Controller
         $docente->tel          = Input::get('tel');
         $docente->role = 'docente';
         $docente->save();
+
+        $nuevo = new ContratoDocente;
+        $nuevo->materia_id = 0;
+        $nuevo->user = $docente->id;
+        $nuevo->gestion = 0;
+        $nuevo->activo = 0;
+        $nuevo->ua_id = 1;
+        $nuevo->save();
         return redirect('nuevoDocente')->with('status', true);
     }
     public function mostrarDocentes()//lista a los docentes
@@ -370,6 +378,10 @@ class PrincipalController extends Controller
         $cursante->ua_id        = 0;
         $cursante->activo       = 1;
         $cursante->save();
+        $anular = Kardex::where('user',$id)->where('materia_id',0)->first();
+        if($anular){
+            $anular->destroy();
+        }
         Session::flash('message','Cursante Asignado Exitosamente');
         return redirect()->back();
     }
@@ -393,6 +405,10 @@ class PrincipalController extends Controller
         $docente->materia_id   = Input::get('materia_id');
         $docente->ua_id        = Input::get('ua_id');
         $docente->save();
+        $anular = ContratoDocente::where('user',$id)->where('materia_id',0)->first();
+        if($anular){
+            $anular->destroy();
+        }
         Session::flash('message','Docente Asignado Exitosamente');
         return redirect()->back();
     }
