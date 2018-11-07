@@ -43,7 +43,7 @@
                     <td>
                         {!! link_to_route('asignarMateria',
                                                     $title = 'Asignar',
-                                                    $parameters = $cursante->id,
+                                                    $parameters = $user->id,
                                                     $attributes = ['class'=>'btn btn-primary']) !!}
                     </td>
                     </tbody>
