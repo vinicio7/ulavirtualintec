@@ -299,6 +299,8 @@ class PrincipalController extends Controller
     public function destroyCu($id)
     {
         User::destroy($id);
+        $kardex = Kardex::where()   
+        //kardex1::destroy()
         Session::flash('message','Usuario Eliminado...');
         return redirect()->back();
     }
@@ -380,7 +382,7 @@ class PrincipalController extends Controller
         $cursante->save();
         $anular = Kardex::where('user',$id)->where('materia_id',0)->first();
         if($anular){
-            $anular->destroy();
+            Kardex::destroy($anular->id);
         }
         Session::flash('message','Cursante Asignado Exitosamente');
         return redirect()->back();
@@ -407,7 +409,7 @@ class PrincipalController extends Controller
         $docente->save();
         $anular = ContratoDocente::where('user',$id)->where('materia_id',0)->first();
         if($anular){
-            $anular->destroy();
+             ContratoDocente::destroy($anular->id);
         }
         Session::flash('message','Docente Asignado Exitosamente');
         return redirect()->back();
