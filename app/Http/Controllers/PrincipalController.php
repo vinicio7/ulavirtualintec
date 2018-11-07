@@ -299,7 +299,13 @@ class PrincipalController extends Controller
     public function destroyCu($id)
     {
         User::destroy($id);
-        //kardex = Kardex::where() ;  
+        $kardexes = Kardex::where('user',$id)->get();
+        if (count($kardexes) > 0) {
+            foreach ($kardexes as $item) {
+                Kardex::destroy($item->id);
+            }
+        }
+            
         //kardex1::destroy()
         Session::flash('message','Usuario Eliminado...');
         return redirect()->back();
@@ -307,6 +313,12 @@ class PrincipalController extends Controller
     public function destroyDo($id)
     {
         User::destroy($id);
+        $kardexes = ContratoDocente::where('user',$id)->get();
+        if (count($kardexes) > 0) {
+            foreach ($kardexes as $item) {
+                ContratoDocente::destroy($item->id);
+            }
+        }
         Session::flash('message','Usuario Eliminado...');
         return redirect()->back();
     }
