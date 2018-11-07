@@ -65,7 +65,7 @@ class AdminController extends Controller
 
     public function nuevoMensaje(Request $request)
     {
-        if(auth()->user()->role == 'Admin'){
+        if(auth()->user()->role == 'admin'){
             $usuarios = "";
             if (Input::get('para') == 1) {
                 $usuarios = User::all();       
