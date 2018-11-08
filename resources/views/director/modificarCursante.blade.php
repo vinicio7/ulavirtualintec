@@ -58,7 +58,7 @@
                                             $attributes = ['class'=>'btn btn-primary']) !!}
                     </td>
                     <td>
-                        {!! Form::open(['route'=>['eliminar',$cursante->id],'method'=>'DELETE']) !!}
+                        {!! Form::open(['route'=>['eliminarcu',$cursante->id],'method'=>'DELETE']) !!}
                         {!! Form::submit('Eliminar',['class'=>'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </td>

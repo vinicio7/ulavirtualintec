@@ -230,9 +230,9 @@ Route::put('actualizarDocente{id}',[
     'uses'  => 'PrincipalController@actualizarDocente',
     'as'    => 'upDocente'
 ]);
-Route::delete('eliminar{id}',[
+Route::delete('eliminarcu{id}',[
     'uses'   => 'PrincipalController@destroyCu',
-    'as'     => 'eliminar'
+    'as'     => 'eliminarcu'
 ]);
 Route::delete('eliminar{id}',[
     'uses'   => 'PrincipalController@destroyDo',

@@ -128,10 +128,11 @@ class CursanteController extends Controller
 
     public function selecMateriaCalificarCursante()
     {
+        //dd(auth());
         $disciplinas = \DB::table('kardex1')
             ->join('materias as m', 'materia_id', '=', 'm.id')
             ->select('m.nombreMateria')
-            ->where('user', '=', Auth::user()->id)
+            ->where('user', auth()->user()->id)
             ->where('activo', '=', true)
             ->get();
         return view('cursante.selecMateriaCalifCursante', compact('disciplinas'));

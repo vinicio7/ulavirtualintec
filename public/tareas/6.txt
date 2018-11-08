@@ -1,0 +1,8 @@
+Modulo Administrador
+
+	No se puede modificar datos de profesores
+	En asignacion de PROFESORES y Alumnos no jala los nuevos inscritos. Y a los que estan da error 
+	al asignar otro curso
+
+nota: en los alumnos aun no jala el ID
+	no hay opcion para modificar precio de cursos

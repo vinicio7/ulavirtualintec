@@ -301,7 +301,10 @@ class PrincipalController extends Controller
     public function destroyCu($id)
     {
         User::destroy($id);
+        //dd($id);
+        //$kardexes = DB::table('kardex1')->where('user',30)->get();
         $kardexes = Kardex::where('user',$id)->get();
+        //dd($kardexes);
         if (count($kardexes) > 0) {
             foreach ($kardexes as $item) {
                 Kardex::destroy($item->id);
@@ -326,7 +329,9 @@ class PrincipalController extends Controller
     public function destroyDo($id)
     {
         User::destroy($id);
+       // dd($id);
         $kardexes = ContratoDocente::where('user',$id)->get();
+        //dd($kardexes);
         if (count($kardexes) > 0) {
             foreach ($kardexes as $item) {
                 ContratoDocente::destroy($item->id);
