@@ -126,9 +126,13 @@
                                     @endif
                                         <?php
                                             $mensaje = Mensaje::where('id',$individual->id_mensaje)->first();
-                                            $usuario = User::where('id',$mensaje->enviado)->first();
+                                            if($mensaje){
+                                                $usuario = User::where('id',$mensaje->enviado)->first();
+                                                $nombre_enviado = $usuario->nombres.$usuario->apellidos;
+                                            }
+                                            $nombre_enviado = "";
                                             //dd($usuario);
-                                            $nombre_enviado = $usuario->nombres.$usuario->apellidos;
+                                            
                                         ?>
                                         <td width="10%">
                                             <center>
