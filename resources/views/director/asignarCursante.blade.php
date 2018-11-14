@@ -14,40 +14,44 @@
                     <th>Grupo</th>
                     <th>Acción</th>
                     </thead>
+                    <tbody >
                     @foreach($cursantes as $cursante)
                     <?php
-                        $user = DB::table('users')->where('id',$cursante->user)->first();
+                        $user = "";
+                        $user = DB::table('users')->where('id',$cursante->id)->first();
+                        //dd($user->dpi);
                         //$cursante = User::where('id',$cursante->user)->first();
                     ?>
-                    <tbody >
-                    <td>{{$user->dpi}}</td>
-                    <td>{{$user->nombres}} {{$user->paterno}} {{$user->materno}}</td>
-                    
-                     <?php
-                            $materia_nombre = '';
-                            $horario_nombre = '';
-                            $materia = \DB::table('materias')->where('id',$cursante->materia_id)->first();
-                            if ($materia) {
-                                $materia_nombre = $materia->nombreMateria;
-                            }
-                            $horario = \DB::table('horarios')->where('id',$cursante->gestion)->first();
-                            if ($horario) {
-                                $horario_nombre = $horario->descripcion;
-                            }
-                            $grupo = $cursante->grupo;
-                    ?>
-                    <td>{{$materia_nombre}}</td>
-                    
-                    <td>{{$horario_nombre}}</td>
-                    <td>{{$grupo}}</td>
-                    <td>
-                        {!! link_to_route('asignarMateria',
-                                                    $title = 'Asignar',
-                                                    $parameters = $user->id,
-                                                    $attributes = ['class'=>'btn btn-primary']) !!}
-                    </td>
-                    </tbody>
+                        @if($user)
+                        <td>{{$user->dpi}}</td>
+                        <td>{{$user->nombres}}</td>
+                        
+                        <?php
+                                $materia_nombre = '';
+                                $horario_nombre = '';
+                                $materia = \DB::table('materias')->where('id',$cursante->materia_id)->first();
+                                if ($materia) {
+                                    $materia_nombre = $materia->nombreMateria;
+                                }
+                                $horario = \DB::table('horarios')->where('id',$cursante->gestion)->first();
+                                if ($horario) {
+                                    $horario_nombre = $horario->descripcion;
+                                }
+                                $grupo = $cursante->grupo;
+                        ?>
+                        <td>{{$materia_nombre}}</td>
+                        
+                        <td>{{$horario_nombre}}</td>
+                        <td>{{$grupo}}</td>
+                        <td>
+                            {!! link_to_route('asignarMateria',
+                                                        $title = 'Asignar',
+                                                        $parameters = $user->id,
+                                                        $attributes = ['class'=>'btn btn-primary']) !!}
+                        </td>
+                        @endif
                     @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
