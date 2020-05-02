@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INTEC | Aula virtual</title>
+    <title>Aula virtual</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -149,7 +149,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <span class="m-r-sm text-muted welcome-message">INTEC</span>
+                        <span class="m-r-sm text-muted welcome-message">Aula Virtual</span>
                     </li>
                     <li class="dropdown">
                         <!--a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INTEC - Aula virtual</title>
+    <title>EDUTECH - Aula virtual</title>
 
     {!! Html::style('css/bootstrap.css') !!}
     {!! Html::style('font-awesome/css/font-awesome.css') !!}
@@ -25,16 +25,16 @@
 
 
         <div class="col-md-6">
-            <h1 class="font-bold" style="font-size: 60px; color: #ff8000; font-weight: bold"> INTEC</h1>
+            <h1 class="font-bold" style="font-size: 60px; color: #ff8000; font-weight: bold"> EduTech</h1>
 
             <p align="justify">
 
-            Bienvenidos a aula virtual de la academia de computacion INTEC.
+            Bienvenidos a aula virtual.
 
         </p>
 
         <p align="justify">
-            El portal le permitira interactuar virtualmente para eficientar los procesos de tareas, notas, pagos, A cualquier hora y en cualquier momento.
+           Edutech es una plataforma social que facilita la comunicación e interacción virtual como complemento de la presencial, aunque también puede usar como una plataforma de educación en línea. Permite organizar estudiantes, asignar tareas, calificaciones y mantener una comunicación que involucre a profesores, estudiantes y padres de familia.
         </p>
 
         </div>
@@ -48,11 +48,9 @@
     </div>
     <hr/>
     <div class="row">
-        <div class="col-md-6" align="justify">
-            <strong style="color: white">Sitio web desarrollado por: Oscar Palala</strong>
-        </div>
+       
         <div class="col-md-4 text-right">
-            <strong><small style="color:#ff8000">Copyright © 2018</small></strong>
+            <strong><small style="color:#ff8000">Copyright © 2020</small></strong>
         </div>
     </div>
 </div>
